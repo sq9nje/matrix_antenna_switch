@@ -1,5 +1,6 @@
 EESchema Schematic File Version 4
-EELAYER 29 0
+LIBS:antenna_switch-cache
+EELAYER 30 0
 EELAYER END
 $Descr A2 23386 16535
 encoding utf-8
@@ -14,8 +15,8 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K1
-U 1 0 5D35D937
+L antenna_switch:Fujitsu_FTR_K1C K1
+U 1 1 5D35D937
 P 2750 1750
 F 0 "K1" V 2750 1520 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 2795 1520 50  0001 R CNN
@@ -26,7 +27,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 2750 1900
 $EndComp
 $Comp
 L Connector:Conn_Coaxial A1
-U 1 0 5D35E106
+U 1 1 5D35E106
 P 3150 900
 F 0 "A1" V 3078 1000 50  0000 L CNN
 F 1 "Conn_Coaxial" H 3250 784 50  0001 L CNN
@@ -37,7 +38,7 @@ F 3 " ~" H 3150 900 50  0001 C CNN
 $EndComp
 $Comp
 L Diode:1N4148WS D1
-U 1 0 5D35F4FA
+U 1 1 5D35F4FA
 P 2350 1750
 F 0 "D1" V 2304 1830 50  0000 L CNN
 F 1 "1N4148WS" V 2395 1830 50  0000 L CNN
@@ -109,8 +110,8 @@ Connection ~ 2350 2100
 Wire Wire Line
 	2350 2100 2350 2150
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K2
-U 1 0 5D37821A
+L antenna_switch:Fujitsu_FTR_K1C K2
+U 1 1 5D37821A
 P 2750 3800
 F 0 "K2" V 2750 3570 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 2795 3570 50  0001 R CNN
@@ -121,7 +122,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 2750 3950
 $EndComp
 $Comp
 L Diode:1N4148WS D2
-U 1 0 5D378220
+U 1 1 5D378220
 P 2350 3800
 F 0 "D2" V 2304 3880 50  0000 L CNN
 F 1 "1N4148WS" V 2395 3880 50  0000 L CNN
@@ -182,8 +183,8 @@ Connection ~ 2350 4150
 Wire Wire Line
 	2350 4150 2350 4200
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K3
-U 1 0 5D37A38D
+L antenna_switch:Fujitsu_FTR_K1C K3
+U 1 1 5D37A38D
 P 2750 5900
 F 0 "K3" V 2750 5670 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 2795 5670 50  0001 R CNN
@@ -194,7 +195,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 2750 6050
 $EndComp
 $Comp
 L Diode:1N4148WS D3
-U 1 0 5D37A393
+U 1 1 5D37A393
 P 2350 5900
 F 0 "D3" V 2304 5980 50  0000 L CNN
 F 1 "1N4148WS" V 2395 5980 50  0000 L CNN
@@ -372,8 +373,8 @@ Connection ~ 2000 6500
 Wire Wire Line
 	2000 6500 1950 6500
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K4
-U 1 0 5D3DAF7C
+L antenna_switch:Fujitsu_FTR_K1C K4
+U 1 1 5D3DAF7C
 P 4450 1750
 F 0 "K4" V 4450 1520 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 4495 1520 50  0001 R CNN
@@ -384,7 +385,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 4450 1900
 $EndComp
 $Comp
 L Diode:1N4148WS D4
-U 1 0 5D3DAF88
+U 1 1 5D3DAF88
 P 4050 1750
 F 0 "D4" V 4004 1830 50  0000 L CNN
 F 1 "1N4148WS" V 4095 1830 50  0000 L CNN
@@ -445,8 +446,8 @@ Connection ~ 4050 2100
 Wire Wire Line
 	4050 2100 4050 2150
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K5
-U 1 0 5D3DAFB0
+L antenna_switch:Fujitsu_FTR_K1C K5
+U 1 1 5D3DAFB0
 P 4450 3800
 F 0 "K5" V 4450 3570 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 4495 3570 50  0001 R CNN
@@ -457,7 +458,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 4450 3950
 $EndComp
 $Comp
 L Diode:1N4148WS D5
-U 1 0 5D3DAFB6
+U 1 1 5D3DAFB6
 P 4050 3800
 F 0 "D5" V 4004 3880 50  0000 L CNN
 F 1 "1N4148WS" V 4095 3880 50  0000 L CNN
@@ -518,8 +519,8 @@ Connection ~ 4050 4150
 Wire Wire Line
 	4050 4150 4050 4200
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K6
-U 1 0 5D3DAFD8
+L antenna_switch:Fujitsu_FTR_K1C K6
+U 1 1 5D3DAFD8
 P 4450 5900
 F 0 "K6" V 4450 5670 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 4495 5670 50  0001 R CNN
@@ -530,7 +531,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 4450 6050
 $EndComp
 $Comp
 L Diode:1N4148WS D6
-U 1 0 5D3DAFDE
+U 1 1 5D3DAFDE
 P 4050 5900
 F 0 "D6" V 4004 5980 50  0000 L CNN
 F 1 "1N4148WS" V 4095 5980 50  0000 L CNN
@@ -708,8 +709,8 @@ Connection ~ 3700 6500
 Wire Wire Line
 	3700 6500 3650 6500
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K7
-U 1 0 5D3EC9E1
+L antenna_switch:Fujitsu_FTR_K1C K7
+U 1 1 5D3EC9E1
 P 6150 1750
 F 0 "K7" V 6150 1520 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 6195 1520 50  0001 R CNN
@@ -720,7 +721,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 6150 1900
 $EndComp
 $Comp
 L Diode:1N4148WS D7
-U 1 0 5D3EC9ED
+U 1 1 5D3EC9ED
 P 5750 1750
 F 0 "D7" V 5704 1830 50  0000 L CNN
 F 1 "1N4148WS" V 5795 1830 50  0000 L CNN
@@ -781,8 +782,8 @@ Connection ~ 5750 2100
 Wire Wire Line
 	5750 2100 5750 2150
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K8
-U 1 0 5D3ECA15
+L antenna_switch:Fujitsu_FTR_K1C K8
+U 1 1 5D3ECA15
 P 6150 3800
 F 0 "K8" V 6150 3570 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 6195 3570 50  0001 R CNN
@@ -793,7 +794,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 6150 3950
 $EndComp
 $Comp
 L Diode:1N4148WS D8
-U 1 0 5D3ECA1B
+U 1 1 5D3ECA1B
 P 5750 3800
 F 0 "D8" V 5704 3880 50  0000 L CNN
 F 1 "1N4148WS" V 5795 3880 50  0000 L CNN
@@ -854,8 +855,8 @@ Connection ~ 5750 4150
 Wire Wire Line
 	5750 4150 5750 4200
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K9
-U 1 0 5D3ECA3D
+L antenna_switch:Fujitsu_FTR_K1C K9
+U 1 1 5D3ECA3D
 P 6150 5900
 F 0 "K9" V 6150 5670 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 6195 5670 50  0001 R CNN
@@ -866,7 +867,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 6150 6050
 $EndComp
 $Comp
 L Diode:1N4148WS D9
-U 1 0 5D3ECA43
+U 1 1 5D3ECA43
 P 5750 5900
 F 0 "D9" V 5704 5980 50  0000 L CNN
 F 1 "1N4148WS" V 5795 5980 50  0000 L CNN
@@ -1044,8 +1045,8 @@ Connection ~ 5400 6500
 Wire Wire Line
 	5400 6500 5350 6500
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K10
-U 1 0 5D437770
+L antenna_switch:Fujitsu_FTR_K1C K10
+U 1 1 5D437770
 P 7850 1750
 F 0 "K10" V 7850 1520 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 7895 1520 50  0001 R CNN
@@ -1056,7 +1057,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 7850 1900
 $EndComp
 $Comp
 L Diode:1N4148WS D10
-U 1 0 5D43777C
+U 1 1 5D43777C
 P 7450 1750
 F 0 "D10" V 7404 1830 50  0000 L CNN
 F 1 "1N4148WS" V 7495 1830 50  0000 L CNN
@@ -1117,8 +1118,8 @@ Connection ~ 7450 2100
 Wire Wire Line
 	7450 2100 7450 2150
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K11
-U 1 0 5D4377A4
+L antenna_switch:Fujitsu_FTR_K1C K11
+U 1 1 5D4377A4
 P 7850 3800
 F 0 "K11" V 7850 3570 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 7895 3570 50  0001 R CNN
@@ -1129,7 +1130,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 7850 3950
 $EndComp
 $Comp
 L Diode:1N4148WS D11
-U 1 0 5D4377AA
+U 1 1 5D4377AA
 P 7450 3800
 F 0 "D11" V 7404 3880 50  0000 L CNN
 F 1 "1N4148WS" V 7495 3880 50  0000 L CNN
@@ -1190,8 +1191,8 @@ Connection ~ 7450 4150
 Wire Wire Line
 	7450 4150 7450 4200
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K12
-U 1 0 5D4377CC
+L antenna_switch:Fujitsu_FTR_K1C K12
+U 1 1 5D4377CC
 P 7850 5900
 F 0 "K12" V 7850 5670 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 7895 5670 50  0001 R CNN
@@ -1202,7 +1203,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 7850 6050
 $EndComp
 $Comp
 L Diode:1N4148WS D12
-U 1 0 5D4377D2
+U 1 1 5D4377D2
 P 7450 5900
 F 0 "D12" V 7404 5980 50  0000 L CNN
 F 1 "1N4148WS" V 7495 5980 50  0000 L CNN
@@ -1380,8 +1381,8 @@ Connection ~ 7100 6500
 Wire Wire Line
 	7100 6500 7050 6500
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K13
-U 1 0 5D437834
+L antenna_switch:Fujitsu_FTR_K1C K13
+U 1 1 5D437834
 P 9550 1750
 F 0 "K13" V 9550 1520 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 9595 1520 50  0001 R CNN
@@ -1392,7 +1393,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 9550 1900
 $EndComp
 $Comp
 L Diode:1N4148WS D13
-U 1 0 5D437840
+U 1 1 5D437840
 P 9150 1750
 F 0 "D13" V 9104 1830 50  0000 L CNN
 F 1 "1N4148WS" V 9195 1830 50  0000 L CNN
@@ -1453,8 +1454,8 @@ Connection ~ 9150 2100
 Wire Wire Line
 	9150 2100 9150 2150
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K14
-U 1 0 5D437868
+L antenna_switch:Fujitsu_FTR_K1C K14
+U 1 1 5D437868
 P 9550 3800
 F 0 "K14" V 9550 3570 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 9595 3570 50  0001 R CNN
@@ -1465,7 +1466,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 9550 3950
 $EndComp
 $Comp
 L Diode:1N4148WS D14
-U 1 0 5D43786E
+U 1 1 5D43786E
 P 9150 3800
 F 0 "D14" V 9104 3880 50  0000 L CNN
 F 1 "1N4148WS" V 9195 3880 50  0000 L CNN
@@ -1526,8 +1527,8 @@ Connection ~ 9150 4150
 Wire Wire Line
 	9150 4150 9150 4200
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K15
-U 1 0 5D437890
+L antenna_switch:Fujitsu_FTR_K1C K15
+U 1 1 5D437890
 P 9550 5900
 F 0 "K15" V 9550 5670 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 9595 5670 50  0001 R CNN
@@ -1538,7 +1539,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 9550 6050
 $EndComp
 $Comp
 L Diode:1N4148WS D15
-U 1 0 5D437896
+U 1 1 5D437896
 P 9150 5900
 F 0 "D15" V 9104 5980 50  0000 L CNN
 F 1 "1N4148WS" V 9195 5980 50  0000 L CNN
@@ -1716,8 +1717,8 @@ Connection ~ 8800 6500
 Wire Wire Line
 	8800 6500 8750 6500
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K16
-U 1 0 5D4378F8
+L antenna_switch:Fujitsu_FTR_K1C K16
+U 1 1 5D4378F8
 P 11250 1750
 F 0 "K16" V 11250 1520 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 11295 1520 50  0001 R CNN
@@ -1728,7 +1729,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 11250 190
 $EndComp
 $Comp
 L Diode:1N4148WS D16
-U 1 0 5D437904
+U 1 1 5D437904
 P 10850 1750
 F 0 "D16" V 10804 1830 50  0000 L CNN
 F 1 "1N4148WS" V 10895 1830 50  0000 L CNN
@@ -1789,8 +1790,8 @@ Connection ~ 10850 2100
 Wire Wire Line
 	10850 2100 10850 2150
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K17
-U 1 0 5D43792C
+L antenna_switch:Fujitsu_FTR_K1C K17
+U 1 1 5D43792C
 P 11250 3800
 F 0 "K17" V 11250 3570 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 11295 3570 50  0001 R CNN
@@ -1801,7 +1802,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 11250 395
 $EndComp
 $Comp
 L Diode:1N4148WS D17
-U 1 0 5D437932
+U 1 1 5D437932
 P 10850 3800
 F 0 "D17" V 10804 3880 50  0000 L CNN
 F 1 "1N4148WS" V 10895 3880 50  0000 L CNN
@@ -1862,8 +1863,8 @@ Connection ~ 10850 4150
 Wire Wire Line
 	10850 4150 10850 4200
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K18
-U 1 0 5D437954
+L antenna_switch:Fujitsu_FTR_K1C K18
+U 1 1 5D437954
 P 11250 5900
 F 0 "K18" V 11250 5670 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 11295 5670 50  0001 R CNN
@@ -1874,7 +1875,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 11250 605
 $EndComp
 $Comp
 L Diode:1N4148WS D18
-U 1 0 5D43795A
+U 1 1 5D43795A
 P 10850 5900
 F 0 "D18" V 10804 5980 50  0000 L CNN
 F 1 "1N4148WS" V 10895 5980 50  0000 L CNN
@@ -2053,7 +2054,7 @@ Wire Wire Line
 	10500 6500 10450 6500
 $Comp
 L Connector:Conn_Coaxial EXT1
-U 1 0 5D4D5610
+U 1 1 5D4D5610
 P 1100 3050
 F 0 "EXT1" H 1028 3197 50  0000 C CNN
 F 1 "Conn_Coaxial" H 1200 2934 50  0001 L CNN
@@ -2064,7 +2065,7 @@ F 3 " ~" H 1100 3050 50  0001 C CNN
 $EndComp
 $Comp
 L Connector:Conn_Coaxial A2
-U 1 0 5D57FACA
+U 1 1 5D57FACA
 P 4850 900
 F 0 "A2" V 4778 1000 50  0000 L CNN
 F 1 "Conn_Coaxial" H 4950 784 50  0001 L CNN
@@ -2086,7 +2087,7 @@ F 3 "" H 4650 900 50  0001 C CNN
 $EndComp
 $Comp
 L Connector:Conn_Coaxial A3
-U 1 0 5D58F42C
+U 1 1 5D58F42C
 P 6550 900
 F 0 "A3" V 6478 1000 50  0000 L CNN
 F 1 "Conn_Coaxial" H 6650 784 50  0001 L CNN
@@ -2108,7 +2109,7 @@ F 3 "" H 6350 900 50  0001 C CNN
 $EndComp
 $Comp
 L Connector:Conn_Coaxial A4
-U 1 0 5D5A30F4
+U 1 1 5D5A30F4
 P 8250 900
 F 0 "A4" V 8178 1000 50  0000 L CNN
 F 1 "Conn_Coaxial" H 8350 784 50  0001 L CNN
@@ -2130,7 +2131,7 @@ F 3 "" H 8050 900 50  0001 C CNN
 $EndComp
 $Comp
 L Connector:Conn_Coaxial A5
-U 1 0 5D5C27B0
+U 1 1 5D5C27B0
 P 9950 900
 F 0 "A5" V 9878 1000 50  0000 L CNN
 F 1 "Conn_Coaxial" H 10050 784 50  0001 L CNN
@@ -2152,7 +2153,7 @@ F 3 "" H 9750 900 50  0001 C CNN
 $EndComp
 $Comp
 L Connector:Conn_Coaxial A6
-U 1 0 5D5D2290
+U 1 1 5D5D2290
 P 11650 900
 F 0 "A6" V 11578 1000 50  0000 L CNN
 F 1 "Conn_Coaxial" H 11750 784 50  0001 L CNN
@@ -2185,7 +2186,7 @@ F 3 "" H 1100 3250 50  0001 C CNN
 $EndComp
 $Comp
 L Connector:Conn_Coaxial EXT2
-U 1 0 5D638C15
+U 1 1 5D638C15
 P 1100 5150
 F 0 "EXT2" H 1028 5297 50  0000 C CNN
 F 1 "Conn_Coaxial" H 1200 5034 50  0001 L CNN
@@ -2206,8 +2207,8 @@ F 3 "" H 1100 5350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K19
-U 1 0 5D67F737
+L antenna_switch:Fujitsu_FTR_K1C K19
+U 1 1 5D67F737
 P 12750 2350
 F 0 "K19" V 12750 2120 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 12795 2120 50  0001 R CNN
@@ -2218,7 +2219,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 12750 250
 $EndComp
 $Comp
 L Connector:Conn_Coaxial LOAD1
-U 1 0 5D67F73D
+U 1 1 5D67F73D
 P 12800 1400
 F 0 "LOAD1" V 12945 1329 50  0000 C CNN
 F 1 "Conn_Coaxial" H 12900 1284 50  0001 L CNN
@@ -2229,7 +2230,7 @@ F 3 " ~" H 12800 1400 50  0001 C CNN
 $EndComp
 $Comp
 L Diode:1N4148WS D19
-U 1 0 5D67F743
+U 1 1 5D67F743
 P 13150 2350
 F 0 "D19" V 13104 2430 50  0000 L CNN
 F 1 "1N4148WS" V 13195 2430 50  0000 L CNN
@@ -2448,7 +2449,7 @@ Wire Wire Line
 Connection ~ 13500 2950
 $Comp
 L Connector:Conn_Coaxial RADIO1
-U 1 0 5DB8C3F8
+U 1 1 5DB8C3F8
 P 12500 1400
 F 0 "RADIO1" V 12650 1250 50  0000 L CNN
 F 1 "Conn_Coaxial" H 12600 1284 50  0001 L CNN
@@ -2497,8 +2498,8 @@ Wire Wire Line
 	12600 3050 12600 2650
 Connection ~ 11400 3050
 $Comp
-L QS_RF:Fujitsu_FTR-K1C K20
-U 1 0 5DD9CFD4
+L antenna_switch:Fujitsu_FTR_K1C K20
+U 1 1 5DD9CFD4
 P 12750 4650
 F 0 "K20" V 12750 4420 50  0000 R CNN
 F 1 "Fujitsu_FTR-K1C" V 12795 4420 50  0001 R CNN
@@ -2509,7 +2510,7 @@ F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 12750 480
 $EndComp
 $Comp
 L Connector:Conn_Coaxial LOAD2
-U 1 0 5DD9CFDA
+U 1 1 5DD9CFDA
 P 12800 3700
 F 0 "LOAD2" V 12945 3629 50  0000 C CNN
 F 1 "Conn_Coaxial" H 12900 3584 50  0001 L CNN
@@ -2520,7 +2521,7 @@ F 3 " ~" H 12800 3700 50  0001 C CNN
 $EndComp
 $Comp
 L Diode:1N4148WS D20
-U 1 0 5DD9CFE0
+U 1 1 5DD9CFE0
 P 13150 4650
 F 0 "D20" V 13104 4730 50  0000 L CNN
 F 1 "1N4148WS" V 13195 4730 50  0000 L CNN
@@ -2615,7 +2616,7 @@ Wire Wire Line
 Connection ~ 13500 5250
 $Comp
 L Connector:Conn_Coaxial RADIO2
-U 1 0 5DD9D014
+U 1 1 5DD9D014
 P 12500 3700
 F 0 "RADIO2" V 12650 3550 50  0000 L CNN
 F 1 "Conn_Coaxial" H 12600 3584 50  0001 L CNN

@@ -15,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K1
+L antenna_switch:Fujitsu_FTR-K1C K1
 U 1 1 5D35D937
 P 2750 1750
 F 0 "K1" V 2750 1520 50  0000 R CNN
@@ -110,7 +110,7 @@ Connection ~ 2350 2100
 Wire Wire Line
 	2350 2100 2350 2150
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K2
+L antenna_switch:Fujitsu_FTR-K1C K2
 U 1 1 5D37821A
 P 2750 3800
 F 0 "K2" V 2750 3570 50  0000 R CNN
@@ -183,7 +183,7 @@ Connection ~ 2350 4150
 Wire Wire Line
 	2350 4150 2350 4200
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K3
+L antenna_switch:Fujitsu_FTR-K1C K3
 U 1 1 5D37A38D
 P 2750 5900
 F 0 "K3" V 2750 5670 50  0000 R CNN
@@ -373,7 +373,7 @@ Connection ~ 2000 6500
 Wire Wire Line
 	2000 6500 1950 6500
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K4
+L antenna_switch:Fujitsu_FTR-K1C K4
 U 1 1 5D3DAF7C
 P 4450 1750
 F 0 "K4" V 4450 1520 50  0000 R CNN
@@ -446,7 +446,7 @@ Connection ~ 4050 2100
 Wire Wire Line
 	4050 2100 4050 2150
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K5
+L antenna_switch:Fujitsu_FTR-K1C K5
 U 1 1 5D3DAFB0
 P 4450 3800
 F 0 "K5" V 4450 3570 50  0000 R CNN
@@ -519,7 +519,7 @@ Connection ~ 4050 4150
 Wire Wire Line
 	4050 4150 4050 4200
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K6
+L antenna_switch:Fujitsu_FTR-K1C K6
 U 1 1 5D3DAFD8
 P 4450 5900
 F 0 "K6" V 4450 5670 50  0000 R CNN
@@ -709,7 +709,7 @@ Connection ~ 3700 6500
 Wire Wire Line
 	3700 6500 3650 6500
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K7
+L antenna_switch:Fujitsu_FTR-K1C K7
 U 1 1 5D3EC9E1
 P 6150 1750
 F 0 "K7" V 6150 1520 50  0000 R CNN
@@ -782,7 +782,7 @@ Connection ~ 5750 2100
 Wire Wire Line
 	5750 2100 5750 2150
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K8
+L antenna_switch:Fujitsu_FTR-K1C K8
 U 1 1 5D3ECA15
 P 6150 3800
 F 0 "K8" V 6150 3570 50  0000 R CNN
@@ -855,7 +855,7 @@ Connection ~ 5750 4150
 Wire Wire Line
 	5750 4150 5750 4200
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K9
+L antenna_switch:Fujitsu_FTR-K1C K9
 U 1 1 5D3ECA3D
 P 6150 5900
 F 0 "K9" V 6150 5670 50  0000 R CNN
@@ -1045,7 +1045,7 @@ Connection ~ 5400 6500
 Wire Wire Line
 	5400 6500 5350 6500
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K10
+L antenna_switch:Fujitsu_FTR-K1C K10
 U 1 1 5D437770
 P 7850 1750
 F 0 "K10" V 7850 1520 50  0000 R CNN
@@ -1118,7 +1118,7 @@ Connection ~ 7450 2100
 Wire Wire Line
 	7450 2100 7450 2150
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K11
+L antenna_switch:Fujitsu_FTR-K1C K11
 U 1 1 5D4377A4
 P 7850 3800
 F 0 "K11" V 7850 3570 50  0000 R CNN
@@ -1191,7 +1191,7 @@ Connection ~ 7450 4150
 Wire Wire Line
 	7450 4150 7450 4200
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K12
+L antenna_switch:Fujitsu_FTR-K1C K12
 U 1 1 5D4377CC
 P 7850 5900
 F 0 "K12" V 7850 5670 50  0000 R CNN
@@ -1381,7 +1381,7 @@ Connection ~ 7100 6500
 Wire Wire Line
 	7100 6500 7050 6500
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K13
+L antenna_switch:Fujitsu_FTR-K1C K13
 U 1 1 5D437834
 P 9550 1750
 F 0 "K13" V 9550 1520 50  0000 R CNN
@@ -1454,7 +1454,7 @@ Connection ~ 9150 2100
 Wire Wire Line
 	9150 2100 9150 2150
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K14
+L antenna_switch:Fujitsu_FTR-K1C K14
 U 1 1 5D437868
 P 9550 3800
 F 0 "K14" V 9550 3570 50  0000 R CNN
@@ -1527,7 +1527,7 @@ Connection ~ 9150 4150
 Wire Wire Line
 	9150 4150 9150 4200
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K15
+L antenna_switch:Fujitsu_FTR-K1C K15
 U 1 1 5D437890
 P 9550 5900
 F 0 "K15" V 9550 5670 50  0000 R CNN
@@ -1717,7 +1717,7 @@ Connection ~ 8800 6500
 Wire Wire Line
 	8800 6500 8750 6500
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K16
+L antenna_switch:Fujitsu_FTR-K1C K16
 U 1 1 5D4378F8
 P 11250 1750
 F 0 "K16" V 11250 1520 50  0000 R CNN
@@ -1790,7 +1790,7 @@ Connection ~ 10850 2100
 Wire Wire Line
 	10850 2100 10850 2150
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K17
+L antenna_switch:Fujitsu_FTR-K1C K17
 U 1 1 5D43792C
 P 11250 3800
 F 0 "K17" V 11250 3570 50  0000 R CNN
@@ -1863,7 +1863,7 @@ Connection ~ 10850 4150
 Wire Wire Line
 	10850 4150 10850 4200
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K18
+L antenna_switch:Fujitsu_FTR-K1C K18
 U 1 1 5D437954
 P 11250 5900
 F 0 "K18" V 11250 5670 50  0000 R CNN
@@ -2207,7 +2207,7 @@ F 3 "" H 1100 5350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K19
+L antenna_switch:Fujitsu_FTR-K1C K19
 U 1 1 5D67F737
 P 12750 2350
 F 0 "K19" V 12750 2120 50  0000 R CNN
@@ -2498,7 +2498,7 @@ Wire Wire Line
 	12600 3050 12600 2650
 Connection ~ 11400 3050
 $Comp
-L antenna_switch-rescue:Fujitsu_FTR-K1C-QS_RF K20
+L antenna_switch:Fujitsu_FTR-K1C K20
 U 1 1 5DD9CFD4
 P 12750 4650
 F 0 "K20" V 12750 4420 50  0000 R CNN
