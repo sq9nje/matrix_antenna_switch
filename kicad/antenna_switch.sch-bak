@@ -1,0 +1,3864 @@
+EESchema Schematic File Version 4
+EELAYER 29 0
+EELAYER END
+$Descr A2 23386 16535
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K1
+U 1 0 5D35D937
+P 2750 1750
+F 0 "K1" V 2750 1520 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 2795 1520 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 2700 1250 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 2750 1900 50  0001 C CNN
+	1    2750 1750
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector:Conn_Coaxial A1
+U 1 0 5D35E106
+P 3150 900
+F 0 "A1" V 3078 1000 50  0000 L CNN
+F 1 "Conn_Coaxial" H 3250 784 50  0001 L CNN
+F 2 "" H 3150 900 50  0001 C CNN
+F 3 " ~" H 3150 900 50  0001 C CNN
+	1    3150 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L Diode:1N4148WS D1
+U 1 0 5D35F4FA
+P 2350 1750
+F 0 "D1" V 2304 1830 50  0000 L CNN
+F 1 "1N4148WS" V 2395 1830 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 2350 1575 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 2350 1750 50  0001 C CNN
+	1    2350 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q1
+U 1 1 5D36047C
+P 2250 2350
+F 0 "Q1" H 2456 2396 50  0000 L CNN
+F 1 "BSS138" H 2456 2305 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2450 2275 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 2250 2350 50  0001 L CNN
+	1    2250 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR07
+U 1 1 5D3637C0
+P 2350 2600
+F 0 "#PWR07" H 2350 2350 50  0001 C CNN
+F 1 "GND" H 2355 2427 50  0000 C CNN
+F 2 "" H 2350 2600 50  0001 C CNN
+F 3 "" H 2350 2600 50  0001 C CNN
+	1    2350 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR06
+U 1 1 5D363A36
+P 2350 1350
+F 0 "#PWR06" H 2350 1200 50  0001 C CNN
+F 1 "+12V" H 2365 1523 50  0000 C CNN
+F 2 "" H 2350 1350 50  0001 C CNN
+F 3 "" H 2350 1350 50  0001 C CNN
+	1    2350 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR013
+U 1 1 5D36A96D
+P 2950 900
+F 0 "#PWR013" H 2950 650 50  0001 C CNN
+F 1 "GND" V 2955 772 50  0000 R CNN
+F 2 "" H 2950 900 50  0001 C CNN
+F 3 "" H 2950 900 50  0001 C CNN
+	1    2950 900 
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2350 1350 2350 1400
+Wire Wire Line
+	2350 1900 2350 2100
+Wire Wire Line
+	2650 1450 2650 1400
+Wire Wire Line
+	2650 1400 2350 1400
+Connection ~ 2350 1400
+Wire Wire Line
+	2350 1400 2350 1600
+Wire Wire Line
+	2650 2050 2650 2100
+Wire Wire Line
+	2650 2100 2350 2100
+Connection ~ 2350 2100
+Wire Wire Line
+	2350 2100 2350 2150
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K2
+U 1 0 5D37821A
+P 2750 3800
+F 0 "K2" V 2750 3570 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 2795 3570 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 2700 3300 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 2750 3950 50  0001 C CNN
+	1    2750 3800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D2
+U 1 0 5D378220
+P 2350 3800
+F 0 "D2" V 2304 3880 50  0000 L CNN
+F 1 "1N4148WS" V 2395 3880 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 2350 3625 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 2350 3800 50  0001 C CNN
+	1    2350 3800
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q2
+U 1 1 5D378226
+P 2250 4400
+F 0 "Q2" H 2456 4446 50  0000 L CNN
+F 1 "BSS138" H 2456 4355 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2450 4325 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 2250 4400 50  0001 L CNN
+	1    2250 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR09
+U 1 1 5D37822C
+P 2350 4650
+F 0 "#PWR09" H 2350 4400 50  0001 C CNN
+F 1 "GND" H 2355 4477 50  0000 C CNN
+F 2 "" H 2350 4650 50  0001 C CNN
+F 3 "" H 2350 4650 50  0001 C CNN
+	1    2350 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR08
+U 1 1 5D378232
+P 2350 3400
+F 0 "#PWR08" H 2350 3250 50  0001 C CNN
+F 1 "+12V" H 2365 3573 50  0000 C CNN
+F 2 "" H 2350 3400 50  0001 C CNN
+F 3 "" H 2350 3400 50  0001 C CNN
+	1    2350 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 3400 2350 3450
+Wire Wire Line
+	2350 3950 2350 4150
+Wire Wire Line
+	2650 3500 2650 3450
+Wire Wire Line
+	2650 3450 2350 3450
+Connection ~ 2350 3450
+Wire Wire Line
+	2350 3450 2350 3650
+Wire Wire Line
+	2650 4100 2650 4150
+Wire Wire Line
+	2650 4150 2350 4150
+Connection ~ 2350 4150
+Wire Wire Line
+	2350 4150 2350 4200
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K3
+U 1 0 5D37A38D
+P 2750 5900
+F 0 "K3" V 2750 5670 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 2795 5670 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 2700 5400 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 2750 6050 50  0001 C CNN
+	1    2750 5900
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D3
+U 1 0 5D37A393
+P 2350 5900
+F 0 "D3" V 2304 5980 50  0000 L CNN
+F 1 "1N4148WS" V 2395 5980 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 2350 5725 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 2350 5900 50  0001 C CNN
+	1    2350 5900
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q3
+U 1 1 5D37A399
+P 2250 6500
+F 0 "Q3" H 2456 6546 50  0000 L CNN
+F 1 "BSS138" H 2456 6455 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2450 6425 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 2250 6500 50  0001 L CNN
+	1    2250 6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR011
+U 1 1 5D37A39F
+P 2350 6750
+F 0 "#PWR011" H 2350 6500 50  0001 C CNN
+F 1 "GND" H 2355 6577 50  0000 C CNN
+F 2 "" H 2350 6750 50  0001 C CNN
+F 3 "" H 2350 6750 50  0001 C CNN
+	1    2350 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR010
+U 1 1 5D37A3A5
+P 2350 5500
+F 0 "#PWR010" H 2350 5350 50  0001 C CNN
+F 1 "+12V" H 2365 5673 50  0000 C CNN
+F 2 "" H 2350 5500 50  0001 C CNN
+F 3 "" H 2350 5500 50  0001 C CNN
+	1    2350 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 5500 2350 5550
+Wire Wire Line
+	2350 6050 2350 6250
+Wire Wire Line
+	2650 5600 2650 5550
+Wire Wire Line
+	2650 5550 2350 5550
+Connection ~ 2350 5550
+Wire Wire Line
+	2350 5550 2350 5750
+Wire Wire Line
+	2650 6200 2650 6250
+Wire Wire Line
+	2650 6250 2350 6250
+Connection ~ 2350 6250
+Wire Wire Line
+	2350 6250 2350 6300
+Wire Wire Line
+	3150 1100 3150 1400
+Wire Wire Line
+	3150 5600 2900 5600
+Wire Wire Line
+	2900 1450 2900 1400
+Wire Wire Line
+	2900 1400 3150 1400
+Connection ~ 3150 1400
+Wire Wire Line
+	3150 1400 3150 3450
+Wire Wire Line
+	2900 3500 2900 3450
+Wire Wire Line
+	2900 3450 3150 3450
+Connection ~ 3150 3450
+Wire Wire Line
+	3150 3450 3150 5600
+Text GLabel 1950 2350 0    50   Input ~ 0
+Rel_A1R1
+Text GLabel 1950 4400 0    50   Input ~ 0
+Rel_A1R2
+Text GLabel 1950 6500 0    50   Input ~ 0
+Rel_A1G
+$Comp
+L Device:R_Small R1
+U 1 1 5D3A7BE0
+P 2000 2500
+F 0 "R1" H 2059 2546 50  0000 L CNN
+F 1 "470k" H 2059 2455 50  0000 L CNN
+F 2 "" H 2000 2500 50  0001 C CNN
+F 3 "~" H 2000 2500 50  0001 C CNN
+	1    2000 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R2
+U 1 1 5D3A9C75
+P 2000 4550
+F 0 "R2" H 2059 4596 50  0000 L CNN
+F 1 "470k" H 2059 4505 50  0000 L CNN
+F 2 "" H 2000 4550 50  0001 C CNN
+F 3 "~" H 2000 4550 50  0001 C CNN
+	1    2000 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R3
+U 1 1 5D3AB876
+P 2000 6650
+F 0 "R3" H 2059 6696 50  0000 L CNN
+F 1 "470k" H 2059 6605 50  0000 L CNN
+F 2 "" H 2000 6650 50  0001 C CNN
+F 3 "~" H 2000 6650 50  0001 C CNN
+	1    2000 6650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR05
+U 1 1 5D3ABE45
+P 2000 6750
+F 0 "#PWR05" H 2000 6500 50  0001 C CNN
+F 1 "GND" H 2005 6577 50  0000 C CNN
+F 2 "" H 2000 6750 50  0001 C CNN
+F 3 "" H 2000 6750 50  0001 C CNN
+	1    2000 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR04
+U 1 1 5D3AC334
+P 2000 4650
+F 0 "#PWR04" H 2000 4400 50  0001 C CNN
+F 1 "GND" H 2005 4477 50  0000 C CNN
+F 2 "" H 2000 4650 50  0001 C CNN
+F 3 "" H 2000 4650 50  0001 C CNN
+	1    2000 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR03
+U 1 1 5D3AD66F
+P 2000 2600
+F 0 "#PWR03" H 2000 2350 50  0001 C CNN
+F 1 "GND" H 2005 2427 50  0000 C CNN
+F 2 "" H 2000 2600 50  0001 C CNN
+F 3 "" H 2000 2600 50  0001 C CNN
+	1    2000 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 6700 2350 6750
+Wire Wire Line
+	2350 4600 2350 4650
+Wire Wire Line
+	2350 2550 2350 2600
+Wire Wire Line
+	2050 2350 2000 2350
+Wire Wire Line
+	2000 2400 2000 2350
+Connection ~ 2000 2350
+Wire Wire Line
+	2000 2350 1950 2350
+Wire Wire Line
+	2050 4400 2000 4400
+Wire Wire Line
+	2000 4450 2000 4400
+Connection ~ 2000 4400
+Wire Wire Line
+	2000 4400 1950 4400
+Wire Wire Line
+	2050 6500 2000 6500
+Wire Wire Line
+	2000 6550 2000 6500
+Connection ~ 2000 6500
+Wire Wire Line
+	2000 6500 1950 6500
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K4
+U 1 0 5D3DAF7C
+P 4450 1750
+F 0 "K4" V 4450 1520 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 4495 1520 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 4400 1250 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 4450 1900 50  0001 C CNN
+	1    4450 1750
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D4
+U 1 0 5D3DAF88
+P 4050 1750
+F 0 "D4" V 4004 1830 50  0000 L CNN
+F 1 "1N4148WS" V 4095 1830 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 4050 1575 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 4050 1750 50  0001 C CNN
+	1    4050 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q4
+U 1 1 5D3DAF8E
+P 3950 2350
+F 0 "Q4" H 4156 2396 50  0000 L CNN
+F 1 "BSS138" H 4156 2305 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 4150 2275 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 3950 2350 50  0001 L CNN
+	1    3950 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR018
+U 1 1 5D3DAF94
+P 4050 2600
+F 0 "#PWR018" H 4050 2350 50  0001 C CNN
+F 1 "GND" H 4055 2427 50  0000 C CNN
+F 2 "" H 4050 2600 50  0001 C CNN
+F 3 "" H 4050 2600 50  0001 C CNN
+	1    4050 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR017
+U 1 1 5D3DAF9A
+P 4050 1350
+F 0 "#PWR017" H 4050 1200 50  0001 C CNN
+F 1 "+12V" H 4065 1523 50  0000 C CNN
+F 2 "" H 4050 1350 50  0001 C CNN
+F 3 "" H 4050 1350 50  0001 C CNN
+	1    4050 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 1350 4050 1400
+Wire Wire Line
+	4050 1900 4050 2100
+Wire Wire Line
+	4350 1450 4350 1400
+Wire Wire Line
+	4350 1400 4050 1400
+Connection ~ 4050 1400
+Wire Wire Line
+	4050 1400 4050 1600
+Wire Wire Line
+	4350 2050 4350 2100
+Wire Wire Line
+	4350 2100 4050 2100
+Connection ~ 4050 2100
+Wire Wire Line
+	4050 2100 4050 2150
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K5
+U 1 0 5D3DAFB0
+P 4450 3800
+F 0 "K5" V 4450 3570 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 4495 3570 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 4400 3300 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 4450 3950 50  0001 C CNN
+	1    4450 3800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D5
+U 1 0 5D3DAFB6
+P 4050 3800
+F 0 "D5" V 4004 3880 50  0000 L CNN
+F 1 "1N4148WS" V 4095 3880 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 4050 3625 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 4050 3800 50  0001 C CNN
+	1    4050 3800
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q5
+U 1 1 5D3DAFBC
+P 3950 4400
+F 0 "Q5" H 4156 4446 50  0000 L CNN
+F 1 "BSS138" H 4156 4355 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 4150 4325 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 3950 4400 50  0001 L CNN
+	1    3950 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR020
+U 1 1 5D3DAFC2
+P 4050 4650
+F 0 "#PWR020" H 4050 4400 50  0001 C CNN
+F 1 "GND" H 4055 4477 50  0000 C CNN
+F 2 "" H 4050 4650 50  0001 C CNN
+F 3 "" H 4050 4650 50  0001 C CNN
+	1    4050 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR019
+U 1 1 5D3DAFC8
+P 4050 3400
+F 0 "#PWR019" H 4050 3250 50  0001 C CNN
+F 1 "+12V" H 4065 3573 50  0000 C CNN
+F 2 "" H 4050 3400 50  0001 C CNN
+F 3 "" H 4050 3400 50  0001 C CNN
+	1    4050 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 3400 4050 3450
+Wire Wire Line
+	4050 3950 4050 4150
+Wire Wire Line
+	4350 3500 4350 3450
+Wire Wire Line
+	4350 3450 4050 3450
+Connection ~ 4050 3450
+Wire Wire Line
+	4050 3450 4050 3650
+Wire Wire Line
+	4350 4100 4350 4150
+Wire Wire Line
+	4350 4150 4050 4150
+Connection ~ 4050 4150
+Wire Wire Line
+	4050 4150 4050 4200
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K6
+U 1 0 5D3DAFD8
+P 4450 5900
+F 0 "K6" V 4450 5670 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 4495 5670 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 4400 5400 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 4450 6050 50  0001 C CNN
+	1    4450 5900
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D6
+U 1 0 5D3DAFDE
+P 4050 5900
+F 0 "D6" V 4004 5980 50  0000 L CNN
+F 1 "1N4148WS" V 4095 5980 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 4050 5725 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 4050 5900 50  0001 C CNN
+	1    4050 5900
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q6
+U 1 1 5D3DAFE4
+P 3950 6500
+F 0 "Q6" H 4156 6546 50  0000 L CNN
+F 1 "BSS138" H 4156 6455 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 4150 6425 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 3950 6500 50  0001 L CNN
+	1    3950 6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR022
+U 1 1 5D3DAFEA
+P 4050 6750
+F 0 "#PWR022" H 4050 6500 50  0001 C CNN
+F 1 "GND" H 4055 6577 50  0000 C CNN
+F 2 "" H 4050 6750 50  0001 C CNN
+F 3 "" H 4050 6750 50  0001 C CNN
+	1    4050 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR021
+U 1 1 5D3DAFF0
+P 4050 5500
+F 0 "#PWR021" H 4050 5350 50  0001 C CNN
+F 1 "+12V" H 4065 5673 50  0000 C CNN
+F 2 "" H 4050 5500 50  0001 C CNN
+F 3 "" H 4050 5500 50  0001 C CNN
+	1    4050 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 5500 4050 5550
+Wire Wire Line
+	4050 6050 4050 6250
+Wire Wire Line
+	4350 5600 4350 5550
+Wire Wire Line
+	4350 5550 4050 5550
+Connection ~ 4050 5550
+Wire Wire Line
+	4050 5550 4050 5750
+Wire Wire Line
+	4350 6200 4350 6250
+Wire Wire Line
+	4350 6250 4050 6250
+Connection ~ 4050 6250
+Wire Wire Line
+	4050 6250 4050 6300
+Wire Wire Line
+	4850 1100 4850 1400
+Wire Wire Line
+	4850 5600 4600 5600
+Wire Wire Line
+	4600 1450 4600 1400
+Wire Wire Line
+	4600 1400 4850 1400
+Connection ~ 4850 1400
+Wire Wire Line
+	4850 1400 4850 3450
+Wire Wire Line
+	4600 3500 4600 3450
+Wire Wire Line
+	4600 3450 4850 3450
+Connection ~ 4850 3450
+Wire Wire Line
+	4850 3450 4850 5600
+Text GLabel 3650 2350 0    50   Input ~ 0
+Rel_A2R1
+Text GLabel 3650 4400 0    50   Input ~ 0
+Rel_A2R2
+Text GLabel 3650 6500 0    50   Input ~ 0
+Rel_A2G
+$Comp
+L Device:R_Small R4
+U 1 1 5D3DB00D
+P 3700 2500
+F 0 "R4" H 3759 2546 50  0000 L CNN
+F 1 "470k" H 3759 2455 50  0000 L CNN
+F 2 "" H 3700 2500 50  0001 C CNN
+F 3 "~" H 3700 2500 50  0001 C CNN
+	1    3700 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R5
+U 1 1 5D3DB013
+P 3700 4550
+F 0 "R5" H 3759 4596 50  0000 L CNN
+F 1 "470k" H 3759 4505 50  0000 L CNN
+F 2 "" H 3700 4550 50  0001 C CNN
+F 3 "~" H 3700 4550 50  0001 C CNN
+	1    3700 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R6
+U 1 1 5D3DB019
+P 3700 6650
+F 0 "R6" H 3759 6696 50  0000 L CNN
+F 1 "470k" H 3759 6605 50  0000 L CNN
+F 2 "" H 3700 6650 50  0001 C CNN
+F 3 "~" H 3700 6650 50  0001 C CNN
+	1    3700 6650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR016
+U 1 1 5D3DB01F
+P 3700 6750
+F 0 "#PWR016" H 3700 6500 50  0001 C CNN
+F 1 "GND" H 3705 6577 50  0000 C CNN
+F 2 "" H 3700 6750 50  0001 C CNN
+F 3 "" H 3700 6750 50  0001 C CNN
+	1    3700 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR015
+U 1 1 5D3DB025
+P 3700 4650
+F 0 "#PWR015" H 3700 4400 50  0001 C CNN
+F 1 "GND" H 3705 4477 50  0000 C CNN
+F 2 "" H 3700 4650 50  0001 C CNN
+F 3 "" H 3700 4650 50  0001 C CNN
+	1    3700 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR014
+U 1 1 5D3DB02B
+P 3700 2600
+F 0 "#PWR014" H 3700 2350 50  0001 C CNN
+F 1 "GND" H 3705 2427 50  0000 C CNN
+F 2 "" H 3700 2600 50  0001 C CNN
+F 3 "" H 3700 2600 50  0001 C CNN
+	1    3700 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 6700 4050 6750
+Wire Wire Line
+	4050 4600 4050 4650
+Wire Wire Line
+	4050 2550 4050 2600
+Wire Wire Line
+	3750 2350 3700 2350
+Wire Wire Line
+	3700 2400 3700 2350
+Connection ~ 3700 2350
+Wire Wire Line
+	3700 2350 3650 2350
+Wire Wire Line
+	3750 4400 3700 4400
+Wire Wire Line
+	3700 4450 3700 4400
+Connection ~ 3700 4400
+Wire Wire Line
+	3700 4400 3650 4400
+Wire Wire Line
+	3750 6500 3700 6500
+Wire Wire Line
+	3700 6550 3700 6500
+Connection ~ 3700 6500
+Wire Wire Line
+	3700 6500 3650 6500
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K7
+U 1 0 5D3EC9E1
+P 6150 1750
+F 0 "K7" V 6150 1520 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 6195 1520 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 6100 1250 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 6150 1900 50  0001 C CNN
+	1    6150 1750
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D7
+U 1 0 5D3EC9ED
+P 5750 1750
+F 0 "D7" V 5704 1830 50  0000 L CNN
+F 1 "1N4148WS" V 5795 1830 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 5750 1575 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 5750 1750 50  0001 C CNN
+	1    5750 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q7
+U 1 1 5D3EC9F3
+P 5650 2350
+F 0 "Q7" H 5856 2396 50  0000 L CNN
+F 1 "BSS138" H 5856 2305 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5850 2275 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 5650 2350 50  0001 L CNN
+	1    5650 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR029
+U 1 1 5D3EC9F9
+P 5750 2600
+F 0 "#PWR029" H 5750 2350 50  0001 C CNN
+F 1 "GND" H 5755 2427 50  0000 C CNN
+F 2 "" H 5750 2600 50  0001 C CNN
+F 3 "" H 5750 2600 50  0001 C CNN
+	1    5750 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR028
+U 1 1 5D3EC9FF
+P 5750 1350
+F 0 "#PWR028" H 5750 1200 50  0001 C CNN
+F 1 "+12V" H 5765 1523 50  0000 C CNN
+F 2 "" H 5750 1350 50  0001 C CNN
+F 3 "" H 5750 1350 50  0001 C CNN
+	1    5750 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 1350 5750 1400
+Wire Wire Line
+	5750 1900 5750 2100
+Wire Wire Line
+	6050 1450 6050 1400
+Wire Wire Line
+	6050 1400 5750 1400
+Connection ~ 5750 1400
+Wire Wire Line
+	5750 1400 5750 1600
+Wire Wire Line
+	6050 2050 6050 2100
+Wire Wire Line
+	6050 2100 5750 2100
+Connection ~ 5750 2100
+Wire Wire Line
+	5750 2100 5750 2150
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K8
+U 1 0 5D3ECA15
+P 6150 3800
+F 0 "K8" V 6150 3570 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 6195 3570 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 6100 3300 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 6150 3950 50  0001 C CNN
+	1    6150 3800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D8
+U 1 0 5D3ECA1B
+P 5750 3800
+F 0 "D8" V 5704 3880 50  0000 L CNN
+F 1 "1N4148WS" V 5795 3880 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 5750 3625 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 5750 3800 50  0001 C CNN
+	1    5750 3800
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q8
+U 1 1 5D3ECA21
+P 5650 4400
+F 0 "Q8" H 5856 4446 50  0000 L CNN
+F 1 "BSS138" H 5856 4355 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5850 4325 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 5650 4400 50  0001 L CNN
+	1    5650 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR031
+U 1 1 5D3ECA27
+P 5750 4650
+F 0 "#PWR031" H 5750 4400 50  0001 C CNN
+F 1 "GND" H 5755 4477 50  0000 C CNN
+F 2 "" H 5750 4650 50  0001 C CNN
+F 3 "" H 5750 4650 50  0001 C CNN
+	1    5750 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR030
+U 1 1 5D3ECA2D
+P 5750 3400
+F 0 "#PWR030" H 5750 3250 50  0001 C CNN
+F 1 "+12V" H 5765 3573 50  0000 C CNN
+F 2 "" H 5750 3400 50  0001 C CNN
+F 3 "" H 5750 3400 50  0001 C CNN
+	1    5750 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 3400 5750 3450
+Wire Wire Line
+	5750 3950 5750 4150
+Wire Wire Line
+	6050 3500 6050 3450
+Wire Wire Line
+	6050 3450 5750 3450
+Connection ~ 5750 3450
+Wire Wire Line
+	5750 3450 5750 3650
+Wire Wire Line
+	6050 4100 6050 4150
+Wire Wire Line
+	6050 4150 5750 4150
+Connection ~ 5750 4150
+Wire Wire Line
+	5750 4150 5750 4200
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K9
+U 1 0 5D3ECA3D
+P 6150 5900
+F 0 "K9" V 6150 5670 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 6195 5670 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 6100 5400 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 6150 6050 50  0001 C CNN
+	1    6150 5900
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D9
+U 1 0 5D3ECA43
+P 5750 5900
+F 0 "D9" V 5704 5980 50  0000 L CNN
+F 1 "1N4148WS" V 5795 5980 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 5750 5725 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 5750 5900 50  0001 C CNN
+	1    5750 5900
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q9
+U 1 1 5D3ECA49
+P 5650 6500
+F 0 "Q9" H 5856 6546 50  0000 L CNN
+F 1 "BSS138" H 5856 6455 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5850 6425 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 5650 6500 50  0001 L CNN
+	1    5650 6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR033
+U 1 1 5D3ECA4F
+P 5750 6750
+F 0 "#PWR033" H 5750 6500 50  0001 C CNN
+F 1 "GND" H 5755 6577 50  0000 C CNN
+F 2 "" H 5750 6750 50  0001 C CNN
+F 3 "" H 5750 6750 50  0001 C CNN
+	1    5750 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR032
+U 1 1 5D3ECA55
+P 5750 5500
+F 0 "#PWR032" H 5750 5350 50  0001 C CNN
+F 1 "+12V" H 5765 5673 50  0000 C CNN
+F 2 "" H 5750 5500 50  0001 C CNN
+F 3 "" H 5750 5500 50  0001 C CNN
+	1    5750 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 5500 5750 5550
+Wire Wire Line
+	5750 6050 5750 6250
+Wire Wire Line
+	6050 5600 6050 5550
+Wire Wire Line
+	6050 5550 5750 5550
+Connection ~ 5750 5550
+Wire Wire Line
+	5750 5550 5750 5750
+Wire Wire Line
+	6050 6200 6050 6250
+Wire Wire Line
+	6050 6250 5750 6250
+Connection ~ 5750 6250
+Wire Wire Line
+	5750 6250 5750 6300
+Wire Wire Line
+	6550 1100 6550 1400
+Wire Wire Line
+	6550 5600 6300 5600
+Wire Wire Line
+	6300 1450 6300 1400
+Wire Wire Line
+	6300 1400 6550 1400
+Connection ~ 6550 1400
+Wire Wire Line
+	6550 1400 6550 3450
+Wire Wire Line
+	6300 3500 6300 3450
+Wire Wire Line
+	6300 3450 6550 3450
+Connection ~ 6550 3450
+Wire Wire Line
+	6550 3450 6550 5600
+Text GLabel 5350 2350 0    50   Input ~ 0
+Rel_A3R1
+Text GLabel 5350 4400 0    50   Input ~ 0
+Rel_A3R2
+Text GLabel 5350 6500 0    50   Input ~ 0
+Rel_A3G
+$Comp
+L Device:R_Small R7
+U 1 1 5D3ECA72
+P 5400 2500
+F 0 "R7" H 5459 2546 50  0000 L CNN
+F 1 "470k" H 5459 2455 50  0000 L CNN
+F 2 "" H 5400 2500 50  0001 C CNN
+F 3 "~" H 5400 2500 50  0001 C CNN
+	1    5400 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R8
+U 1 1 5D3ECA78
+P 5400 4550
+F 0 "R8" H 5459 4596 50  0000 L CNN
+F 1 "470k" H 5459 4505 50  0000 L CNN
+F 2 "" H 5400 4550 50  0001 C CNN
+F 3 "~" H 5400 4550 50  0001 C CNN
+	1    5400 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R9
+U 1 1 5D3ECA7E
+P 5400 6650
+F 0 "R9" H 5459 6696 50  0000 L CNN
+F 1 "470k" H 5459 6605 50  0000 L CNN
+F 2 "" H 5400 6650 50  0001 C CNN
+F 3 "~" H 5400 6650 50  0001 C CNN
+	1    5400 6650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR027
+U 1 1 5D3ECA84
+P 5400 6750
+F 0 "#PWR027" H 5400 6500 50  0001 C CNN
+F 1 "GND" H 5405 6577 50  0000 C CNN
+F 2 "" H 5400 6750 50  0001 C CNN
+F 3 "" H 5400 6750 50  0001 C CNN
+	1    5400 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR026
+U 1 1 5D3ECA8A
+P 5400 4650
+F 0 "#PWR026" H 5400 4400 50  0001 C CNN
+F 1 "GND" H 5405 4477 50  0000 C CNN
+F 2 "" H 5400 4650 50  0001 C CNN
+F 3 "" H 5400 4650 50  0001 C CNN
+	1    5400 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR025
+U 1 1 5D3ECA90
+P 5400 2600
+F 0 "#PWR025" H 5400 2350 50  0001 C CNN
+F 1 "GND" H 5405 2427 50  0000 C CNN
+F 2 "" H 5400 2600 50  0001 C CNN
+F 3 "" H 5400 2600 50  0001 C CNN
+	1    5400 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 6700 5750 6750
+Wire Wire Line
+	5750 4600 5750 4650
+Wire Wire Line
+	5750 2550 5750 2600
+Wire Wire Line
+	5450 2350 5400 2350
+Wire Wire Line
+	5400 2400 5400 2350
+Connection ~ 5400 2350
+Wire Wire Line
+	5400 2350 5350 2350
+Wire Wire Line
+	5450 4400 5400 4400
+Wire Wire Line
+	5400 4450 5400 4400
+Connection ~ 5400 4400
+Wire Wire Line
+	5400 4400 5350 4400
+Wire Wire Line
+	5450 6500 5400 6500
+Wire Wire Line
+	5400 6550 5400 6500
+Connection ~ 5400 6500
+Wire Wire Line
+	5400 6500 5350 6500
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K10
+U 1 0 5D437770
+P 7850 1750
+F 0 "K10" V 7850 1520 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 7895 1520 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 7800 1250 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 7850 1900 50  0001 C CNN
+	1    7850 1750
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D10
+U 1 0 5D43777C
+P 7450 1750
+F 0 "D10" V 7404 1830 50  0000 L CNN
+F 1 "1N4148WS" V 7495 1830 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 7450 1575 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 7450 1750 50  0001 C CNN
+	1    7450 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q10
+U 1 1 5D437782
+P 7350 2350
+F 0 "Q10" H 7556 2396 50  0000 L CNN
+F 1 "BSS138" H 7556 2305 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7550 2275 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 7350 2350 50  0001 L CNN
+	1    7350 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR040
+U 1 1 5D437788
+P 7450 2600
+F 0 "#PWR040" H 7450 2350 50  0001 C CNN
+F 1 "GND" H 7455 2427 50  0000 C CNN
+F 2 "" H 7450 2600 50  0001 C CNN
+F 3 "" H 7450 2600 50  0001 C CNN
+	1    7450 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR039
+U 1 1 5D43778E
+P 7450 1350
+F 0 "#PWR039" H 7450 1200 50  0001 C CNN
+F 1 "+12V" H 7465 1523 50  0000 C CNN
+F 2 "" H 7450 1350 50  0001 C CNN
+F 3 "" H 7450 1350 50  0001 C CNN
+	1    7450 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 1350 7450 1400
+Wire Wire Line
+	7450 1900 7450 2100
+Wire Wire Line
+	7750 1450 7750 1400
+Wire Wire Line
+	7750 1400 7450 1400
+Connection ~ 7450 1400
+Wire Wire Line
+	7450 1400 7450 1600
+Wire Wire Line
+	7750 2050 7750 2100
+Wire Wire Line
+	7750 2100 7450 2100
+Connection ~ 7450 2100
+Wire Wire Line
+	7450 2100 7450 2150
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K11
+U 1 0 5D4377A4
+P 7850 3800
+F 0 "K11" V 7850 3570 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 7895 3570 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 7800 3300 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 7850 3950 50  0001 C CNN
+	1    7850 3800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D11
+U 1 0 5D4377AA
+P 7450 3800
+F 0 "D11" V 7404 3880 50  0000 L CNN
+F 1 "1N4148WS" V 7495 3880 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 7450 3625 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 7450 3800 50  0001 C CNN
+	1    7450 3800
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q11
+U 1 1 5D4377B0
+P 7350 4400
+F 0 "Q11" H 7556 4446 50  0000 L CNN
+F 1 "BSS138" H 7556 4355 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7550 4325 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 7350 4400 50  0001 L CNN
+	1    7350 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR042
+U 1 1 5D4377B6
+P 7450 4650
+F 0 "#PWR042" H 7450 4400 50  0001 C CNN
+F 1 "GND" H 7455 4477 50  0000 C CNN
+F 2 "" H 7450 4650 50  0001 C CNN
+F 3 "" H 7450 4650 50  0001 C CNN
+	1    7450 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR041
+U 1 1 5D4377BC
+P 7450 3400
+F 0 "#PWR041" H 7450 3250 50  0001 C CNN
+F 1 "+12V" H 7465 3573 50  0000 C CNN
+F 2 "" H 7450 3400 50  0001 C CNN
+F 3 "" H 7450 3400 50  0001 C CNN
+	1    7450 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 3400 7450 3450
+Wire Wire Line
+	7450 3950 7450 4150
+Wire Wire Line
+	7750 3500 7750 3450
+Wire Wire Line
+	7750 3450 7450 3450
+Connection ~ 7450 3450
+Wire Wire Line
+	7450 3450 7450 3650
+Wire Wire Line
+	7750 4100 7750 4150
+Wire Wire Line
+	7750 4150 7450 4150
+Connection ~ 7450 4150
+Wire Wire Line
+	7450 4150 7450 4200
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K12
+U 1 0 5D4377CC
+P 7850 5900
+F 0 "K12" V 7850 5670 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 7895 5670 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 7800 5400 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 7850 6050 50  0001 C CNN
+	1    7850 5900
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D12
+U 1 0 5D4377D2
+P 7450 5900
+F 0 "D12" V 7404 5980 50  0000 L CNN
+F 1 "1N4148WS" V 7495 5980 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 7450 5725 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 7450 5900 50  0001 C CNN
+	1    7450 5900
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q12
+U 1 1 5D4377D8
+P 7350 6500
+F 0 "Q12" H 7556 6546 50  0000 L CNN
+F 1 "BSS138" H 7556 6455 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7550 6425 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 7350 6500 50  0001 L CNN
+	1    7350 6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR044
+U 1 1 5D4377DE
+P 7450 6750
+F 0 "#PWR044" H 7450 6500 50  0001 C CNN
+F 1 "GND" H 7455 6577 50  0000 C CNN
+F 2 "" H 7450 6750 50  0001 C CNN
+F 3 "" H 7450 6750 50  0001 C CNN
+	1    7450 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR043
+U 1 1 5D4377E4
+P 7450 5500
+F 0 "#PWR043" H 7450 5350 50  0001 C CNN
+F 1 "+12V" H 7465 5673 50  0000 C CNN
+F 2 "" H 7450 5500 50  0001 C CNN
+F 3 "" H 7450 5500 50  0001 C CNN
+	1    7450 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 5500 7450 5550
+Wire Wire Line
+	7450 6050 7450 6250
+Wire Wire Line
+	7750 5600 7750 5550
+Wire Wire Line
+	7750 5550 7450 5550
+Connection ~ 7450 5550
+Wire Wire Line
+	7450 5550 7450 5750
+Wire Wire Line
+	7750 6200 7750 6250
+Wire Wire Line
+	7750 6250 7450 6250
+Connection ~ 7450 6250
+Wire Wire Line
+	7450 6250 7450 6300
+Wire Wire Line
+	8250 1100 8250 1400
+Wire Wire Line
+	8250 5600 8000 5600
+Wire Wire Line
+	8000 1450 8000 1400
+Wire Wire Line
+	8000 1400 8250 1400
+Connection ~ 8250 1400
+Wire Wire Line
+	8250 1400 8250 3450
+Wire Wire Line
+	8000 3500 8000 3450
+Wire Wire Line
+	8000 3450 8250 3450
+Connection ~ 8250 3450
+Wire Wire Line
+	8250 3450 8250 5600
+Text GLabel 7050 2350 0    50   Input ~ 0
+Rel_A4R1
+Text GLabel 7050 4400 0    50   Input ~ 0
+Rel_A4R2
+Text GLabel 7050 6500 0    50   Input ~ 0
+Rel_A4G
+$Comp
+L Device:R_Small R10
+U 1 1 5D437801
+P 7100 2500
+F 0 "R10" H 7159 2546 50  0000 L CNN
+F 1 "470k" H 7159 2455 50  0000 L CNN
+F 2 "" H 7100 2500 50  0001 C CNN
+F 3 "~" H 7100 2500 50  0001 C CNN
+	1    7100 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R11
+U 1 1 5D437807
+P 7100 4550
+F 0 "R11" H 7159 4596 50  0000 L CNN
+F 1 "470k" H 7159 4505 50  0000 L CNN
+F 2 "" H 7100 4550 50  0001 C CNN
+F 3 "~" H 7100 4550 50  0001 C CNN
+	1    7100 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R12
+U 1 1 5D43780D
+P 7100 6650
+F 0 "R12" H 7159 6696 50  0000 L CNN
+F 1 "470k" H 7159 6605 50  0000 L CNN
+F 2 "" H 7100 6650 50  0001 C CNN
+F 3 "~" H 7100 6650 50  0001 C CNN
+	1    7100 6650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR038
+U 1 1 5D437813
+P 7100 6750
+F 0 "#PWR038" H 7100 6500 50  0001 C CNN
+F 1 "GND" H 7105 6577 50  0000 C CNN
+F 2 "" H 7100 6750 50  0001 C CNN
+F 3 "" H 7100 6750 50  0001 C CNN
+	1    7100 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR037
+U 1 1 5D437819
+P 7100 4650
+F 0 "#PWR037" H 7100 4400 50  0001 C CNN
+F 1 "GND" H 7105 4477 50  0000 C CNN
+F 2 "" H 7100 4650 50  0001 C CNN
+F 3 "" H 7100 4650 50  0001 C CNN
+	1    7100 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR036
+U 1 1 5D43781F
+P 7100 2600
+F 0 "#PWR036" H 7100 2350 50  0001 C CNN
+F 1 "GND" H 7105 2427 50  0000 C CNN
+F 2 "" H 7100 2600 50  0001 C CNN
+F 3 "" H 7100 2600 50  0001 C CNN
+	1    7100 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 6700 7450 6750
+Wire Wire Line
+	7450 4600 7450 4650
+Wire Wire Line
+	7450 2550 7450 2600
+Wire Wire Line
+	7150 2350 7100 2350
+Wire Wire Line
+	7100 2400 7100 2350
+Connection ~ 7100 2350
+Wire Wire Line
+	7100 2350 7050 2350
+Wire Wire Line
+	7150 4400 7100 4400
+Wire Wire Line
+	7100 4450 7100 4400
+Connection ~ 7100 4400
+Wire Wire Line
+	7100 4400 7050 4400
+Wire Wire Line
+	7150 6500 7100 6500
+Wire Wire Line
+	7100 6550 7100 6500
+Connection ~ 7100 6500
+Wire Wire Line
+	7100 6500 7050 6500
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K13
+U 1 0 5D437834
+P 9550 1750
+F 0 "K13" V 9550 1520 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 9595 1520 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 9500 1250 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 9550 1900 50  0001 C CNN
+	1    9550 1750
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D13
+U 1 0 5D437840
+P 9150 1750
+F 0 "D13" V 9104 1830 50  0000 L CNN
+F 1 "1N4148WS" V 9195 1830 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 9150 1575 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 9150 1750 50  0001 C CNN
+	1    9150 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q13
+U 1 1 5D437846
+P 9050 2350
+F 0 "Q13" H 9256 2396 50  0000 L CNN
+F 1 "BSS138" H 9256 2305 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 9250 2275 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 9050 2350 50  0001 L CNN
+	1    9050 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR051
+U 1 1 5D43784C
+P 9150 2600
+F 0 "#PWR051" H 9150 2350 50  0001 C CNN
+F 1 "GND" H 9155 2427 50  0000 C CNN
+F 2 "" H 9150 2600 50  0001 C CNN
+F 3 "" H 9150 2600 50  0001 C CNN
+	1    9150 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR050
+U 1 1 5D437852
+P 9150 1350
+F 0 "#PWR050" H 9150 1200 50  0001 C CNN
+F 1 "+12V" H 9165 1523 50  0000 C CNN
+F 2 "" H 9150 1350 50  0001 C CNN
+F 3 "" H 9150 1350 50  0001 C CNN
+	1    9150 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9150 1350 9150 1400
+Wire Wire Line
+	9150 1900 9150 2100
+Wire Wire Line
+	9450 1450 9450 1400
+Wire Wire Line
+	9450 1400 9150 1400
+Connection ~ 9150 1400
+Wire Wire Line
+	9150 1400 9150 1600
+Wire Wire Line
+	9450 2050 9450 2100
+Wire Wire Line
+	9450 2100 9150 2100
+Connection ~ 9150 2100
+Wire Wire Line
+	9150 2100 9150 2150
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K14
+U 1 0 5D437868
+P 9550 3800
+F 0 "K14" V 9550 3570 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 9595 3570 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 9500 3300 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 9550 3950 50  0001 C CNN
+	1    9550 3800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D14
+U 1 0 5D43786E
+P 9150 3800
+F 0 "D14" V 9104 3880 50  0000 L CNN
+F 1 "1N4148WS" V 9195 3880 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 9150 3625 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 9150 3800 50  0001 C CNN
+	1    9150 3800
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q14
+U 1 1 5D437874
+P 9050 4400
+F 0 "Q14" H 9256 4446 50  0000 L CNN
+F 1 "BSS138" H 9256 4355 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 9250 4325 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 9050 4400 50  0001 L CNN
+	1    9050 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR053
+U 1 1 5D43787A
+P 9150 4650
+F 0 "#PWR053" H 9150 4400 50  0001 C CNN
+F 1 "GND" H 9155 4477 50  0000 C CNN
+F 2 "" H 9150 4650 50  0001 C CNN
+F 3 "" H 9150 4650 50  0001 C CNN
+	1    9150 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR052
+U 1 1 5D437880
+P 9150 3400
+F 0 "#PWR052" H 9150 3250 50  0001 C CNN
+F 1 "+12V" H 9165 3573 50  0000 C CNN
+F 2 "" H 9150 3400 50  0001 C CNN
+F 3 "" H 9150 3400 50  0001 C CNN
+	1    9150 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9150 3400 9150 3450
+Wire Wire Line
+	9150 3950 9150 4150
+Wire Wire Line
+	9450 3500 9450 3450
+Wire Wire Line
+	9450 3450 9150 3450
+Connection ~ 9150 3450
+Wire Wire Line
+	9150 3450 9150 3650
+Wire Wire Line
+	9450 4100 9450 4150
+Wire Wire Line
+	9450 4150 9150 4150
+Connection ~ 9150 4150
+Wire Wire Line
+	9150 4150 9150 4200
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K15
+U 1 0 5D437890
+P 9550 5900
+F 0 "K15" V 9550 5670 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 9595 5670 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 9500 5400 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 9550 6050 50  0001 C CNN
+	1    9550 5900
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D15
+U 1 0 5D437896
+P 9150 5900
+F 0 "D15" V 9104 5980 50  0000 L CNN
+F 1 "1N4148WS" V 9195 5980 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 9150 5725 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 9150 5900 50  0001 C CNN
+	1    9150 5900
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q15
+U 1 1 5D43789C
+P 9050 6500
+F 0 "Q15" H 9256 6546 50  0000 L CNN
+F 1 "BSS138" H 9256 6455 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 9250 6425 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 9050 6500 50  0001 L CNN
+	1    9050 6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR055
+U 1 1 5D4378A2
+P 9150 6750
+F 0 "#PWR055" H 9150 6500 50  0001 C CNN
+F 1 "GND" H 9155 6577 50  0000 C CNN
+F 2 "" H 9150 6750 50  0001 C CNN
+F 3 "" H 9150 6750 50  0001 C CNN
+	1    9150 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR054
+U 1 1 5D4378A8
+P 9150 5500
+F 0 "#PWR054" H 9150 5350 50  0001 C CNN
+F 1 "+12V" H 9165 5673 50  0000 C CNN
+F 2 "" H 9150 5500 50  0001 C CNN
+F 3 "" H 9150 5500 50  0001 C CNN
+	1    9150 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9150 5500 9150 5550
+Wire Wire Line
+	9150 6050 9150 6250
+Wire Wire Line
+	9450 5600 9450 5550
+Wire Wire Line
+	9450 5550 9150 5550
+Connection ~ 9150 5550
+Wire Wire Line
+	9150 5550 9150 5750
+Wire Wire Line
+	9450 6200 9450 6250
+Wire Wire Line
+	9450 6250 9150 6250
+Connection ~ 9150 6250
+Wire Wire Line
+	9150 6250 9150 6300
+Wire Wire Line
+	9950 1100 9950 1400
+Wire Wire Line
+	9950 5600 9700 5600
+Wire Wire Line
+	9700 1450 9700 1400
+Wire Wire Line
+	9700 1400 9950 1400
+Connection ~ 9950 1400
+Wire Wire Line
+	9950 1400 9950 3450
+Wire Wire Line
+	9700 3500 9700 3450
+Wire Wire Line
+	9700 3450 9950 3450
+Connection ~ 9950 3450
+Wire Wire Line
+	9950 3450 9950 5600
+Text GLabel 8750 2350 0    50   Input ~ 0
+Rel_A5R1
+Text GLabel 8750 4400 0    50   Input ~ 0
+Rel_A5R2
+Text GLabel 8750 6500 0    50   Input ~ 0
+Rel_A5G
+$Comp
+L Device:R_Small R13
+U 1 1 5D4378C5
+P 8800 2500
+F 0 "R13" H 8859 2546 50  0000 L CNN
+F 1 "470k" H 8859 2455 50  0000 L CNN
+F 2 "" H 8800 2500 50  0001 C CNN
+F 3 "~" H 8800 2500 50  0001 C CNN
+	1    8800 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R14
+U 1 1 5D4378CB
+P 8800 4550
+F 0 "R14" H 8859 4596 50  0000 L CNN
+F 1 "470k" H 8859 4505 50  0000 L CNN
+F 2 "" H 8800 4550 50  0001 C CNN
+F 3 "~" H 8800 4550 50  0001 C CNN
+	1    8800 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R15
+U 1 1 5D4378D1
+P 8800 6650
+F 0 "R15" H 8859 6696 50  0000 L CNN
+F 1 "470k" H 8859 6605 50  0000 L CNN
+F 2 "" H 8800 6650 50  0001 C CNN
+F 3 "~" H 8800 6650 50  0001 C CNN
+	1    8800 6650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR049
+U 1 1 5D4378D7
+P 8800 6750
+F 0 "#PWR049" H 8800 6500 50  0001 C CNN
+F 1 "GND" H 8805 6577 50  0000 C CNN
+F 2 "" H 8800 6750 50  0001 C CNN
+F 3 "" H 8800 6750 50  0001 C CNN
+	1    8800 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR048
+U 1 1 5D4378DD
+P 8800 4650
+F 0 "#PWR048" H 8800 4400 50  0001 C CNN
+F 1 "GND" H 8805 4477 50  0000 C CNN
+F 2 "" H 8800 4650 50  0001 C CNN
+F 3 "" H 8800 4650 50  0001 C CNN
+	1    8800 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR047
+U 1 1 5D4378E3
+P 8800 2600
+F 0 "#PWR047" H 8800 2350 50  0001 C CNN
+F 1 "GND" H 8805 2427 50  0000 C CNN
+F 2 "" H 8800 2600 50  0001 C CNN
+F 3 "" H 8800 2600 50  0001 C CNN
+	1    8800 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9150 6700 9150 6750
+Wire Wire Line
+	9150 4600 9150 4650
+Wire Wire Line
+	9150 2550 9150 2600
+Wire Wire Line
+	8850 2350 8800 2350
+Wire Wire Line
+	8800 2400 8800 2350
+Connection ~ 8800 2350
+Wire Wire Line
+	8800 2350 8750 2350
+Wire Wire Line
+	8850 4400 8800 4400
+Wire Wire Line
+	8800 4450 8800 4400
+Connection ~ 8800 4400
+Wire Wire Line
+	8800 4400 8750 4400
+Wire Wire Line
+	8850 6500 8800 6500
+Wire Wire Line
+	8800 6550 8800 6500
+Connection ~ 8800 6500
+Wire Wire Line
+	8800 6500 8750 6500
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K16
+U 1 0 5D4378F8
+P 11250 1750
+F 0 "K16" V 11250 1520 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 11295 1520 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 11200 1250 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 11250 1900 50  0001 C CNN
+	1    11250 1750
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D16
+U 1 0 5D437904
+P 10850 1750
+F 0 "D16" V 10804 1830 50  0000 L CNN
+F 1 "1N4148WS" V 10895 1830 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 10850 1575 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 10850 1750 50  0001 C CNN
+	1    10850 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q16
+U 1 1 5D43790A
+P 10750 2350
+F 0 "Q16" H 10956 2396 50  0000 L CNN
+F 1 "BSS138" H 10956 2305 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 10950 2275 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 10750 2350 50  0001 L CNN
+	1    10750 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR062
+U 1 1 5D437910
+P 10850 2600
+F 0 "#PWR062" H 10850 2350 50  0001 C CNN
+F 1 "GND" H 10855 2427 50  0000 C CNN
+F 2 "" H 10850 2600 50  0001 C CNN
+F 3 "" H 10850 2600 50  0001 C CNN
+	1    10850 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR061
+U 1 1 5D437916
+P 10850 1350
+F 0 "#PWR061" H 10850 1200 50  0001 C CNN
+F 1 "+12V" H 10865 1523 50  0000 C CNN
+F 2 "" H 10850 1350 50  0001 C CNN
+F 3 "" H 10850 1350 50  0001 C CNN
+	1    10850 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10850 1350 10850 1400
+Wire Wire Line
+	10850 1900 10850 2100
+Wire Wire Line
+	11150 1450 11150 1400
+Wire Wire Line
+	11150 1400 10850 1400
+Connection ~ 10850 1400
+Wire Wire Line
+	10850 1400 10850 1600
+Wire Wire Line
+	11150 2050 11150 2100
+Wire Wire Line
+	11150 2100 10850 2100
+Connection ~ 10850 2100
+Wire Wire Line
+	10850 2100 10850 2150
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K17
+U 1 0 5D43792C
+P 11250 3800
+F 0 "K17" V 11250 3570 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 11295 3570 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 11200 3300 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 11250 3950 50  0001 C CNN
+	1    11250 3800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D17
+U 1 0 5D437932
+P 10850 3800
+F 0 "D17" V 10804 3880 50  0000 L CNN
+F 1 "1N4148WS" V 10895 3880 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 10850 3625 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 10850 3800 50  0001 C CNN
+	1    10850 3800
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q17
+U 1 1 5D437938
+P 10750 4400
+F 0 "Q17" H 10956 4446 50  0000 L CNN
+F 1 "BSS138" H 10956 4355 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 10950 4325 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 10750 4400 50  0001 L CNN
+	1    10750 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR064
+U 1 1 5D43793E
+P 10850 4650
+F 0 "#PWR064" H 10850 4400 50  0001 C CNN
+F 1 "GND" H 10855 4477 50  0000 C CNN
+F 2 "" H 10850 4650 50  0001 C CNN
+F 3 "" H 10850 4650 50  0001 C CNN
+	1    10850 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR063
+U 1 1 5D437944
+P 10850 3400
+F 0 "#PWR063" H 10850 3250 50  0001 C CNN
+F 1 "+12V" H 10865 3573 50  0000 C CNN
+F 2 "" H 10850 3400 50  0001 C CNN
+F 3 "" H 10850 3400 50  0001 C CNN
+	1    10850 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10850 3400 10850 3450
+Wire Wire Line
+	10850 3950 10850 4150
+Wire Wire Line
+	11150 3500 11150 3450
+Wire Wire Line
+	11150 3450 10850 3450
+Connection ~ 10850 3450
+Wire Wire Line
+	10850 3450 10850 3650
+Wire Wire Line
+	11150 4100 11150 4150
+Wire Wire Line
+	11150 4150 10850 4150
+Connection ~ 10850 4150
+Wire Wire Line
+	10850 4150 10850 4200
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K18
+U 1 0 5D437954
+P 11250 5900
+F 0 "K18" V 11250 5670 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 11295 5670 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 11200 5400 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 11250 6050 50  0001 C CNN
+	1    11250 5900
+	0    -1   1    0   
+$EndComp
+$Comp
+L Diode:1N4148WS D18
+U 1 0 5D43795A
+P 10850 5900
+F 0 "D18" V 10804 5980 50  0000 L CNN
+F 1 "1N4148WS" V 10895 5980 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 10850 5725 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 10850 5900 50  0001 C CNN
+	1    10850 5900
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q18
+U 1 1 5D437960
+P 10750 6500
+F 0 "Q18" H 10956 6546 50  0000 L CNN
+F 1 "BSS138" H 10956 6455 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 10950 6425 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 10750 6500 50  0001 L CNN
+	1    10750 6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR066
+U 1 1 5D437966
+P 10850 6750
+F 0 "#PWR066" H 10850 6500 50  0001 C CNN
+F 1 "GND" H 10855 6577 50  0000 C CNN
+F 2 "" H 10850 6750 50  0001 C CNN
+F 3 "" H 10850 6750 50  0001 C CNN
+	1    10850 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR065
+U 1 1 5D43796C
+P 10850 5500
+F 0 "#PWR065" H 10850 5350 50  0001 C CNN
+F 1 "+12V" H 10865 5673 50  0000 C CNN
+F 2 "" H 10850 5500 50  0001 C CNN
+F 3 "" H 10850 5500 50  0001 C CNN
+	1    10850 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10850 5500 10850 5550
+Wire Wire Line
+	10850 6050 10850 6250
+Wire Wire Line
+	11150 5600 11150 5550
+Wire Wire Line
+	11150 5550 10850 5550
+Connection ~ 10850 5550
+Wire Wire Line
+	10850 5550 10850 5750
+Wire Wire Line
+	11150 6200 11150 6250
+Wire Wire Line
+	11150 6250 10850 6250
+Connection ~ 10850 6250
+Wire Wire Line
+	10850 6250 10850 6300
+Wire Wire Line
+	11650 1100 11650 1400
+Wire Wire Line
+	11650 5600 11400 5600
+Wire Wire Line
+	11400 1450 11400 1400
+Wire Wire Line
+	11400 1400 11650 1400
+Connection ~ 11650 1400
+Wire Wire Line
+	11650 1400 11650 3450
+Wire Wire Line
+	11400 3500 11400 3450
+Wire Wire Line
+	11400 3450 11650 3450
+Connection ~ 11650 3450
+Wire Wire Line
+	11650 3450 11650 5600
+Text GLabel 10450 2350 0    50   Input ~ 0
+Rel_A6R1
+Text GLabel 10450 4400 0    50   Input ~ 0
+Rel_A6R2
+Text GLabel 10450 6500 0    50   Input ~ 0
+Rel_A6G
+$Comp
+L Device:R_Small R16
+U 1 1 5D437989
+P 10500 2500
+F 0 "R16" H 10559 2546 50  0000 L CNN
+F 1 "470k" H 10559 2455 50  0000 L CNN
+F 2 "" H 10500 2500 50  0001 C CNN
+F 3 "~" H 10500 2500 50  0001 C CNN
+	1    10500 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R17
+U 1 1 5D43798F
+P 10500 4550
+F 0 "R17" H 10559 4596 50  0000 L CNN
+F 1 "470k" H 10559 4505 50  0000 L CNN
+F 2 "" H 10500 4550 50  0001 C CNN
+F 3 "~" H 10500 4550 50  0001 C CNN
+	1    10500 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R18
+U 1 1 5D437995
+P 10500 6650
+F 0 "R18" H 10559 6696 50  0000 L CNN
+F 1 "470k" H 10559 6605 50  0000 L CNN
+F 2 "" H 10500 6650 50  0001 C CNN
+F 3 "~" H 10500 6650 50  0001 C CNN
+	1    10500 6650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR060
+U 1 1 5D43799B
+P 10500 6750
+F 0 "#PWR060" H 10500 6500 50  0001 C CNN
+F 1 "GND" H 10505 6577 50  0000 C CNN
+F 2 "" H 10500 6750 50  0001 C CNN
+F 3 "" H 10500 6750 50  0001 C CNN
+	1    10500 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR059
+U 1 1 5D4379A1
+P 10500 4650
+F 0 "#PWR059" H 10500 4400 50  0001 C CNN
+F 1 "GND" H 10505 4477 50  0000 C CNN
+F 2 "" H 10500 4650 50  0001 C CNN
+F 3 "" H 10500 4650 50  0001 C CNN
+	1    10500 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR058
+U 1 1 5D4379A7
+P 10500 2600
+F 0 "#PWR058" H 10500 2350 50  0001 C CNN
+F 1 "GND" H 10505 2427 50  0000 C CNN
+F 2 "" H 10500 2600 50  0001 C CNN
+F 3 "" H 10500 2600 50  0001 C CNN
+	1    10500 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10850 6700 10850 6750
+Wire Wire Line
+	10850 4600 10850 4650
+Wire Wire Line
+	10850 2550 10850 2600
+Wire Wire Line
+	10550 2350 10500 2350
+Wire Wire Line
+	10500 2400 10500 2350
+Connection ~ 10500 2350
+Wire Wire Line
+	10500 2350 10450 2350
+Wire Wire Line
+	10550 4400 10500 4400
+Wire Wire Line
+	10500 4450 10500 4400
+Connection ~ 10500 4400
+Wire Wire Line
+	10500 4400 10450 4400
+Wire Wire Line
+	10550 6500 10500 6500
+Wire Wire Line
+	10500 6550 10500 6500
+Connection ~ 10500 6500
+Wire Wire Line
+	10500 6500 10450 6500
+$Comp
+L Connector:Conn_Coaxial EXT1
+U 1 0 5D4D5610
+P 1100 3050
+F 0 "EXT1" H 1028 3197 50  0000 C CNN
+F 1 "Conn_Coaxial" H 1200 2934 50  0001 L CNN
+F 2 "" H 1100 3050 50  0001 C CNN
+F 3 " ~" H 1100 3050 50  0001 C CNN
+	1    1100 3050
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_Coaxial A2
+U 1 0 5D57FACA
+P 4850 900
+F 0 "A2" V 4778 1000 50  0000 L CNN
+F 1 "Conn_Coaxial" H 4950 784 50  0001 L CNN
+F 2 "" H 4850 900 50  0001 C CNN
+F 3 " ~" H 4850 900 50  0001 C CNN
+	1    4850 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:GND #PWR024
+U 1 1 5D57FAD0
+P 4650 900
+F 0 "#PWR024" H 4650 650 50  0001 C CNN
+F 1 "GND" V 4655 772 50  0000 R CNN
+F 2 "" H 4650 900 50  0001 C CNN
+F 3 "" H 4650 900 50  0001 C CNN
+	1    4650 900 
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:Conn_Coaxial A3
+U 1 0 5D58F42C
+P 6550 900
+F 0 "A3" V 6478 1000 50  0000 L CNN
+F 1 "Conn_Coaxial" H 6650 784 50  0001 L CNN
+F 2 "" H 6550 900 50  0001 C CNN
+F 3 " ~" H 6550 900 50  0001 C CNN
+	1    6550 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:GND #PWR035
+U 1 1 5D58F432
+P 6350 900
+F 0 "#PWR035" H 6350 650 50  0001 C CNN
+F 1 "GND" V 6355 772 50  0000 R CNN
+F 2 "" H 6350 900 50  0001 C CNN
+F 3 "" H 6350 900 50  0001 C CNN
+	1    6350 900 
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:Conn_Coaxial A4
+U 1 0 5D5A30F4
+P 8250 900
+F 0 "A4" V 8178 1000 50  0000 L CNN
+F 1 "Conn_Coaxial" H 8350 784 50  0001 L CNN
+F 2 "" H 8250 900 50  0001 C CNN
+F 3 " ~" H 8250 900 50  0001 C CNN
+	1    8250 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:GND #PWR046
+U 1 1 5D5A30FA
+P 8050 900
+F 0 "#PWR046" H 8050 650 50  0001 C CNN
+F 1 "GND" V 8055 772 50  0000 R CNN
+F 2 "" H 8050 900 50  0001 C CNN
+F 3 "" H 8050 900 50  0001 C CNN
+	1    8050 900 
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:Conn_Coaxial A5
+U 1 0 5D5C27B0
+P 9950 900
+F 0 "A5" V 9878 1000 50  0000 L CNN
+F 1 "Conn_Coaxial" H 10050 784 50  0001 L CNN
+F 2 "" H 9950 900 50  0001 C CNN
+F 3 " ~" H 9950 900 50  0001 C CNN
+	1    9950 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:GND #PWR057
+U 1 1 5D5C27B6
+P 9750 900
+F 0 "#PWR057" H 9750 650 50  0001 C CNN
+F 1 "GND" V 9755 772 50  0000 R CNN
+F 2 "" H 9750 900 50  0001 C CNN
+F 3 "" H 9750 900 50  0001 C CNN
+	1    9750 900 
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:Conn_Coaxial A6
+U 1 0 5D5D2290
+P 11650 900
+F 0 "A6" V 11578 1000 50  0000 L CNN
+F 1 "Conn_Coaxial" H 11750 784 50  0001 L CNN
+F 2 "" H 11650 900 50  0001 C CNN
+F 3 " ~" H 11650 900 50  0001 C CNN
+	1    11650 900 
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:GND #PWR068
+U 1 1 5D5D2296
+P 11450 900
+F 0 "#PWR068" H 11450 650 50  0001 C CNN
+F 1 "GND" V 11455 772 50  0000 R CNN
+F 2 "" H 11450 900 50  0001 C CNN
+F 3 "" H 11450 900 50  0001 C CNN
+	1    11450 900 
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR01
+U 1 1 5D62AC7D
+P 1100 3250
+F 0 "#PWR01" H 1100 3000 50  0001 C CNN
+F 1 "GND" H 1105 3077 50  0000 C CNN
+F 2 "" H 1100 3250 50  0001 C CNN
+F 3 "" H 1100 3250 50  0001 C CNN
+	1    1100 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_Coaxial EXT2
+U 1 0 5D638C15
+P 1100 5150
+F 0 "EXT2" H 1028 5297 50  0000 C CNN
+F 1 "Conn_Coaxial" H 1200 5034 50  0001 L CNN
+F 2 "" H 1100 5150 50  0001 C CNN
+F 3 " ~" H 1100 5150 50  0001 C CNN
+	1    1100 5150
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR02
+U 1 1 5D638C1B
+P 1100 5350
+F 0 "#PWR02" H 1100 5100 50  0001 C CNN
+F 1 "GND" H 1105 5177 50  0000 C CNN
+F 2 "" H 1100 5350 50  0001 C CNN
+F 3 "" H 1100 5350 50  0001 C CNN
+	1    1100 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K19
+U 1 0 5D67F737
+P 12750 2350
+F 0 "K19" V 12750 2120 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 12795 2120 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 12700 1850 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 12750 2500 50  0001 C CNN
+	1    12750 2350
+	0    1    -1   0   
+$EndComp
+$Comp
+L Connector:Conn_Coaxial LOAD1
+U 1 0 5D67F73D
+P 12800 1400
+F 0 "LOAD1" V 12945 1329 50  0000 C CNN
+F 1 "Conn_Coaxial" H 12900 1284 50  0001 L CNN
+F 2 "" H 12800 1400 50  0001 C CNN
+F 3 " ~" H 12800 1400 50  0001 C CNN
+	1    12800 1400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148WS D19
+U 1 0 5D67F743
+P 13150 2350
+F 0 "D19" V 13104 2430 50  0000 L CNN
+F 1 "1N4148WS" V 13195 2430 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 13150 2175 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 13150 2350 50  0001 C CNN
+	1    13150 2350
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q19
+U 1 1 5D67F749
+P 13250 2950
+F 0 "Q19" H 13456 2996 50  0000 L CNN
+F 1 "BSS138" H 13456 2905 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 13450 2875 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 13250 2950 50  0001 L CNN
+	1    13250 2950
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR073
+U 1 1 5D67F755
+P 13150 1950
+F 0 "#PWR073" H 13150 1800 50  0001 C CNN
+F 1 "+12V" H 13165 2123 50  0000 C CNN
+F 2 "" H 13150 1950 50  0001 C CNN
+F 3 "" H 13150 1950 50  0001 C CNN
+	1    13150 1950
+	1    0    0    -1  
+$EndComp
+Text GLabel 13550 2950 2    50   Input ~ 0
+Rel_R1L
+$Comp
+L Device:R_Small R19
+U 1 1 5D67F768
+P 13500 3100
+F 0 "R19" H 13559 3146 50  0000 L CNN
+F 1 "470k" H 13559 3055 50  0000 L CNN
+F 2 "" H 13500 3100 50  0001 C CNN
+F 3 "~" H 13500 3100 50  0001 C CNN
+	1    13500 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR077
+U 1 1 5D67F76E
+P 13500 3200
+F 0 "#PWR077" H 13500 2950 50  0001 C CNN
+F 1 "GND" H 13505 3027 50  0000 C CNN
+F 2 "" H 13500 3200 50  0001 C CNN
+F 3 "" H 13500 3200 50  0001 C CNN
+	1    13500 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1300 3050 2900 3050
+Wire Wire Line
+	2900 3050 2900 2050
+Wire Wire Line
+	2900 3050 4600 3050
+Wire Wire Line
+	4600 3050 4600 2050
+Connection ~ 2900 3050
+Wire Wire Line
+	4600 3050 6300 3050
+Wire Wire Line
+	6300 3050 6300 2050
+Connection ~ 4600 3050
+Wire Wire Line
+	6300 3050 8000 3050
+Wire Wire Line
+	8000 3050 8000 2050
+Connection ~ 6300 3050
+Wire Wire Line
+	8000 3050 9700 3050
+Wire Wire Line
+	9700 3050 9700 2050
+Connection ~ 8000 3050
+Wire Wire Line
+	9700 3050 11400 3050
+Wire Wire Line
+	11400 3050 11400 2050
+Connection ~ 9700 3050
+Wire Wire Line
+	1300 5150 2900 5150
+Wire Wire Line
+	2900 5150 2900 4100
+Wire Wire Line
+	2900 5150 4600 5150
+Wire Wire Line
+	4600 5150 4600 4100
+Connection ~ 2900 5150
+Wire Wire Line
+	4600 5150 6300 5150
+Wire Wire Line
+	6300 5150 6300 4100
+Connection ~ 4600 5150
+Wire Wire Line
+	6300 5150 8000 5150
+Wire Wire Line
+	8000 5150 8000 4100
+Connection ~ 6300 5150
+Wire Wire Line
+	8000 5150 9700 5150
+Wire Wire Line
+	9700 5150 9700 4100
+Connection ~ 8000 5150
+Wire Wire Line
+	9700 5150 11400 5150
+Wire Wire Line
+	11400 5150 11400 4100
+Connection ~ 9700 5150
+$Comp
+L power:GND #PWR067
+U 1 1 5D7F754D
+P 11300 6200
+F 0 "#PWR067" H 11300 5950 50  0001 C CNN
+F 1 "GND" H 11305 6027 50  0000 C CNN
+F 2 "" H 11300 6200 50  0001 C CNN
+F 3 "" H 11300 6200 50  0001 C CNN
+	1    11300 6200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR056
+U 1 1 5D7F81F7
+P 9600 6200
+F 0 "#PWR056" H 9600 5950 50  0001 C CNN
+F 1 "GND" H 9605 6027 50  0000 C CNN
+F 2 "" H 9600 6200 50  0001 C CNN
+F 3 "" H 9600 6200 50  0001 C CNN
+	1    9600 6200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR045
+U 1 1 5D7F8D93
+P 7900 6200
+F 0 "#PWR045" H 7900 5950 50  0001 C CNN
+F 1 "GND" H 7905 6027 50  0000 C CNN
+F 2 "" H 7900 6200 50  0001 C CNN
+F 3 "" H 7900 6200 50  0001 C CNN
+	1    7900 6200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR034
+U 1 1 5D804C18
+P 6200 6200
+F 0 "#PWR034" H 6200 5950 50  0001 C CNN
+F 1 "GND" H 6205 6027 50  0000 C CNN
+F 2 "" H 6200 6200 50  0001 C CNN
+F 3 "" H 6200 6200 50  0001 C CNN
+	1    6200 6200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR023
+U 1 1 5D805804
+P 4500 6200
+F 0 "#PWR023" H 4500 5950 50  0001 C CNN
+F 1 "GND" H 4505 6027 50  0000 C CNN
+F 2 "" H 4500 6200 50  0001 C CNN
+F 3 "" H 4500 6200 50  0001 C CNN
+	1    4500 6200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR012
+U 1 1 5D8063C2
+P 2800 6200
+F 0 "#PWR012" H 2800 5950 50  0001 C CNN
+F 1 "GND" H 2805 6027 50  0000 C CNN
+F 2 "" H 2800 6200 50  0001 C CNN
+F 3 "" H 2800 6200 50  0001 C CNN
+	1    2800 6200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	12850 2050 12850 2000
+Wire Wire Line
+	12850 2000 13150 2000
+Wire Wire Line
+	13150 2000 13150 1950
+Wire Wire Line
+	13150 2200 13150 2000
+Connection ~ 13150 2000
+Wire Wire Line
+	12850 2650 12850 2700
+Wire Wire Line
+	12850 2700 13150 2700
+Wire Wire Line
+	13150 2700 13150 2500
+Wire Wire Line
+	13150 2750 13150 2700
+Connection ~ 13150 2700
+$Comp
+L power:GND #PWR074
+U 1 1 5DAF0DA9
+P 13150 3200
+F 0 "#PWR074" H 13150 2950 50  0001 C CNN
+F 1 "GND" H 13155 3027 50  0000 C CNN
+F 2 "" H 13150 3200 50  0001 C CNN
+F 3 "" H 13150 3200 50  0001 C CNN
+	1    13150 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	13150 3150 13150 3200
+Wire Wire Line
+	13450 2950 13500 2950
+Wire Wire Line
+	13500 2950 13500 3000
+Wire Wire Line
+	13550 2950 13500 2950
+Connection ~ 13500 2950
+$Comp
+L Connector:Conn_Coaxial RADIO1
+U 1 0 5DB8C3F8
+P 12500 1400
+F 0 "RADIO1" V 12650 1250 50  0000 L CNN
+F 1 "Conn_Coaxial" H 12600 1284 50  0001 L CNN
+F 2 "" H 12500 1400 50  0001 C CNN
+F 3 " ~" H 12500 1400 50  0001 C CNN
+	1    12500 1400
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:GND #PWR069
+U 1 1 5DB8DFBB
+P 12300 1400
+F 0 "#PWR069" H 12300 1150 50  0001 C CNN
+F 1 "GND" V 12305 1272 50  0000 R CNN
+F 2 "" H 12300 1400 50  0001 C CNN
+F 3 "" H 12300 1400 50  0001 C CNN
+	1    12300 1400
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR071
+U 1 1 5DB8E6E6
+P 13000 1400
+F 0 "#PWR071" H 13000 1150 50  0001 C CNN
+F 1 "GND" V 13005 1272 50  0000 R CNN
+F 2 "" H 13000 1400 50  0001 C CNN
+F 3 "" H 13000 1400 50  0001 C CNN
+	1    13000 1400
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	12800 1600 12800 1800
+Wire Wire Line
+	12800 1800 12700 1800
+Wire Wire Line
+	12700 1800 12700 2050
+Wire Wire Line
+	12500 1600 12500 1800
+Wire Wire Line
+	12500 1800 12600 1800
+Wire Wire Line
+	12600 1800 12600 2050
+Wire Wire Line
+	11400 3050 12600 3050
+Wire Wire Line
+	12600 3050 12600 2650
+Connection ~ 11400 3050
+$Comp
+L QS_RF:Fujitsu_FTR-K1C K20
+U 1 0 5DD9CFD4
+P 12750 4650
+F 0 "K20" V 12750 4420 50  0000 R CNN
+F 1 "Fujitsu_FTR-K1C" V 12795 4420 50  0001 R CNN
+F 2 "QS_RF:Relay_DPDT_Fujitsu_FTR-K1C" H 12700 4150 50  0001 C CNN
+F 3 "https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf" H 12750 4800 50  0001 C CNN
+	1    12750 4650
+	0    1    -1   0   
+$EndComp
+$Comp
+L Connector:Conn_Coaxial LOAD2
+U 1 0 5DD9CFDA
+P 12800 3700
+F 0 "LOAD2" V 12945 3629 50  0000 C CNN
+F 1 "Conn_Coaxial" H 12900 3584 50  0001 L CNN
+F 2 "" H 12800 3700 50  0001 C CNN
+F 3 " ~" H 12800 3700 50  0001 C CNN
+	1    12800 3700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:1N4148WS D20
+U 1 0 5DD9CFE0
+P 13150 4650
+F 0 "D20" V 13104 4730 50  0000 L CNN
+F 1 "1N4148WS" V 13195 4730 50  0000 L CNN
+F 2 "Diode_SMD:D_SOD-323" H 13150 4475 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85751/1n4148ws.pdf" H 13150 4650 50  0001 C CNN
+	1    13150 4650
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q20
+U 1 1 5DD9CFE6
+P 13250 5250
+F 0 "Q20" H 13456 5296 50  0000 L CNN
+F 1 "BSS138" H 13456 5205 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 13450 5175 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 13250 5250 50  0001 L CNN
+	1    13250 5250
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR075
+U 1 1 5DD9CFEC
+P 13150 4250
+F 0 "#PWR075" H 13150 4100 50  0001 C CNN
+F 1 "+12V" H 13165 4423 50  0000 C CNN
+F 2 "" H 13150 4250 50  0001 C CNN
+F 3 "" H 13150 4250 50  0001 C CNN
+	1    13150 4250
+	1    0    0    -1  
+$EndComp
+Text GLabel 13550 5250 2    50   Input ~ 0
+Rel_R2L
+$Comp
+L Device:R_Small R20
+U 1 1 5DD9CFF3
+P 13500 5400
+F 0 "R20" H 13559 5446 50  0000 L CNN
+F 1 "470k" H 13559 5355 50  0000 L CNN
+F 2 "" H 13500 5400 50  0001 C CNN
+F 3 "~" H 13500 5400 50  0001 C CNN
+	1    13500 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR078
+U 1 1 5DD9CFF9
+P 13500 5500
+F 0 "#PWR078" H 13500 5250 50  0001 C CNN
+F 1 "GND" H 13505 5327 50  0000 C CNN
+F 2 "" H 13500 5500 50  0001 C CNN
+F 3 "" H 13500 5500 50  0001 C CNN
+	1    13500 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	12850 4350 12850 4300
+Wire Wire Line
+	12850 4300 13150 4300
+Wire Wire Line
+	13150 4300 13150 4250
+Wire Wire Line
+	13150 4500 13150 4300
+Connection ~ 13150 4300
+Wire Wire Line
+	12850 4950 12850 5000
+Wire Wire Line
+	12850 5000 13150 5000
+Wire Wire Line
+	13150 5000 13150 4800
+Wire Wire Line
+	13150 5050 13150 5000
+Connection ~ 13150 5000
+$Comp
+L power:GND #PWR076
+U 1 1 5DD9D009
+P 13150 5500
+F 0 "#PWR076" H 13150 5250 50  0001 C CNN
+F 1 "GND" H 13155 5327 50  0000 C CNN
+F 2 "" H 13150 5500 50  0001 C CNN
+F 3 "" H 13150 5500 50  0001 C CNN
+	1    13150 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	13150 5450 13150 5500
+Wire Wire Line
+	13450 5250 13500 5250
+Wire Wire Line
+	13500 5250 13500 5300
+Wire Wire Line
+	13550 5250 13500 5250
+Connection ~ 13500 5250
+$Comp
+L Connector:Conn_Coaxial RADIO2
+U 1 0 5DD9D014
+P 12500 3700
+F 0 "RADIO2" V 12650 3550 50  0000 L CNN
+F 1 "Conn_Coaxial" H 12600 3584 50  0001 L CNN
+F 2 "" H 12500 3700 50  0001 C CNN
+F 3 " ~" H 12500 3700 50  0001 C CNN
+	1    12500 3700
+	0    1    -1   0   
+$EndComp
+$Comp
+L power:GND #PWR070
+U 1 1 5DD9D01A
+P 12300 3700
+F 0 "#PWR070" H 12300 3450 50  0001 C CNN
+F 1 "GND" V 12305 3572 50  0000 R CNN
+F 2 "" H 12300 3700 50  0001 C CNN
+F 3 "" H 12300 3700 50  0001 C CNN
+	1    12300 3700
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR072
+U 1 1 5DD9D020
+P 13000 3700
+F 0 "#PWR072" H 13000 3450 50  0001 C CNN
+F 1 "GND" V 13005 3572 50  0000 R CNN
+F 2 "" H 13000 3700 50  0001 C CNN
+F 3 "" H 13000 3700 50  0001 C CNN
+	1    13000 3700
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	12800 3900 12800 4100
+Wire Wire Line
+	12800 4100 12700 4100
+Wire Wire Line
+	12700 4100 12700 4350
+Wire Wire Line
+	12500 3900 12500 4100
+Wire Wire Line
+	12500 4100 12600 4100
+Wire Wire Line
+	12600 4100 12600 4350
+Wire Wire Line
+	11400 5150 12600 5150
+Wire Wire Line
+	12600 4950 12600 5150
+Connection ~ 11400 5150
+$Comp
+L 74xx:7400 U1
+U 5 1 5ED2FD80
+P 19050 11950
+F 0 "U1" H 19280 11996 50  0000 L CNN
+F 1 "7400" H 19280 11905 50  0000 L CNN
+F 2 "" H 19050 11950 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 19050 11950 50  0001 C CNN
+	5    19050 11950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR080
+U 1 1 5F23E83D
+P 19050 12600
+F 0 "#PWR080" H 19050 12350 50  0001 C CNN
+F 1 "GND" H 19055 12427 50  0000 C CNN
+F 2 "" H 19050 12600 50  0001 C CNN
+F 3 "" H 19050 12600 50  0001 C CNN
+	1    19050 12600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR079
+U 1 1 5F245A48
+P 19050 11300
+F 0 "#PWR079" H 19050 11150 50  0001 C CNN
+F 1 "+12V" H 19065 11473 50  0000 C CNN
+F 2 "" H 19050 11300 50  0001 C CNN
+F 3 "" H 19050 11300 50  0001 C CNN
+	1    19050 11300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	19050 11300 19050 11400
+Wire Wire Line
+	19050 12450 19050 12500
+$Comp
+L Device:C_Small C1
+U 1 1 5F634394
+P 18700 11950
+F 0 "C1" H 18608 11904 50  0000 R CNN
+F 1 "100n" H 18608 11995 50  0000 R CNN
+F 2 "" H 18700 11950 50  0001 C CNN
+F 3 "~" H 18700 11950 50  0001 C CNN
+	1    18700 11950
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	18700 11850 18700 11400
+Wire Wire Line
+	18700 11400 19050 11400
+Connection ~ 19050 11400
+Wire Wire Line
+	19050 11400 19050 11450
+Wire Wire Line
+	18700 12050 18700 12500
+Wire Wire Line
+	18700 12500 19050 12500
+Connection ~ 19050 12500
+Wire Wire Line
+	19050 12500 19050 12600
+$Comp
+L 74xx:7400 U3
+U 5 1 5F7070C0
+P 20150 11950
+F 0 "U3" H 20380 11996 50  0000 L CNN
+F 1 "7400" H 20380 11905 50  0000 L CNN
+F 2 "" H 20150 11950 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 20150 11950 50  0001 C CNN
+	5    20150 11950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR084
+U 1 1 5F7070C6
+P 20150 12600
+F 0 "#PWR084" H 20150 12350 50  0001 C CNN
+F 1 "GND" H 20155 12427 50  0000 C CNN
+F 2 "" H 20150 12600 50  0001 C CNN
+F 3 "" H 20150 12600 50  0001 C CNN
+	1    20150 12600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR083
+U 1 1 5F7070CC
+P 20150 11300
+F 0 "#PWR083" H 20150 11150 50  0001 C CNN
+F 1 "+12V" H 20165 11473 50  0000 C CNN
+F 2 "" H 20150 11300 50  0001 C CNN
+F 3 "" H 20150 11300 50  0001 C CNN
+	1    20150 11300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	20150 11300 20150 11400
+Wire Wire Line
+	20150 12450 20150 12500
+$Comp
+L Device:C_Small C3
+U 1 1 5F7070D4
+P 19800 11950
+F 0 "C3" H 19708 11904 50  0000 R CNN
+F 1 "100n" H 19708 11995 50  0000 R CNN
+F 2 "" H 19800 11950 50  0001 C CNN
+F 3 "~" H 19800 11950 50  0001 C CNN
+	1    19800 11950
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	19800 11850 19800 11400
+Wire Wire Line
+	19800 11400 20150 11400
+Connection ~ 20150 11400
+Wire Wire Line
+	20150 11400 20150 11450
+Wire Wire Line
+	19800 12050 19800 12500
+Wire Wire Line
+	19800 12500 20150 12500
+Connection ~ 20150 12500
+Wire Wire Line
+	20150 12500 20150 12600
+$Comp
+L 74xx:7400 U5
+U 5 1 5F747A0E
+P 21250 11950
+F 0 "U5" H 21480 11996 50  0000 L CNN
+F 1 "7400" H 21480 11905 50  0000 L CNN
+F 2 "" H 21250 11950 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 21250 11950 50  0001 C CNN
+	5    21250 11950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR088
+U 1 1 5F747A14
+P 21250 12600
+F 0 "#PWR088" H 21250 12350 50  0001 C CNN
+F 1 "GND" H 21255 12427 50  0000 C CNN
+F 2 "" H 21250 12600 50  0001 C CNN
+F 3 "" H 21250 12600 50  0001 C CNN
+	1    21250 12600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR087
+U 1 1 5F747A1A
+P 21250 11300
+F 0 "#PWR087" H 21250 11150 50  0001 C CNN
+F 1 "+12V" H 21265 11473 50  0000 C CNN
+F 2 "" H 21250 11300 50  0001 C CNN
+F 3 "" H 21250 11300 50  0001 C CNN
+	1    21250 11300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	21250 11300 21250 11400
+Wire Wire Line
+	21250 12450 21250 12500
+$Comp
+L Device:C_Small C5
+U 1 1 5F747A22
+P 20900 11950
+F 0 "C5" H 20808 11904 50  0000 R CNN
+F 1 "100n" H 20808 11995 50  0000 R CNN
+F 2 "" H 20900 11950 50  0001 C CNN
+F 3 "~" H 20900 11950 50  0001 C CNN
+	1    20900 11950
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	20900 11850 20900 11400
+Wire Wire Line
+	20900 11400 21250 11400
+Connection ~ 21250 11400
+Wire Wire Line
+	21250 11400 21250 11450
+Wire Wire Line
+	20900 12050 20900 12500
+Wire Wire Line
+	20900 12500 21250 12500
+Connection ~ 21250 12500
+Wire Wire Line
+	21250 12500 21250 12600
+$Comp
+L 74xx:7400 U7
+U 5 1 5F78A87A
+P 22350 11950
+F 0 "U7" H 22580 11996 50  0000 L CNN
+F 1 "7400" H 22580 11905 50  0000 L CNN
+F 2 "" H 22350 11950 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 22350 11950 50  0001 C CNN
+	5    22350 11950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR092
+U 1 1 5F78A880
+P 22350 12600
+F 0 "#PWR092" H 22350 12350 50  0001 C CNN
+F 1 "GND" H 22355 12427 50  0000 C CNN
+F 2 "" H 22350 12600 50  0001 C CNN
+F 3 "" H 22350 12600 50  0001 C CNN
+	1    22350 12600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR091
+U 1 1 5F78A886
+P 22350 11300
+F 0 "#PWR091" H 22350 11150 50  0001 C CNN
+F 1 "+12V" H 22365 11473 50  0000 C CNN
+F 2 "" H 22350 11300 50  0001 C CNN
+F 3 "" H 22350 11300 50  0001 C CNN
+	1    22350 11300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	22350 11300 22350 11400
+Wire Wire Line
+	22350 12450 22350 12500
+$Comp
+L Device:C_Small C7
+U 1 1 5F78A88E
+P 22000 11950
+F 0 "C7" H 21908 11904 50  0000 R CNN
+F 1 "100n" H 21908 11995 50  0000 R CNN
+F 2 "" H 22000 11950 50  0001 C CNN
+F 3 "~" H 22000 11950 50  0001 C CNN
+	1    22000 11950
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	22000 11850 22000 11400
+Wire Wire Line
+	22000 11400 22350 11400
+Connection ~ 22350 11400
+Wire Wire Line
+	22350 11400 22350 11450
+Wire Wire Line
+	22000 12050 22000 12500
+Wire Wire Line
+	22000 12500 22350 12500
+Connection ~ 22350 12500
+Wire Wire Line
+	22350 12500 22350 12600
+$Comp
+L 74xx:7400 U2
+U 5 1 5F80343C
+P 19050 13750
+F 0 "U2" H 19280 13796 50  0000 L CNN
+F 1 "7400" H 19280 13705 50  0000 L CNN
+F 2 "" H 19050 13750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 19050 13750 50  0001 C CNN
+	5    19050 13750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR082
+U 1 1 5F803442
+P 19050 14400
+F 0 "#PWR082" H 19050 14150 50  0001 C CNN
+F 1 "GND" H 19055 14227 50  0000 C CNN
+F 2 "" H 19050 14400 50  0001 C CNN
+F 3 "" H 19050 14400 50  0001 C CNN
+	1    19050 14400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR081
+U 1 1 5F803448
+P 19050 13100
+F 0 "#PWR081" H 19050 12950 50  0001 C CNN
+F 1 "+12V" H 19065 13273 50  0000 C CNN
+F 2 "" H 19050 13100 50  0001 C CNN
+F 3 "" H 19050 13100 50  0001 C CNN
+	1    19050 13100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	19050 13100 19050 13200
+Wire Wire Line
+	19050 14250 19050 14300
+$Comp
+L Device:C_Small C2
+U 1 1 5F803450
+P 18700 13750
+F 0 "C2" H 18608 13704 50  0000 R CNN
+F 1 "100n" H 18608 13795 50  0000 R CNN
+F 2 "" H 18700 13750 50  0001 C CNN
+F 3 "~" H 18700 13750 50  0001 C CNN
+	1    18700 13750
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	18700 13650 18700 13200
+Wire Wire Line
+	18700 13200 19050 13200
+Connection ~ 19050 13200
+Wire Wire Line
+	19050 13200 19050 13250
+Wire Wire Line
+	18700 13850 18700 14300
+Wire Wire Line
+	18700 14300 19050 14300
+Connection ~ 19050 14300
+Wire Wire Line
+	19050 14300 19050 14400
+$Comp
+L 74xx:7400 U4
+U 5 1 5F80345E
+P 20150 13750
+F 0 "U4" H 20380 13796 50  0000 L CNN
+F 1 "7400" H 20380 13705 50  0000 L CNN
+F 2 "" H 20150 13750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 20150 13750 50  0001 C CNN
+	5    20150 13750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR086
+U 1 1 5F803464
+P 20150 14400
+F 0 "#PWR086" H 20150 14150 50  0001 C CNN
+F 1 "GND" H 20155 14227 50  0000 C CNN
+F 2 "" H 20150 14400 50  0001 C CNN
+F 3 "" H 20150 14400 50  0001 C CNN
+	1    20150 14400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR085
+U 1 1 5F80346A
+P 20150 13100
+F 0 "#PWR085" H 20150 12950 50  0001 C CNN
+F 1 "+12V" H 20165 13273 50  0000 C CNN
+F 2 "" H 20150 13100 50  0001 C CNN
+F 3 "" H 20150 13100 50  0001 C CNN
+	1    20150 13100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	20150 13100 20150 13200
+Wire Wire Line
+	20150 14250 20150 14300
+$Comp
+L Device:C_Small C4
+U 1 1 5F803472
+P 19800 13750
+F 0 "C4" H 19708 13704 50  0000 R CNN
+F 1 "100n" H 19708 13795 50  0000 R CNN
+F 2 "" H 19800 13750 50  0001 C CNN
+F 3 "~" H 19800 13750 50  0001 C CNN
+	1    19800 13750
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	19800 13650 19800 13200
+Wire Wire Line
+	19800 13200 20150 13200
+Connection ~ 20150 13200
+Wire Wire Line
+	20150 13200 20150 13250
+Wire Wire Line
+	19800 13850 19800 14300
+Wire Wire Line
+	19800 14300 20150 14300
+Connection ~ 20150 14300
+Wire Wire Line
+	20150 14300 20150 14400
+$Comp
+L 74xx:7400 U6
+U 5 1 5F803480
+P 21250 13750
+F 0 "U6" H 21480 13796 50  0000 L CNN
+F 1 "7400" H 21480 13705 50  0000 L CNN
+F 2 "" H 21250 13750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 21250 13750 50  0001 C CNN
+	5    21250 13750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR090
+U 1 1 5F803486
+P 21250 14400
+F 0 "#PWR090" H 21250 14150 50  0001 C CNN
+F 1 "GND" H 21255 14227 50  0000 C CNN
+F 2 "" H 21250 14400 50  0001 C CNN
+F 3 "" H 21250 14400 50  0001 C CNN
+	1    21250 14400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR089
+U 1 1 5F80348C
+P 21250 13100
+F 0 "#PWR089" H 21250 12950 50  0001 C CNN
+F 1 "+12V" H 21265 13273 50  0000 C CNN
+F 2 "" H 21250 13100 50  0001 C CNN
+F 3 "" H 21250 13100 50  0001 C CNN
+	1    21250 13100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	21250 13100 21250 13200
+Wire Wire Line
+	21250 14250 21250 14300
+$Comp
+L Device:C_Small C6
+U 1 1 5F803494
+P 20900 13750
+F 0 "C6" H 20808 13704 50  0000 R CNN
+F 1 "100n" H 20808 13795 50  0000 R CNN
+F 2 "" H 20900 13750 50  0001 C CNN
+F 3 "~" H 20900 13750 50  0001 C CNN
+	1    20900 13750
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	20900 13650 20900 13200
+Wire Wire Line
+	20900 13200 21250 13200
+Connection ~ 21250 13200
+Wire Wire Line
+	21250 13200 21250 13250
+Wire Wire Line
+	20900 13850 20900 14300
+Wire Wire Line
+	20900 14300 21250 14300
+Connection ~ 21250 14300
+Wire Wire Line
+	21250 14300 21250 14400
+$Comp
+L 74xx:7400 U8
+U 5 1 5F8034A2
+P 22350 13750
+F 0 "U8" H 22580 13796 50  0000 L CNN
+F 1 "7400" H 22580 13705 50  0000 L CNN
+F 2 "" H 22350 13750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 22350 13750 50  0001 C CNN
+	5    22350 13750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR094
+U 1 1 5F8034A8
+P 22350 14400
+F 0 "#PWR094" H 22350 14150 50  0001 C CNN
+F 1 "GND" H 22355 14227 50  0000 C CNN
+F 2 "" H 22350 14400 50  0001 C CNN
+F 3 "" H 22350 14400 50  0001 C CNN
+	1    22350 14400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR093
+U 1 1 5F8034AE
+P 22350 13100
+F 0 "#PWR093" H 22350 12950 50  0001 C CNN
+F 1 "+12V" H 22365 13273 50  0000 C CNN
+F 2 "" H 22350 13100 50  0001 C CNN
+F 3 "" H 22350 13100 50  0001 C CNN
+	1    22350 13100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	22350 13100 22350 13200
+Wire Wire Line
+	22350 14250 22350 14300
+$Comp
+L Device:C_Small C8
+U 1 1 5F8034B6
+P 22000 13750
+F 0 "C8" H 21908 13704 50  0000 R CNN
+F 1 "100n" H 21908 13795 50  0000 R CNN
+F 2 "" H 22000 13750 50  0001 C CNN
+F 3 "~" H 22000 13750 50  0001 C CNN
+	1    22000 13750
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	22000 13650 22000 13200
+Wire Wire Line
+	22000 13200 22350 13200
+Connection ~ 22350 13200
+Wire Wire Line
+	22350 13200 22350 13250
+Wire Wire Line
+	22000 13850 22000 14300
+Wire Wire Line
+	22000 14300 22350 14300
+Connection ~ 22350 14300
+Wire Wire Line
+	22350 14300 22350 14400
+Wire Wire Line
+	12850 7800 12850 7850
+Wire Wire Line
+	12400 7800 12400 7900
+Wire Wire Line
+	11900 8500 11900 8550
+Wire Wire Line
+	11700 8500 11700 8550
+Wire Wire Line
+	11800 7800 11800 7900
+Text GLabel 11800 7800 1    50   Output ~ 0
+Rel_A6G
+Text GLabel 11900 8550 3    50   Input ~ 0
+Rel_A6R2
+Text GLabel 11700 8550 3    50   Input ~ 0
+Rel_A6R1
+Wire Wire Line
+	9900 8500 9900 8550
+Wire Wire Line
+	9700 8500 9700 8550
+Wire Wire Line
+	9800 7800 9800 7900
+Wire Wire Line
+	10400 7800 10400 7900
+Wire Wire Line
+	10850 7800 10850 7850
+Text GLabel 9800 7800 1    50   Output ~ 0
+Rel_A5G
+Text GLabel 9900 8550 3    50   Input ~ 0
+Rel_A5R2
+Text GLabel 9700 8550 3    50   Input ~ 0
+Rel_A5R1
+Wire Wire Line
+	7600 8500 7600 8550
+Wire Wire Line
+	7800 8500 7800 8550
+Wire Wire Line
+	8800 7800 8800 7850
+Wire Wire Line
+	8350 7800 8350 7900
+Wire Wire Line
+	7700 7800 7700 7900
+Text GLabel 7700 7800 1    50   Output ~ 0
+Rel_A4G
+Text GLabel 7800 8550 3    50   Input ~ 0
+Rel_A4R2
+Text GLabel 7600 8550 3    50   Input ~ 0
+Rel_A4R1
+Wire Wire Line
+	6700 7800 6700 7850
+Wire Wire Line
+	6250 7800 6250 7900
+Wire Wire Line
+	5750 8500 5750 8550
+Wire Wire Line
+	5550 8500 5550 8550
+Wire Wire Line
+	5650 7800 5650 7900
+Text GLabel 5650 7800 1    50   Output ~ 0
+Rel_A3G
+Text GLabel 5750 8550 3    50   Input ~ 0
+Rel_A3R2
+Text GLabel 5550 8550 3    50   Input ~ 0
+Rel_A3R1
+$Comp
+L 74xx:7400 U?
+U 2 1 5E9E4E75
+P 11800 8200
+F 0 "U?" H 11800 8500 50  0000 C CNN
+F 1 "7400" H 11800 8400 50  0000 C CNN
+F 2 "" H 11800 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 11800 8200 50  0001 C CNN
+	2    11800 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 1 1 5E9E20D9
+P 9800 8200
+F 0 "U?" H 9800 8525 50  0000 C CNN
+F 1 "7400" H 9800 8434 50  0000 C CNN
+F 2 "" H 9800 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 9800 8200 50  0001 C CNN
+	1    9800 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 4 1 5E9CCCDE
+P 7700 8200
+F 0 "U?" H 7700 8500 50  0000 C CNN
+F 1 "7400" H 7700 8400 50  0000 C CNN
+F 2 "" H 7700 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 7700 8200 50  0001 C CNN
+	4    7700 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 3 1 5E9CAFEE
+P 5650 8200
+F 0 "U?" H 5650 8525 50  0000 C CNN
+F 1 "7400" H 5650 8434 50  0000 C CNN
+F 2 "" H 5650 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 5650 8200 50  0001 C CNN
+	3    5650 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 2 1 5E513A52
+P 3600 8200
+F 0 "U?" H 3600 8500 50  0000 C CNN
+F 1 "7400" H 3600 8400 50  0000 C CNN
+F 2 "" H 3600 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 3600 8200 50  0001 C CNN
+	2    3600 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 1 1 5E48FA00
+P 1650 8200
+F 0 "U?" H 1650 8525 50  0000 C CNN
+F 1 "7400" H 1650 8434 50  0000 C CNN
+F 2 "" H 1650 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 1650 8200 50  0001 C CNN
+	1    1650 8200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3500 8550 3500 8500
+Text GLabel 3500 8550 3    50   Input ~ 0
+Rel_A2R1
+Wire Wire Line
+	4650 7800 4650 7850
+Wire Wire Line
+	4200 7800 4200 7900
+Wire Wire Line
+	1650 7900 1650 7800
+Wire Wire Line
+	2250 7900 2250 7800
+Wire Wire Line
+	2700 7850 2700 7800
+Wire Wire Line
+	1750 8500 1750 8550
+Wire Wire Line
+	1550 8500 1550 8550
+Wire Wire Line
+	3700 8500 3700 8550
+Wire Wire Line
+	3600 7900 3600 7850
+Text GLabel 3700 8550 3    50   Input ~ 0
+Rel_A2R2
+Text GLabel 3600 7850 1    50   Output ~ 0
+Rel_A2G
+Text GLabel 1750 8550 3    50   Input ~ 0
+Rel_A1R2
+Text GLabel 1550 8550 3    50   Input ~ 0
+Rel_A1R1
+Text GLabel 1650 7800 1    50   Output ~ 0
+Rel_A1G
+Text GLabel 12850 7800 1    50   Output ~ 0
+Rel_A6R2
+Text GLabel 12400 7800 1    50   Output ~ 0
+Rel_A6R1
+Wire Wire Line
+	12850 9450 12850 9250
+Wire Wire Line
+	12400 9450 12400 9250
+Text GLabel 12850 9450 3    50   Input ~ 0
+A6R2
+Text GLabel 12400 9450 3    50   Input ~ 0
+A6R1
+Wire Wire Line
+	12500 8650 12500 8500
+Wire Wire Line
+	12700 8650 12500 8650
+Connection ~ 12400 9250
+Wire Wire Line
+	12750 8700 12750 8450
+Wire Wire Line
+	12550 8700 12750 8700
+Wire Wire Line
+	12550 9250 12550 8700
+Wire Wire Line
+	12400 9250 12550 9250
+Connection ~ 12850 9250
+Wire Wire Line
+	12700 9250 12850 9250
+Wire Wire Line
+	12700 8650 12700 9250
+Wire Wire Line
+	12950 8600 12950 8450
+Wire Wire Line
+	12300 8600 12300 8500
+Wire Wire Line
+	13050 9250 13050 9200
+Wire Wire Line
+	12850 9250 13050 9250
+Wire Wire Line
+	12850 9200 12850 9250
+Wire Wire Line
+	12400 9250 12400 9200
+Wire Wire Line
+	12200 9250 12400 9250
+Wire Wire Line
+	12200 9200 12200 9250
+$Comp
+L 74xx:7400 U?
+U 4 1 5E370820
+P 12850 8150
+F 0 "U?" H 12850 8350 50  0000 C CNN
+F 1 "7400" H 12850 7950 50  0000 C CNN
+F 2 "" H 12850 8150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 12850 8150 50  0001 C CNN
+	4    12850 8150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 3 1 5E37081A
+P 12400 8200
+F 0 "U?" H 12400 8525 50  0000 C CNN
+F 1 "7400" H 12400 8434 50  0000 C CNN
+F 2 "" H 12400 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 12400 8200 50  0001 C CNN
+	3    12400 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 2 1 5E370814
+P 12950 8900
+F 0 "U?" H 12950 9100 50  0000 C CNN
+F 1 "7400" H 12950 8700 50  0000 C CNN
+F 2 "" H 12950 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 12950 8900 50  0001 C CNN
+	2    12950 8900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 1 1 5E37080E
+P 12300 8900
+F 0 "U?" H 12300 9225 50  0000 C CNN
+F 1 "7400" H 12300 9134 50  0000 C CNN
+F 2 "" H 12300 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 12300 8900 50  0001 C CNN
+	1    12300 8900
+	0    -1   -1   0   
+$EndComp
+Text GLabel 10850 7800 1    50   Output ~ 0
+Rel_A5R2
+Text GLabel 10400 7800 1    50   Output ~ 0
+Rel_A5R1
+Wire Wire Line
+	10850 9450 10850 9250
+Wire Wire Line
+	10400 9450 10400 9250
+Text GLabel 10850 9450 3    50   Input ~ 0
+A5R2
+Text GLabel 10400 9450 3    50   Input ~ 0
+A5R1
+Wire Wire Line
+	10500 8650 10500 8500
+Wire Wire Line
+	10700 8650 10500 8650
+Connection ~ 10400 9250
+Wire Wire Line
+	10750 8700 10750 8450
+Wire Wire Line
+	10550 8700 10750 8700
+Wire Wire Line
+	10550 9250 10550 8700
+Wire Wire Line
+	10400 9250 10550 9250
+Connection ~ 10850 9250
+Wire Wire Line
+	10700 9250 10850 9250
+Wire Wire Line
+	10700 8650 10700 9250
+Wire Wire Line
+	10950 8600 10950 8450
+Wire Wire Line
+	10300 8600 10300 8500
+Wire Wire Line
+	11050 9250 11050 9200
+Wire Wire Line
+	10850 9250 11050 9250
+Wire Wire Line
+	10850 9200 10850 9250
+Wire Wire Line
+	10400 9250 10400 9200
+Wire Wire Line
+	10200 9250 10400 9250
+Wire Wire Line
+	10200 9200 10200 9250
+$Comp
+L 74xx:7400 U?
+U 4 1 5E339F29
+P 10850 8150
+F 0 "U?" H 10850 8350 50  0000 C CNN
+F 1 "7400" H 10850 7950 50  0000 C CNN
+F 2 "" H 10850 8150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 10850 8150 50  0001 C CNN
+	4    10850 8150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 3 1 5E339F23
+P 10400 8200
+F 0 "U?" H 10400 8525 50  0000 C CNN
+F 1 "7400" H 10400 8434 50  0000 C CNN
+F 2 "" H 10400 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 10400 8200 50  0001 C CNN
+	3    10400 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 2 1 5E339F1D
+P 10950 8900
+F 0 "U?" H 10950 9100 50  0000 C CNN
+F 1 "7400" H 10950 8700 50  0000 C CNN
+F 2 "" H 10950 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 10950 8900 50  0001 C CNN
+	2    10950 8900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 1 1 5E339F17
+P 10300 8900
+F 0 "U?" H 10300 9225 50  0000 C CNN
+F 1 "7400" H 10300 9134 50  0000 C CNN
+F 2 "" H 10300 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 10300 8900 50  0001 C CNN
+	1    10300 8900
+	0    -1   -1   0   
+$EndComp
+Text GLabel 8800 7800 1    50   Output ~ 0
+Rel_A4R2
+Text GLabel 8350 7800 1    50   Output ~ 0
+Rel_A4R1
+Wire Wire Line
+	8800 9450 8800 9250
+Wire Wire Line
+	8350 9450 8350 9250
+Text GLabel 8800 9450 3    50   Input ~ 0
+A4R2
+Text GLabel 8350 9450 3    50   Input ~ 0
+A4R1
+Wire Wire Line
+	8450 8650 8450 8500
+Wire Wire Line
+	8650 8650 8450 8650
+Connection ~ 8350 9250
+Wire Wire Line
+	8700 8700 8700 8450
+Wire Wire Line
+	8500 8700 8700 8700
+Wire Wire Line
+	8500 9250 8500 8700
+Wire Wire Line
+	8350 9250 8500 9250
+Connection ~ 8800 9250
+Wire Wire Line
+	8650 9250 8800 9250
+Wire Wire Line
+	8650 8650 8650 9250
+Wire Wire Line
+	8900 8600 8900 8450
+Wire Wire Line
+	8250 8600 8250 8500
+Wire Wire Line
+	9000 9250 9000 9200
+Wire Wire Line
+	8800 9250 9000 9250
+Wire Wire Line
+	8800 9200 8800 9250
+Wire Wire Line
+	8350 9250 8350 9200
+Wire Wire Line
+	8150 9250 8350 9250
+Wire Wire Line
+	8150 9200 8150 9250
+$Comp
+L 74xx:7400 U?
+U 4 1 5E30B708
+P 8800 8150
+F 0 "U?" H 8800 8350 50  0000 C CNN
+F 1 "7400" H 8800 7950 50  0000 C CNN
+F 2 "" H 8800 8150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 8800 8150 50  0001 C CNN
+	4    8800 8150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 3 1 5E30B702
+P 8350 8200
+F 0 "U?" H 8350 8525 50  0000 C CNN
+F 1 "7400" H 8350 8434 50  0000 C CNN
+F 2 "" H 8350 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 8350 8200 50  0001 C CNN
+	3    8350 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 2 1 5E30B6FC
+P 8900 8900
+F 0 "U?" H 8900 9100 50  0000 C CNN
+F 1 "7400" H 8900 8700 50  0000 C CNN
+F 2 "" H 8900 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 8900 8900 50  0001 C CNN
+	2    8900 8900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 1 1 5E30B6F6
+P 8250 8900
+F 0 "U?" H 8250 9225 50  0000 C CNN
+F 1 "7400" H 8250 9134 50  0000 C CNN
+F 2 "" H 8250 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 8250 8900 50  0001 C CNN
+	1    8250 8900
+	0    -1   -1   0   
+$EndComp
+Text GLabel 6700 7800 1    50   Output ~ 0
+Rel_A3R2
+Text GLabel 6250 7800 1    50   Output ~ 0
+Rel_A3R1
+Wire Wire Line
+	6700 9450 6700 9250
+Wire Wire Line
+	6250 9450 6250 9250
+Text GLabel 6700 9450 3    50   Input ~ 0
+A3R2
+Text GLabel 6250 9450 3    50   Input ~ 0
+A3R1
+Wire Wire Line
+	6350 8650 6350 8500
+Wire Wire Line
+	6550 8650 6350 8650
+Connection ~ 6250 9250
+Wire Wire Line
+	6600 8700 6600 8450
+Wire Wire Line
+	6400 8700 6600 8700
+Wire Wire Line
+	6400 9250 6400 8700
+Wire Wire Line
+	6250 9250 6400 9250
+Connection ~ 6700 9250
+Wire Wire Line
+	6550 9250 6700 9250
+Wire Wire Line
+	6550 8650 6550 9250
+Wire Wire Line
+	6800 8600 6800 8450
+Wire Wire Line
+	6150 8600 6150 8500
+Wire Wire Line
+	6900 9250 6900 9200
+Wire Wire Line
+	6700 9250 6900 9250
+Wire Wire Line
+	6700 9200 6700 9250
+Wire Wire Line
+	6250 9250 6250 9200
+Wire Wire Line
+	6050 9250 6250 9250
+Wire Wire Line
+	6050 9200 6050 9250
+$Comp
+L 74xx:7400 U?
+U 4 1 5E2A78DA
+P 6700 8150
+F 0 "U?" H 6700 8350 50  0000 C CNN
+F 1 "7400" H 6700 7950 50  0000 C CNN
+F 2 "" H 6700 8150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 6700 8150 50  0001 C CNN
+	4    6700 8150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 3 1 5E2A78D4
+P 6250 8200
+F 0 "U?" H 6250 8525 50  0000 C CNN
+F 1 "7400" H 6250 8434 50  0000 C CNN
+F 2 "" H 6250 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 6250 8200 50  0001 C CNN
+	3    6250 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 2 1 5E2A78CE
+P 6800 8900
+F 0 "U?" H 6800 9100 50  0000 C CNN
+F 1 "7400" H 6800 8700 50  0000 C CNN
+F 2 "" H 6800 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 6800 8900 50  0001 C CNN
+	2    6800 8900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 1 1 5E2A78C8
+P 6150 8900
+F 0 "U?" H 6150 9225 50  0000 C CNN
+F 1 "7400" H 6150 9134 50  0000 C CNN
+F 2 "" H 6150 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 6150 8900 50  0001 C CNN
+	1    6150 8900
+	0    -1   -1   0   
+$EndComp
+Text GLabel 4650 7800 1    50   Output ~ 0
+Rel_A2R2
+Text GLabel 4200 7800 1    50   Output ~ 0
+Rel_A2R1
+Wire Wire Line
+	4650 9450 4650 9250
+Wire Wire Line
+	4200 9450 4200 9250
+Text GLabel 4650 9450 3    50   Input ~ 0
+A2R2
+Text GLabel 4200 9450 3    50   Input ~ 0
+A2R1
+Wire Wire Line
+	4300 8650 4300 8500
+Wire Wire Line
+	4500 8650 4300 8650
+Connection ~ 4200 9250
+Wire Wire Line
+	4550 8700 4550 8450
+Wire Wire Line
+	4350 8700 4550 8700
+Wire Wire Line
+	4350 9250 4350 8700
+Wire Wire Line
+	4200 9250 4350 9250
+Connection ~ 4650 9250
+Wire Wire Line
+	4500 9250 4650 9250
+Wire Wire Line
+	4500 8650 4500 9250
+Wire Wire Line
+	4750 8600 4750 8450
+Wire Wire Line
+	4100 8600 4100 8500
+Wire Wire Line
+	4850 9250 4850 9200
+Wire Wire Line
+	4650 9250 4850 9250
+Wire Wire Line
+	4650 9200 4650 9250
+Wire Wire Line
+	4200 9250 4200 9200
+Wire Wire Line
+	4000 9250 4200 9250
+Wire Wire Line
+	4000 9200 4000 9250
+$Comp
+L 74xx:7400 U?
+U 4 1 5E2809D5
+P 4650 8150
+F 0 "U?" H 4650 8350 50  0000 C CNN
+F 1 "7400" H 4650 7950 50  0000 C CNN
+F 2 "" H 4650 8150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 4650 8150 50  0001 C CNN
+	4    4650 8150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 3 1 5E2809CF
+P 4200 8200
+F 0 "U?" H 4200 8525 50  0000 C CNN
+F 1 "7400" H 4200 8434 50  0000 C CNN
+F 2 "" H 4200 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 4200 8200 50  0001 C CNN
+	3    4200 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 2 1 5E2809C9
+P 4750 8900
+F 0 "U?" H 4750 9100 50  0000 C CNN
+F 1 "7400" H 4750 8700 50  0000 C CNN
+F 2 "" H 4750 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 4750 8900 50  0001 C CNN
+	2    4750 8900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 1 1 5E2809C3
+P 4100 8900
+F 0 "U?" H 4100 9225 50  0000 C CNN
+F 1 "7400" H 4100 9134 50  0000 C CNN
+F 2 "" H 4100 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 4100 8900 50  0001 C CNN
+	1    4100 8900
+	0    -1   -1   0   
+$EndComp
+Text GLabel 2700 7800 1    50   Output ~ 0
+Rel_A1R2
+Text GLabel 2250 7800 1    50   Output ~ 0
+Rel_A1R1
+Wire Wire Line
+	2700 9450 2700 9250
+Wire Wire Line
+	2250 9450 2250 9250
+Text GLabel 2700 9450 3    50   Input ~ 0
+A1R2
+Text GLabel 2250 9450 3    50   Input ~ 0
+A1R1
+Wire Wire Line
+	2350 8650 2350 8500
+Wire Wire Line
+	2550 8650 2350 8650
+Connection ~ 2250 9250
+Wire Wire Line
+	2600 8700 2600 8450
+Wire Wire Line
+	2400 8700 2600 8700
+Wire Wire Line
+	2400 9250 2400 8700
+Wire Wire Line
+	2250 9250 2400 9250
+Connection ~ 2700 9250
+Wire Wire Line
+	2550 9250 2700 9250
+Wire Wire Line
+	2550 8650 2550 9250
+Wire Wire Line
+	2800 8600 2800 8450
+Wire Wire Line
+	2150 8600 2150 8500
+Wire Wire Line
+	2900 9250 2900 9200
+Wire Wire Line
+	2700 9250 2900 9250
+Wire Wire Line
+	2700 9200 2700 9250
+Wire Wire Line
+	2250 9250 2250 9200
+Wire Wire Line
+	2050 9250 2250 9250
+Wire Wire Line
+	2050 9200 2050 9250
+$Comp
+L 74xx:7400 U?
+U 4 1 5DFE4B72
+P 2700 8150
+F 0 "U?" H 2700 8350 50  0000 C CNN
+F 1 "7400" H 2700 7950 50  0000 C CNN
+F 2 "" H 2700 8150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 2700 8150 50  0001 C CNN
+	4    2700 8150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 3 1 5DFE130A
+P 2250 8200
+F 0 "U?" H 2250 8525 50  0000 C CNN
+F 1 "7400" H 2250 8434 50  0000 C CNN
+F 2 "" H 2250 8200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 2250 8200 50  0001 C CNN
+	3    2250 8200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 2 1 5DFDD6AA
+P 2800 8900
+F 0 "U?" H 2800 9100 50  0000 C CNN
+F 1 "7400" H 2800 8700 50  0000 C CNN
+F 2 "" H 2800 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 2800 8900 50  0001 C CNN
+	2    2800 8900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 74xx:7400 U?
+U 1 1 5DFD90E4
+P 2150 8900
+F 0 "U?" H 2150 9225 50  0000 C CNN
+F 1 "7400" H 2150 9134 50  0000 C CNN
+F 2 "" H 2150 8900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn7400" H 2150 8900 50  0001 C CNN
+	1    2150 8900
+	0    -1   -1   0   
+$EndComp
+$EndSCHEMATC
