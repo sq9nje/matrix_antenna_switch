@@ -71,6 +71,13 @@ void parseCommand(char* commandLine) {
   else if(strcmp(cmd, "?") == 0) {
     Serial.println("6x2 Antenna Switch SQ9NJE");
   }
+  else if(strcmp(cmd, "test") == 0) {
+    for(uint8_t r = 0; r < 2; r++)
+      for(int8_t a = 6; a >= 0; a--) {
+        selectAntenna(r, a);
+        delay(100);
+      }
+  }
 }
 
 void setup() {
@@ -91,26 +98,26 @@ void setup() {
   pinMode(7, OUTPUT);
   pinMode(13, OUTPUT);
 
-  blink(5);
+  blink(3);
+  Serial.println("Hello");
 }
 
 void loop() {
-  while(1) {
-    wdt_reset();
+  wdt_reset();
 
-    while(Serial.available()) {
-      static char buffer[BUF_SIZE];
-      static uint8_t len = 0;
+  while(Serial.available()) {
+    static char buffer[BUF_SIZE];
+    static uint8_t len = 0;
 
-      char data = Serial.read();
-      if(data == '\r' || data == '\n') {
-        buffer[len] = '\0';
-        parseCommand(buffer);
-        len = 0;
-      }
-      else if(len < BUF_SIZE-1)
-        buffer[len++] = tolower(data);
+    char data = Serial.read();
+    if(data == '\r' || data == '\n') {
+      buffer[len] = '\0';
+      parseCommand(buffer);
+      len = 0;
     }
+    else if(len < BUF_SIZE-1)
+      buffer[len++] = tolower(data);
   }
+
 }
 

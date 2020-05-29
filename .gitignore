@@ -23,3 +23,9 @@ _autosave-*
 # Exported BOM files
 *.xml
 *.csv
+
+# Python venv
+.venv
+
+# Editor settings
+.vscode
