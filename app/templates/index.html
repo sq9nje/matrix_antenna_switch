@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatibile" content="ie=edge">
+    <title>Matrix Antenna Switch - SQ9NJE</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <center>
+
+    <h1>Matrix Antenna Switch</h1>
+
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-8">
+            <table class="table">
+                <thead><tr><th>Radio 1</th><th width=70% >Antenna</th><th>Radio 2</th></tr></thead>
+                <tr><td><button id="1_0" onclick="setAntenna(1, 0)" class="btn btn-basic" >Disconnected</button></td><td width=70%> Not connected to any antenna </td><td><button id="2_0" onclick="setAntenna(2, 0)" class="btn btn-basic">Disconnected</button></td></tr>
+                {% for i in range(1, 7) %}
+                <tr><td><button id="1_{{ i}}" onclick="setAntenna(1, {{ i }})" class="btn btn-basic">Antenna {{ i }}</button></td><td width=70%> {{ ANTENNAS[i-1] }} </td><td><button id="2_{{ i}}" onclick="setAntenna(2, {{ i }})" class="btn btn-basic">Antenna {{ i }}</button></td></tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-sm-2">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-8"><textarea id="status" rows=5 class="form-control"></textarea></div>
+        <div class="col-sm-2">&nbsp;</div>
+    </div>
+    </center>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        
+        socket.on('connect', function() {
+            document.getElementById("status").value += "Websocket connected!\n"
+            console.log('Websocket connected!');
+        });
+
+        socket.on('antenna', function(msg) {
+            console.log(msg);
+            sts = JSON.parse(msg);
+            buttons = document.getElementsByTagName('button');
+            for (but of buttons) {
+                but.className = "btn btn-basic";
+            }
+            r1 = document.getElementById('1_' + sts.radio1);
+            r1.className = "btn btn-success";
+            r2 = document.getElementById('2_' + sts.radio2);
+            r2.className = "btn btn-success";
+        });
+
+        socket.on('status', function(msg) {
+            document.getElementById("status").value = msg + "\n" + document.getElementById("status").value;
+        });
+
+        function setAntenna(radio, antenna) {
+            console.log("Setting antenna %d for radio %d", antenna, radio);
+            socket.emit('antenna_switch', radio, antenna);
+        }
+    </script>
+
+</body>
+</html>
