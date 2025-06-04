@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "antenna_switch_comms-rescue")(type "Legacy")(uri "${KIPRJMOD}/antenna_switch_comms-rescue.lib")(options "")(descr ""))
+  (lib (name "esp32_devkit")(type "KiCad")(uri "${KIPRJMOD}/lib/esp32_30pin.kicad_sym")(options "")(descr ""))
+)

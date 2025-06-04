@@ -29,3 +29,5 @@ _autosave-*
 
 # Editor settings
 .vscode
+
+.DS_Store
