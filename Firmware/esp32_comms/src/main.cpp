@@ -5,6 +5,7 @@
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
 #include <SPIFFS.h>
+#include <ESPmDNS.h>
 
 #define BUF_SIZE   32
 
@@ -26,6 +27,9 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 
 // Antenna names/descriptions
 String antennaNames[6] = {"Antenna 1", "Antenna 2", "Antenna 3", "Antenna 4", "Antenna 5", "Antenna 6"};
+
+// mDNS hostname
+String mdnsHostname = "antenna";
 
 void blink(uint8_t n) {
   for(uint8_t i = 0; i < n; i++) {
@@ -179,6 +183,32 @@ void saveAntennaNames() {
   }
 }
 
+void loadSettings() {
+  if(SPIFFS.exists("/settings.json")) {
+    File file = SPIFFS.open("/settings.json", "r");
+    if(file) {
+      DynamicJsonDocument doc(512);
+      deserializeJson(doc, file);
+      file.close();
+      
+      if(doc.containsKey("mdnsHostname")) {
+        mdnsHostname = doc["mdnsHostname"].as<String>();
+      }
+    }
+  }
+}
+
+void saveSettings() {
+  DynamicJsonDocument doc(512);
+  doc["mdnsHostname"] = mdnsHostname;
+  
+  File file = SPIFFS.open("/settings.json", "w");
+  if(file) {
+    serializeJson(doc, file);
+    file.close();
+  }
+}
+
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
   switch(type) {
     case WStype_DISCONNECTED:
@@ -234,21 +264,47 @@ void setup() {
   pinMode(STATUS_LED, OUTPUT);
   pinMode(BUILTIN_LED, OUTPUT);
 
-  // Load antenna names
+  // Load settings and antenna names
+  loadSettings();
   loadAntennaNames();
 
-  // WiFiManager
+  // WiFiManager with custom hostname parameter
   WiFiManager wm;
   wm.setConfigPortalTimeout(180); // 3 minutes timeout
+  
+  // Add custom parameter for mDNS hostname
+  WiFiManagerParameter custom_hostname("hostname", "mDNS Hostname", mdnsHostname.c_str(), 63);
+  wm.addParameter(&custom_hostname);
   
   if(!wm.autoConnect("AntennaSwitch")) {
     Serial.println("Failed to connect");
     ESP.restart();
   }
+  
+  // Save custom hostname if it was changed
+  if (strcmp(custom_hostname.getValue(), mdnsHostname.c_str()) != 0) {
+    mdnsHostname = String(custom_hostname.getValue());
+    saveSettings();
+    Serial.println("Hostname updated from WiFiManager: " + mdnsHostname);
+  }
 
   Serial.println("WiFi connected!");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+
+  // Initialize mDNS
+  if (MDNS.begin(mdnsHostname.c_str())) {
+    Serial.println("mDNS responder started");
+    Serial.print("You can now connect to http://");
+    Serial.print(mdnsHostname);
+    Serial.println(".local");
+    
+    // Add service to mDNS
+    MDNS.addService("http", "tcp", 80);
+    MDNS.addService("ws", "tcp", 81);
+  } else {
+    Serial.println("Error setting up mDNS responder!");
+  }
 
   // WebSocket setup
   webSocket.begin();
@@ -346,6 +402,49 @@ void setup() {
     serializeJson(doc, response);
     request->send(200, "application/json", response);
   });
+
+  // mDNS hostname management
+  server.on("/api/hostname", HTTP_GET, [](AsyncWebServerRequest *request){
+    DynamicJsonDocument doc(256);
+    doc["hostname"] = mdnsHostname;
+    String response;
+    serializeJson(doc, response);
+    request->send(200, "application/json", response);
+  });
+
+  server.on("/api/hostname", HTTP_POST, [](AsyncWebServerRequest *request){}, NULL, 
+    [](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total){
+      DynamicJsonDocument doc(256);
+      deserializeJson(doc, (char*)data);
+      
+      if(doc.containsKey("hostname")) {
+        String newHostname = doc["hostname"].as<String>();
+        
+        // Validate hostname (basic validation)
+        if(newHostname.length() > 0 && newHostname.length() <= 63) {
+          // Remove invalid characters and convert to lowercase
+          String validHostname = "";
+          for(int i = 0; i < newHostname.length(); i++) {
+            char c = newHostname[i];
+            if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '-') {
+              validHostname += tolower(c);
+            }
+          }
+          
+          if(validHostname.length() > 0) {
+            mdnsHostname = validHostname;
+            saveSettings();
+            request->send(200, "text/plain", "OK - Restart required for changes to take effect");
+          } else {
+            request->send(400, "text/plain", "Invalid hostname format");
+          }
+        } else {
+          request->send(400, "text/plain", "Hostname length must be 1-63 characters");
+        }
+      } else {
+        request->send(400, "text/plain", "Missing 'hostname' field");
+      }
+    });
 
   server.begin();
   Serial.println("HTTP server started");

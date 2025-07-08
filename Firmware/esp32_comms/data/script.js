@@ -154,6 +154,7 @@ class SettingsManager {
 
     async init() {
         await this.loadAntennaNames();
+        await this.loadHostname();
         this.setupEventListeners();
     }
 
@@ -171,6 +172,21 @@ class SettingsManager {
         } catch (error) {
             console.error('Failed to load antenna names:', error);
             this.showMessage('Failed to load antenna names', 'error');
+        }
+    }
+
+    async loadHostname() {
+        try {
+            const response = await fetch('/api/hostname');
+            const data = await response.json();
+            
+            const hostnameInput = document.getElementById('mdns-hostname');
+            if (hostnameInput) {
+                hostnameInput.value = data.hostname || 'antenna';
+            }
+        } catch (error) {
+            console.error('Failed to load hostname:', error);
+            this.showMessage('Failed to load hostname', 'error');
         }
     }
 
@@ -199,8 +215,12 @@ class SettingsManager {
             }
         }
 
+        const hostnameInput = document.getElementById('mdns-hostname');
+        const hostname = hostnameInput ? hostnameInput.value.trim() : 'antenna';
+
         try {
-            const response = await fetch('/api/antennas', {
+            // Save antenna names
+            const antennaResponse = await fetch('/api/antennas', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -208,13 +228,32 @@ class SettingsManager {
                 body: JSON.stringify(antennaNames)
             });
 
-            if (response.ok) {
-                this.showMessage('Settings saved successfully!', 'success');
+            // Save hostname
+            const hostnameResponse = await fetch('/api/hostname', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ hostname: hostname })
+            });
+
+            if (antennaResponse.ok && hostnameResponse.ok) {
+                const hostnameText = await hostnameResponse.text();
+                if (hostnameText.includes('Restart required')) {
+                    this.showMessage('Settings saved! Restart device to apply hostname changes.', 'success');
+                } else {
+                    this.showMessage('Settings saved successfully!', 'success');
+                }
                 setTimeout(() => {
                     window.location.href = '/';
-                }, 1500);
+                }, 2000);
             } else {
-                this.showMessage('Failed to save settings', 'error');
+                if (!antennaResponse.ok) {
+                    this.showMessage('Failed to save antenna names', 'error');
+                } else {
+                    const errorText = await hostnameResponse.text();
+                    this.showMessage(`Failed to save hostname: ${errorText}`, 'error');
+                }
             }
         } catch (error) {
             console.error('Error saving settings:', error);
