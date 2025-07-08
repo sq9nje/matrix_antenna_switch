@@ -209,6 +209,25 @@ void saveSettings() {
   }
 }
 
+String validateHostname(const String& input) {
+  // Check length constraints
+  if(input.length() == 0 || input.length() > 63) {
+    return ""; // Empty string indicates invalid
+  }
+  
+  // Remove invalid characters and convert to lowercase
+  String validHostname = "";
+  for(int i = 0; i < input.length(); i++) {
+    char c = input[i];
+    if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '-') {
+      validHostname += tolower(c);
+    }
+  }
+  
+  // Return empty string if no valid characters remain
+  return validHostname.length() > 0 ? validHostname : "";
+}
+
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
   switch(type) {
     case WStype_DISCONNECTED:
@@ -419,27 +438,14 @@ void setup() {
       
       if(doc.containsKey("hostname")) {
         String newHostname = doc["hostname"].as<String>();
+        String validHostname = validateHostname(newHostname);
         
-        // Validate hostname (basic validation)
-        if(newHostname.length() > 0 && newHostname.length() <= 63) {
-          // Remove invalid characters and convert to lowercase
-          String validHostname = "";
-          for(int i = 0; i < newHostname.length(); i++) {
-            char c = newHostname[i];
-            if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '-') {
-              validHostname += tolower(c);
-            }
-          }
-          
-          if(validHostname.length() > 0) {
-            mdnsHostname = validHostname;
-            saveSettings();
-            request->send(200, "text/plain", "OK - Restart required for changes to take effect");
-          } else {
-            request->send(400, "text/plain", "Invalid hostname format");
-          }
+        if(validHostname.length() > 0) {
+          mdnsHostname = validHostname;
+          saveSettings();
+          request->send(200, "text/plain", "OK - Restart required for changes to take effect");
         } else {
-          request->send(400, "text/plain", "Hostname length must be 1-63 characters");
+          request->send(400, "text/plain", "Invalid hostname format or length (1-63 characters, letters/numbers/hyphens only)");
         }
       } else {
         request->send(400, "text/plain", "Missing 'hostname' field");
