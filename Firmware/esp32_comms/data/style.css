@@ -38,6 +38,15 @@ body {
     border: 2px solid #e2e8f0;
     min-width: 200px;
     text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.status:hover {
+    background: #e2e8f0;
+    border-color: #cbd5e0;
+    transform: translateY(-1px);
 }
 
 .status.connected {
@@ -46,10 +55,31 @@ body {
     border-color: #9ae6b4;
 }
 
+.status.connected:hover {
+    background: #c6f6d5;
+    border-color: #68d391;
+}
+
 .status.error {
     background: #fed7d7;
     color: #742a2a;
     border-color: #feb2b2;
+}
+
+.status.error:hover {
+    background: #fbb6ce;
+    border-color: #f687b3;
+}
+
+.status.warning {
+    background: #fef5e7;
+    color: #744210;
+    border-color: #f6e05e;
+}
+
+.status.warning:hover {
+    background: #faf089;
+    border-color: #ecc94b;
 }
 
 .nav-link {
@@ -248,6 +278,24 @@ main {
     box-shadow: 0 4px 12px rgba(113, 128, 150, 0.4);
 }
 
+.btn-warning {
+    background: linear-gradient(135deg, #ed8936, #dd6b20);
+    color: white;
+}
+
+.btn-warning:hover {
+    box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e53e3e, #c53030);
+    color: white;
+}
+
+.btn-danger:hover {
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.4);
+}
+
 .settings-form {
     max-width: 600px;
     margin: 0 auto;
@@ -258,6 +306,52 @@ main {
     gap: 15px;
     justify-content: center;
     margin-top: 30px;
+}
+
+.status-section {
+    margin-bottom: 30px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.info-item label {
+    font-weight: 600;
+    color: #2d3748;
+    margin-right: 10px;
+}
+
+.info-item span {
+    color: #4a5568;
+    font-family: monospace;
+    font-size: 0.95em;
+}
+
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
 }
 
 @media (max-width: 550px) {

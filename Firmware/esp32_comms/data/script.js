@@ -193,6 +193,8 @@ class SettingsManager {
     setupEventListeners() {
         const saveBtn = document.getElementById('save-btn');
         const cancelBtn = document.getElementById('cancel-btn');
+        const rebootBtn = document.getElementById('reboot-btn');
+        const resetNetworkBtn = document.getElementById('reset-network-btn');
         
         if (saveBtn) {
             saveBtn.addEventListener('click', () => this.saveSettings());
@@ -202,6 +204,14 @@ class SettingsManager {
             cancelBtn.addEventListener('click', () => {
                 window.location.href = '/';
             });
+        }
+        
+        if (rebootBtn) {
+            rebootBtn.addEventListener('click', () => this.rebootDevice());
+        }
+        
+        if (resetNetworkBtn) {
+            resetNetworkBtn.addEventListener('click', () => this.resetNetworkSettings());
         }
     }
 
@@ -261,12 +271,196 @@ class SettingsManager {
         }
     }
 
+    async rebootDevice() {
+        if (confirm('Are you sure you want to reboot the device? This will interrupt any active connections.')) {
+            try {
+                this.showMessage('Rebooting device...', 'warning');
+                const response = await fetch('/api/reboot', {
+                    method: 'POST'
+                });
+                
+                if (response.ok) {
+                    this.showMessage('Device is rebooting. Please wait...', 'warning');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 10000);
+                } else {
+                    this.showMessage('Failed to reboot device', 'error');
+                }
+            } catch (error) {
+                console.error('Error rebooting device:', error);
+                this.showMessage('Error rebooting device', 'error');
+            }
+        }
+    }
+
+    async resetNetworkSettings() {
+        if (confirm('Are you sure you want to reset network settings? This will erase all WiFi credentials and the device will restart in AP mode for reconfiguration.')) {
+            try {
+                this.showMessage('Resetting network settings...', 'warning');
+                const response = await fetch('/api/reset-network', {
+                    method: 'POST'
+                });
+                
+                if (response.ok) {
+                    this.showMessage('Network settings reset. Device will restart in AP mode.', 'warning');
+                    setTimeout(() => {
+                        alert('Network settings have been reset. The device will now restart in AP mode. Look for the "AntennaSwitch" WiFi network to reconfigure.');
+                        window.location.reload();
+                    }, 3000);
+                } else {
+                    this.showMessage('Failed to reset network settings', 'error');
+                }
+            } catch (error) {
+                console.error('Error resetting network settings:', error);
+                this.showMessage('Error resetting network settings', 'error');
+            }
+        }
+    }
+
     showMessage(message, type) {
         const statusElement = document.getElementById('status');
         if (statusElement) {
             statusElement.textContent = message;
-            statusElement.className = `status ${type === 'success' ? 'connected' : 'error'}`;
+            let className = 'status';
+            if (type === 'success') {
+                className += ' connected';
+            } else if (type === 'warning') {
+                className += ' warning';
+            } else {
+                className += ' error';
+            }
+            statusElement.className = className;
         }
+    }
+}
+
+// Status page functionality
+class StatusViewer {
+    constructor() {
+        if (window.location.pathname === '/status') {
+            this.init();
+        }
+    }
+
+    async init() {
+        await this.loadStatus();
+        this.setupEventListeners();
+        
+        // Auto-refresh every 5 seconds
+        setInterval(() => this.loadStatus(), 5000);
+    }
+
+    setupEventListeners() {
+        const refreshBtn = document.getElementById('refresh-btn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => this.loadStatus());
+        }
+    }
+
+    async loadStatus() {
+        try {
+            const response = await fetch('/api/status');
+            const data = await response.json();
+            
+            this.updateNetworkInfo(data);
+            this.updateDeviceInfo(data);
+            this.updateAntennaStatus(data);
+            
+        } catch (error) {
+            console.error('Failed to load status:', error);
+            this.showError('Failed to load status information');
+        }
+    }
+
+    updateNetworkInfo(data) {
+        document.getElementById('wifi-ssid').textContent = data.ssid || 'Not connected';
+        document.getElementById('ip-address').textContent = data.ip || 'N/A';
+        document.getElementById('gateway').textContent = data.gateway || 'N/A';
+        document.getElementById('subnet').textContent = data.subnet || 'N/A';
+        document.getElementById('dns').textContent = data.dns || 'N/A';
+        document.getElementById('mac-address').textContent = data.macAddress || 'N/A';
+        document.getElementById('hostname').textContent = data.hostname + '.local' || 'N/A';
+        
+        // Format signal strength
+        const signalElement = document.getElementById('signal-strength');
+        if (data.rssi !== undefined) {
+            let signalText = `${data.rssi} dBm`;
+            if (data.rssi > -50) {
+                signalText += ' (Excellent)';
+            } else if (data.rssi > -60) {
+                signalText += ' (Good)';
+            } else if (data.rssi > -70) {
+                signalText += ' (Fair)';
+            } else {
+                signalText += ' (Weak)';
+            }
+            signalElement.textContent = signalText;
+        } else {
+            signalElement.textContent = 'N/A';
+        }
+    }
+
+    updateDeviceInfo(data) {
+        document.getElementById('chip-model').textContent = data.chipModel || 'N/A';
+        document.getElementById('chip-revision').textContent = data.chipRevision || 'N/A';
+        document.getElementById('cpu-freq').textContent = data.cpuFreqMHz ? `${data.cpuFreqMHz} MHz` : 'N/A';
+        
+        // Format memory information
+        const freeHeap = data.freeHeap || 0;
+        const totalHeap = data.totalHeap || 0;
+        const usedHeap = totalHeap - freeHeap;
+        const usagePercent = totalHeap > 0 ? Math.round((usedHeap / totalHeap) * 100) : 0;
+        
+        document.getElementById('free-heap').textContent = `${this.formatBytes(freeHeap)} (${100 - usagePercent}% free)`;
+        document.getElementById('total-heap').textContent = `${this.formatBytes(totalHeap)} (${usagePercent}% used)`;
+        
+        // Format uptime
+        const uptime = data.uptime || 0;
+        document.getElementById('uptime').textContent = this.formatUptime(uptime);
+    }
+
+    updateAntennaStatus(data) {
+        const radio1 = data.currentRadio1 || 0;
+        const radio2 = data.currentRadio2 || 0;
+        
+        document.getElementById('radio1-antenna').textContent = radio1 === 0 ? 'Disconnected' : `Antenna ${radio1}`;
+        document.getElementById('radio2-antenna').textContent = radio2 === 0 ? 'Disconnected' : `Antenna ${radio2}`;
+    }
+
+    formatBytes(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    formatUptime(seconds) {
+        const days = Math.floor(seconds / (24 * 60 * 60));
+        const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
+        const minutes = Math.floor((seconds % (60 * 60)) / 60);
+        const secs = Math.floor(seconds % 60);
+        
+        if (days > 0) {
+            return `${days}d ${hours}h ${minutes}m ${secs}s`;
+        } else if (hours > 0) {
+            return `${hours}h ${minutes}m ${secs}s`;
+        } else if (minutes > 0) {
+            return `${minutes}m ${secs}s`;
+        } else {
+            return `${secs}s`;
+        }
+    }
+
+    showError(message) {
+        // Update all loading elements to show error
+        const loadingElements = document.querySelectorAll('#status [id]:not([id="refresh-btn"])');
+        loadingElements.forEach(element => {
+            if (element.textContent === 'Loading...') {
+                element.textContent = 'Error';
+            }
+        });
     }
 }
 
@@ -274,6 +468,8 @@ class SettingsManager {
 document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname === '/settings') {
         new SettingsManager();
+    } else if (window.location.pathname === '/status') {
+        new StatusViewer();
     } else {
         new AntennaSwitch();
     }

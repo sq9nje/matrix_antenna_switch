@@ -452,6 +452,56 @@ void setup() {
       }
     });
 
+  // Admin endpoints
+  server.on("/api/reboot", HTTP_POST, [](AsyncWebServerRequest *request){
+    request->send(200, "text/plain", "Device rebooting...");
+    delay(1000);
+    ESP.restart();
+  });
+
+  server.on("/api/reset-network", HTTP_POST, [](AsyncWebServerRequest *request){
+    WiFiManager wm;
+    wm.resetSettings();
+    request->send(200, "text/plain", "Network settings reset. Device will reboot...");
+    delay(1000);
+    ESP.restart();
+  });
+
+  server.on("/api/status", HTTP_GET, [](AsyncWebServerRequest *request){
+    DynamicJsonDocument doc(1024);
+    
+    // WiFi information
+    doc["ssid"] = WiFi.SSID();
+    doc["ip"] = WiFi.localIP().toString();
+    doc["gateway"] = WiFi.gatewayIP().toString();
+    doc["subnet"] = WiFi.subnetMask().toString();
+    doc["dns"] = WiFi.dnsIP().toString();
+    doc["rssi"] = WiFi.RSSI();
+    doc["macAddress"] = WiFi.macAddress();
+    doc["hostname"] = mdnsHostname;
+    
+    // Device information
+    doc["chipModel"] = ESP.getChipModel();
+    doc["chipRevision"] = ESP.getChipRevision();
+    doc["cpuFreqMHz"] = ESP.getCpuFreqMHz();
+    doc["freeHeap"] = ESP.getFreeHeap();
+    doc["totalHeap"] = ESP.getHeapSize();
+    doc["uptime"] = millis() / 1000;
+    
+    // Current antenna state
+    doc["currentRadio1"] = currentAntenna[0];
+    doc["currentRadio2"] = currentAntenna[1];
+    
+    String response;
+    serializeJson(doc, response);
+    request->send(200, "application/json", response);
+  });
+
+  // Status page route
+  server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/status.html", "text/html");
+  });
+
   server.begin();
   Serial.println("HTTP server started");
 
