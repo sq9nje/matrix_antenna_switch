@@ -31,6 +31,10 @@ String antennaNames[6] = {"Antenna 1", "Antenna 2", "Antenna 3", "Antenna 4", "A
 // mDNS hostname
 String mdnsHostname = "antenna";
 
+// Operation mode settings
+bool antennaSwappingEnabled = false;
+bool singleRadioMode = false;
+
 void blink(uint8_t n) {
   for(uint8_t i = 0; i < n; i++) {
     digitalWrite(STATUS_LED, 1);
@@ -41,10 +45,11 @@ void blink(uint8_t n) {
 }
 
 void sendWebSocketUpdate() {
-  DynamicJsonDocument doc(200);
+  DynamicJsonDocument doc(300);
   doc["type"] = "state";
   doc["radio1"] = currentAntenna[0];
   doc["radio2"] = currentAntenna[1];
+  doc["singleRadioMode"] = singleRadioMode;
   
   String message;
   serializeJson(doc, message);
@@ -70,16 +75,49 @@ uint8_t selectAntenna(uint8_t radio, uint8_t antenna) {
     return 1;
   }
   
+  // Single radio mode - always disconnect radio 2
+  if(singleRadioMode && radio == 1) {
+    if(currentAntenna[1] > 0) {
+      digitalWrite(relay[1][currentAntenna[1]-1], 0);
+      currentAntenna[1] = 0;
+    }
+    sendWebSocketUpdate();
+    blink(1);
+    return 0;
+  }
+  
   // Check if antenna is already selected by the other radio (unless disconnecting)
   if(antenna > 0) {
-    if(radio == 0) {
-      if(currentAntenna[1] == antenna) {
-        blink(3);
-        return 2;
-      }    
-    }
-    else {
-      if(currentAntenna[0] == antenna) {
+    uint8_t otherRadio = (radio == 0) ? 1 : 0;
+    
+    if(currentAntenna[otherRadio] == antenna) {
+      // If antenna swapping is enabled, perform the swap
+      if(antennaSwappingEnabled) {
+        uint8_t previousAntenna = currentAntenna[radio];
+        
+        // Step 1: Disconnect the other radio
+        digitalWrite(relay[otherRadio][antenna-1], 0);
+        
+        // Step 2: Connect the first radio to the desired antenna
+        if(currentAntenna[radio] > 0) {
+          digitalWrite(relay[radio][currentAntenna[radio]-1], 0);
+        }
+        digitalWrite(relay[radio][antenna-1], 1);
+        currentAntenna[radio] = antenna;
+        
+        // Step 3: Connect the other radio to the antenna that was used by the first radio
+        if(previousAntenna > 0 && !singleRadioMode) {
+          digitalWrite(relay[otherRadio][previousAntenna-1], 1);
+          currentAntenna[otherRadio] = previousAntenna;
+        } else {
+          currentAntenna[otherRadio] = 0;
+        }
+        
+        sendWebSocketUpdate();
+        blink(1);
+        return 0;
+      } else {
+        // Antenna swapping disabled - return busy error
         blink(3);
         return 2;
       }
@@ -187,20 +225,31 @@ void loadSettings() {
   if(SPIFFS.exists("/settings.json")) {
     File file = SPIFFS.open("/settings.json", "r");
     if(file) {
-      DynamicJsonDocument doc(512);
+      DynamicJsonDocument doc(1024);
       deserializeJson(doc, file);
       file.close();
       
       if(doc.containsKey("mdnsHostname")) {
-        mdnsHostname = doc["mdnsHostname"].as<String>();
+        const char* hostname = doc["mdnsHostname"];
+        if(hostname) {
+          mdnsHostname = String(hostname);
+        }
+      }
+      if(doc.containsKey("antennaSwapping")) {
+        antennaSwappingEnabled = doc["antennaSwapping"].as<bool>();
+      }
+      if(doc.containsKey("singleRadioMode")) {
+        singleRadioMode = doc["singleRadioMode"].as<bool>();
       }
     }
   }
 }
 
 void saveSettings() {
-  DynamicJsonDocument doc(512);
-  doc["mdnsHostname"] = mdnsHostname;
+  DynamicJsonDocument doc(1024);
+  doc["mdnsHostname"] = mdnsHostname.c_str();
+  doc["antennaSwapping"] = antennaSwappingEnabled;
+  doc["singleRadioMode"] = singleRadioMode;
   
   File file = SPIFFS.open("/settings.json", "w");
   if(file) {
@@ -220,9 +269,10 @@ String validateHostname(const String& input) {
   for(int i = 0; i < input.length(); i++) {
     char c = input[i];
     if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '-') {
-      validHostname += tolower(c);
+      validHostname += c;
     }
   }
+  validHostname.toLowerCase();
   
   // Return empty string if no valid characters remain
   return validHostname.length() > 0 ? validHostname : "";
@@ -424,10 +474,7 @@ void setup() {
 
   // mDNS hostname management
   server.on("/api/hostname", HTTP_GET, [](AsyncWebServerRequest *request){
-    DynamicJsonDocument doc(256);
-    doc["hostname"] = mdnsHostname;
-    String response;
-    serializeJson(doc, response);
+    String response = "{\"hostname\":\"" + mdnsHostname + "\"}";
     request->send(200, "application/json", response);
   });
 
@@ -443,6 +490,7 @@ void setup() {
         if(validHostname.length() > 0) {
           mdnsHostname = validHostname;
           saveSettings();
+          
           request->send(200, "text/plain", "OK - Restart required for changes to take effect");
         } else {
           request->send(400, "text/plain", "Invalid hostname format or length (1-63 characters, letters/numbers/hyphens only)");
@@ -450,6 +498,44 @@ void setup() {
       } else {
         request->send(400, "text/plain", "Missing 'hostname' field");
       }
+    });
+
+  // Operation mode settings
+  server.on("/api/operation-mode", HTTP_GET, [](AsyncWebServerRequest *request){
+    DynamicJsonDocument doc(256);
+    doc["antennaSwapping"] = antennaSwappingEnabled;
+    doc["singleRadioMode"] = singleRadioMode;
+    String response;
+    serializeJson(doc, response);
+    request->send(200, "application/json", response);
+  });
+
+  server.on("/api/operation-mode", HTTP_POST, [](AsyncWebServerRequest *request){}, NULL, 
+    [](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total){
+      DynamicJsonDocument doc(256);
+      deserializeJson(doc, (char*)data);
+      
+      if(doc.containsKey("antennaSwapping")) {
+        antennaSwappingEnabled = doc["antennaSwapping"].as<bool>();
+      }
+      
+      if(doc.containsKey("singleRadioMode")) {
+        bool newSingleRadioMode = doc["singleRadioMode"].as<bool>();
+        
+        // If enabling single radio mode, disconnect radio 2
+        if(newSingleRadioMode && !singleRadioMode) {
+          if(currentAntenna[1] > 0) {
+            digitalWrite(relay[1][currentAntenna[1]-1], 0);
+            currentAntenna[1] = 0;
+          }
+        }
+        
+        singleRadioMode = newSingleRadioMode;
+      }
+      
+      saveSettings();
+      sendWebSocketUpdate(); // Update the UI with new state
+      request->send(200, "text/plain", "OK");
     });
 
   // Admin endpoints

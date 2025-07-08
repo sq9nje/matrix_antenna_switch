@@ -226,7 +226,7 @@ main {
     margin-bottom: 20px;
 }
 
-.form-group label {
+.form-group label:not(.switch-label) {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
@@ -306,6 +306,69 @@ main {
     gap: 15px;
     justify-content: center;
     margin-top: 30px;
+}
+
+/* Toggle switch styles */
+.form-group .switch-label {
+    display: flex !important;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #2d3748;
+    gap: 12px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.switch-checkbox {
+    display: none;
+}
+
+.switch-slider {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    background: #cbd5e0;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+    order: 2;
+}
+
+.switch-slider::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switch-checkbox:checked + .switch-slider {
+    background: #667eea;
+}
+
+.switch-checkbox:checked + .switch-slider::before {
+    transform: translateX(26px);
+}
+
+.switch-text {
+    user-select: none;
+    order: 1;
+    flex-grow: 1;
+}
+
+.form-group .switch-label:hover .switch-slider {
+    background: #a0aec0;
+}
+
+.switch-checkbox:checked + .switch-slider:hover {
+    background: #5a67d8;
 }
 
 .status-section {

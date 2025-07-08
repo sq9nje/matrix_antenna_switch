@@ -4,12 +4,14 @@ class AntennaSwitch {
         this.reconnectInterval = null;
         this.antennaNames = [];
         this.currentState = { radio1: 0, radio2: 0 };
+        this.operationMode = { antennaSwapping: false, singleRadioMode: false };
         
         this.init();
     }
 
-    init() {
+    async init() {
         this.loadAntennaNames();
+        await this.loadOperationMode();
         this.setupEventListeners();
         this.connectWebSocket();
     }
@@ -21,6 +23,43 @@ class AntennaSwitch {
             this.updateAntennaNames();
         } catch (error) {
             console.error('Failed to load antenna names:', error);
+        }
+    }
+
+    async loadOperationMode() {
+        try {
+            const response = await fetch('/api/operation-mode');
+            const data = await response.json();
+            
+            this.operationMode = {
+                antennaSwapping: data.antennaSwapping || false,
+                singleRadioMode: data.singleRadioMode || false
+            };
+            
+            this.updateSingleRadioMode();
+        } catch (error) {
+            console.error('Failed to load operation mode:', error);
+        }
+    }
+
+    updateSingleRadioMode() {
+        const radio2Column = document.querySelector('.antenna-grid .column:nth-child(3)');
+        if (radio2Column) {
+            if (this.operationMode.singleRadioMode) {
+                radio2Column.style.display = 'none';
+                // Update grid layout to 2 columns
+                const antennaGrid = document.querySelector('.antenna-grid');
+                if (antennaGrid) {
+                    antennaGrid.style.gridTemplateColumns = '1fr 2fr';
+                }
+            } else {
+                radio2Column.style.display = 'flex';
+                // Restore grid layout to 3 columns
+                const antennaGrid = document.querySelector('.antenna-grid');
+                if (antennaGrid) {
+                    antennaGrid.style.gridTemplateColumns = '1fr 2fr 1fr';
+                }
+            }
         }
     }
 
@@ -68,6 +107,11 @@ class AntennaSwitch {
             try {
                 const data = JSON.parse(event.data);
                 if (data.type === 'state') {
+                    // Update operation mode if received
+                    if (data.hasOwnProperty('singleRadioMode')) {
+                        this.operationMode.singleRadioMode = data.singleRadioMode;
+                        this.updateSingleRadioMode();
+                    }
                     this.updateState(data.radio1, data.radio2);
                 } else if (data.type === 'antennaNames') {
                     this.updateAntennaNames(data.names);
@@ -155,6 +199,7 @@ class SettingsManager {
     async init() {
         await this.loadAntennaNames();
         await this.loadHostname();
+        await this.loadOperationMode();
         this.setupEventListeners();
     }
 
@@ -187,6 +232,27 @@ class SettingsManager {
         } catch (error) {
             console.error('Failed to load hostname:', error);
             this.showMessage('Failed to load hostname', 'error');
+        }
+    }
+
+    async loadOperationMode() {
+        try {
+            const response = await fetch('/api/operation-mode');
+            const data = await response.json();
+            
+            const antennaSwappingInput = document.getElementById('antenna-swapping');
+            const singleRadioModeInput = document.getElementById('single-radio-mode');
+            
+            if (antennaSwappingInput) {
+                antennaSwappingInput.checked = data.antennaSwapping || false;
+            }
+            
+            if (singleRadioModeInput) {
+                singleRadioModeInput.checked = data.singleRadioMode || false;
+            }
+        } catch (error) {
+            console.error('Failed to load operation mode:', error);
+            this.showMessage('Failed to load operation mode', 'error');
         }
     }
 
@@ -228,6 +294,14 @@ class SettingsManager {
         const hostnameInput = document.getElementById('mdns-hostname');
         const hostname = hostnameInput ? hostnameInput.value.trim() : 'antenna';
 
+        const antennaSwappingInput = document.getElementById('antenna-swapping');
+        const singleRadioModeInput = document.getElementById('single-radio-mode');
+        
+        const operationMode = {
+            antennaSwapping: antennaSwappingInput ? antennaSwappingInput.checked : false,
+            singleRadioMode: singleRadioModeInput ? singleRadioModeInput.checked : false
+        };
+
         try {
             // Save antenna names
             const antennaResponse = await fetch('/api/antennas', {
@@ -247,7 +321,16 @@ class SettingsManager {
                 body: JSON.stringify({ hostname: hostname })
             });
 
-            if (antennaResponse.ok && hostnameResponse.ok) {
+            // Save operation mode
+            const operationModeResponse = await fetch('/api/operation-mode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(operationMode)
+            });
+
+            if (antennaResponse.ok && hostnameResponse.ok && operationModeResponse.ok) {
                 const hostnameText = await hostnameResponse.text();
                 if (hostnameText.includes('Restart required')) {
                     this.showMessage('Settings saved! Restart device to apply hostname changes.', 'success');
@@ -260,9 +343,11 @@ class SettingsManager {
             } else {
                 if (!antennaResponse.ok) {
                     this.showMessage('Failed to save antenna names', 'error');
-                } else {
+                } else if (!hostnameResponse.ok) {
                     const errorText = await hostnameResponse.text();
                     this.showMessage(`Failed to save hostname: ${errorText}`, 'error');
+                } else {
+                    this.showMessage('Failed to save operation mode', 'error');
                 }
             }
         } catch (error) {
