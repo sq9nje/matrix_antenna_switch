@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6x2 Antenna Switch</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <div class="antenna-grid">
+                <div class="column">
+                    <h2>Radio 1</h2>
+                    <button class="antenna-btn disconnected active" data-radio="0" data-antenna="0">
+                        Disconnected
+                    </button>
+                    <button class="antenna-btn" data-radio="0" data-antenna="1">1</button>
+                    <button class="antenna-btn" data-radio="0" data-antenna="2">2</button>
+                    <button class="antenna-btn" data-radio="0" data-antenna="3">3</button>
+                    <button class="antenna-btn" data-radio="0" data-antenna="4">4</button>
+                    <button class="antenna-btn" data-radio="0" data-antenna="5">5</button>
+                    <button class="antenna-btn" data-radio="0" data-antenna="6">6</button>
+                </div>
+
+                <div class="column">
+                    <h2>Antennas</h2>
+                    <div class="antenna-name">-</div>
+                    <div class="antenna-name" id="antenna-1">Antenna 1</div>
+                    <div class="antenna-name" id="antenna-2">Antenna 2</div>
+                    <div class="antenna-name" id="antenna-3">Antenna 3</div>
+                    <div class="antenna-name" id="antenna-4">Antenna 4</div>
+                    <div class="antenna-name" id="antenna-5">Antenna 5</div>
+                    <div class="antenna-name" id="antenna-6">Antenna 6</div>
+                </div>
+
+                <div class="column">
+                    <h2>Radio 2</h2>
+                    <button class="antenna-btn disconnected active" data-radio="1" data-antenna="0">
+                        Disconnected
+                    </button>
+                    <button class="antenna-btn" data-radio="1" data-antenna="1">1</button>
+                    <button class="antenna-btn" data-radio="1" data-antenna="2">2</button>
+                    <button class="antenna-btn" data-radio="1" data-antenna="3">3</button>
+                    <button class="antenna-btn" data-radio="1" data-antenna="4">4</button>
+                    <button class="antenna-btn" data-radio="1" data-antenna="5">5</button>
+                    <button class="antenna-btn" data-radio="1" data-antenna="6">6</button>
+                </div>
+            </div>
+        </main>
+
+        <div class="bottom-bar">
+            <a href="/status" class="status" id="status">
+                Connecting...
+            </a>
+            <a href="/settings" class="nav-link">Settings</a>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>

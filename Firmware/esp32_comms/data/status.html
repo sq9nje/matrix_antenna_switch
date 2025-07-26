@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status - 6x2 Antenna Switch</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <div class="settings-form">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #2d3748;">Device Status</h2>
+                
+                <div class="status-section">
+                    <h3 style="color: #2d3748; margin-bottom: 15px;">Network Information</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>WiFi Network:</label>
+                            <span id="wifi-ssid">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>IP Address:</label>
+                            <span id="ip-address">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Gateway:</label>
+                            <span id="gateway">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Subnet Mask:</label>
+                            <span id="subnet">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>DNS Server:</label>
+                            <span id="dns">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>MAC Address:</label>
+                            <span id="mac-address">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Signal Strength:</label>
+                            <span id="signal-strength">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Hostname:</label>
+                            <span id="hostname">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="margin: 30px 0; border: 0; height: 1px; background: #e2e8f0;">
+
+                <div class="status-section">
+                    <h3 style="color: #2d3748; margin-bottom: 15px;">Device Information</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Chip Model:</label>
+                            <span id="chip-model">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Chip Revision:</label>
+                            <span id="chip-revision">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>CPU Frequency:</label>
+                            <span id="cpu-freq">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Free Memory:</label>
+                            <span id="free-heap">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Total Memory:</label>
+                            <span id="total-heap">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Uptime:</label>
+                            <span id="uptime">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="margin: 30px 0; border: 0; height: 1px; background: #e2e8f0;">
+
+                <div class="status-section">
+                    <h3 style="color: #2d3748; margin-bottom: 15px;">Current Antenna Selection</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Radio 1:</label>
+                            <span id="radio1-antenna">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Radio 2:</label>
+                            <span id="radio2-antenna">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn" id="refresh-btn">Refresh Status</button>
+                    <a href="/" class="btn btn-secondary">Back to Main</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - 6x2 Antenna Switch</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+
+            <div class="settings-form">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #2d3748;">Device Configuration</h2>
+                
+                <div class="form-group">
+                    <label for="mdns-hostname">mDNS Hostname (.local):</label>
+                    <input type="text" id="mdns-hostname" placeholder="antenna" maxlength="63" 
+                           pattern="[a-zA-Z0-9\-]+" title="Only letters, numbers, and hyphens allowed">
+                    <small style="color: #666; font-size: 0.9em;">After changing, restart the device to apply the new hostname</small>
+                </div>
+
+                <hr style="margin: 20px 0; border: 0; height: 1px; background: #e2e8f0;">
+
+                <h3 style="text-align: center; margin-bottom: 20px; color: #2d3748;">Operation Mode</h3>
+                
+                <div class="form-group">
+                    <label class="switch-label">
+                        <input type="checkbox" id="antenna-swapping" class="switch-checkbox">
+                        <span class="switch-slider"></span>
+                        <span class="switch-text">Enable Antenna Swapping</span>
+                    </label>
+                    <small style="color: #666; font-size: 0.9em;">When enabled, requesting an antenna used by the other radio will automatically swap their connections</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="switch-label">
+                        <input type="checkbox" id="single-radio-mode" class="switch-checkbox">
+                        <span class="switch-slider"></span>
+                        <span class="switch-text">Single Radio Mode</span>
+                    </label>
+                    <small style="color: #666; font-size: 0.9em;">When enabled, Radio 2 will be disconnected and hidden from the interface</small>
+                </div>
+
+                <hr style="margin: 20px 0; border: 0; height: 1px; background: #e2e8f0;">
+
+                <h3 style="text-align: center; margin-bottom: 20px; color: #2d3748;">Antenna Configuration</h3>
+                
+                <div class="form-group">
+                    <label for="antenna-0">Antenna 1 Name:</label>
+                    <input type="text" id="antenna-0" placeholder="Enter antenna name/description" maxlength="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="antenna-1">Antenna 2 Name:</label>
+                    <input type="text" id="antenna-1" placeholder="Enter antenna name/description" maxlength="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="antenna-2">Antenna 3 Name:</label>
+                    <input type="text" id="antenna-2" placeholder="Enter antenna name/description" maxlength="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="antenna-3">Antenna 4 Name:</label>
+                    <input type="text" id="antenna-3" placeholder="Enter antenna name/description" maxlength="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="antenna-4">Antenna 5 Name:</label>
+                    <input type="text" id="antenna-4" placeholder="Enter antenna name/description" maxlength="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="antenna-5">Antenna 6 Name:</label>
+                    <input type="text" id="antenna-5" placeholder="Enter antenna name/description" maxlength="50">
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn" id="save-btn">Save Settings</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+                </div>
+
+                <hr style="margin: 30px 0; border: 0; height: 1px; background: #e2e8f0;">
+
+                <h3 style="text-align: center; margin-bottom: 20px; color: #2d3748;">Admin Functions</h3>
+                
+                <div class="button-group">
+                    <button type="button" class="btn btn-warning" id="reboot-btn">Reboot Device</button>
+                    <button type="button" class="btn btn-danger" id="reset-network-btn">Reset Network Settings</button>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
