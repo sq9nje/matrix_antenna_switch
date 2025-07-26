@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "QS Logo")(type "KiCad")(uri "${KIPRJMOD}/lib/qs_logo.pretty")(options "")(descr ""))
+  (lib (name "ESP32 DevKit")(type "KiCad")(uri "${KIPRJMOD}/lib/esp32_devkit_v1_doit.pretty")(options "")(descr ""))
+)
