@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTA Update - 6x2 Antenna Switch</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="ota-container">
+        <h1 class="ota-title">Over-The-Air (OTA) Update</h1>
+
+        <div class="warning-box">
+            <strong>⚠️ Warning:</strong> During the update process, all antenna connections will be disconnected for safety.
+            Do not power off the device during the update process.
+        </div>
+
+        <div style="background: #e8f4fd; border: 1px solid #b6d7ff; color: #1e40af; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <strong>📋 File Types:</strong><br>
+            • <strong>Firmware files:</strong> Contains "firmware" in filename (e.g., antenna_switch_firmware_20240909.bin)<br>
+            • <strong>Web interface files:</strong> Contains "spiffs" in filename (e.g., antenna_switch_spiffs_20240909.bin)<br>
+            • <strong>Generic .bin:</strong> Treated as firmware update
+        </div>
+
+        <div class="upload-section">
+            <h3>Select Update File</h3>
+            <input type="file" id="firmwareFile" accept=".bin" class="file-input" />
+            <button id="uploadBtn" class="upload-btn" onclick="startUpload()">Start Update</button>
+
+            <div id="progressContainer" class="progress-container">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill">0%</div>
+                </div>
+                <div id="statusMessage" class="status-message"></div>
+            </div>
+        </div>
+
+        <a href="/" class="back-link">← Back to Main Page</a>
+    </div>
+
+    <script>
+        let ws;
+
+        // Initialize WebSocket connection
+        function initWebSocket() {
+            ws = new WebSocket(`ws://${window.location.hostname}:81/`);
+
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                if (data.type === 'ota') {
+                    handleOTAUpdate(data);
+                }
+            };
+
+            ws.onopen = function() {
+                console.log('WebSocket connected');
+            };
+
+            ws.onerror = function() {
+                console.log('WebSocket connection error');
+            };
+        }
+
+        // Handle OTA status updates
+        function handleOTAUpdate(data) {
+            const progressContainer = document.getElementById('progressContainer');
+            const progressFill = document.getElementById('progressFill');
+            const statusMessage = document.getElementById('statusMessage');
+            const uploadBtn = document.getElementById('uploadBtn');
+
+            progressContainer.style.display = 'block';
+
+            switch(data.status) {
+                case 'starting':
+                    progressFill.style.width = '0%';
+                    progressFill.textContent = '0%';
+                    statusMessage.textContent = `Starting update: ${data.message}`;
+                    statusMessage.className = 'status-message status-info';
+                    uploadBtn.disabled = true;
+                    break;
+
+                case 'progress':
+                    progressFill.style.width = data.progress + '%';
+                    progressFill.textContent = data.progress + '%';
+                    statusMessage.textContent = `Uploading... ${data.progress}%`;
+                    statusMessage.className = 'status-message status-info';
+                    break;
+
+                case 'complete':
+                    progressFill.style.width = '100%';
+                    progressFill.textContent = '100%';
+                    statusMessage.textContent = 'Update completed successfully! Device will restart...';
+                    statusMessage.className = 'status-message status-success';
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 3000);
+                    break;
+
+                case 'error':
+                    statusMessage.textContent = `Update failed: ${data.message}`;
+                    statusMessage.className = 'status-message status-error';
+                    uploadBtn.disabled = false;
+                    break;
+            }
+        }
+
+        // Start firmware upload
+        function startUpload() {
+            const fileInput = document.getElementById('firmwareFile');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a firmware file first');
+                return;
+            }
+
+            if (!file.name.endsWith('.bin')) {
+                alert('Please select a valid .bin firmware file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('firmware', file);
+
+            const uploadBtn = document.getElementById('uploadBtn');
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+
+            fetch('/api/update', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Upload failed');
+                }
+                return response.text();
+            })
+            .catch(error => {
+                console.error('Upload error:', error);
+                const statusMessage = document.getElementById('statusMessage');
+                statusMessage.textContent = 'Upload failed: ' + error.message;
+                statusMessage.className = 'status-message status-error';
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Start Update';
+            });
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            initWebSocket();
+        };
+    </script>
+</body>
+</html>

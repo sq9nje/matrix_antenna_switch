@@ -31,3 +31,7 @@ _autosave-*
 .vscode
 
 .DS_Store
+
+# PIO and build artifacts
+.pio
+ota_builds
