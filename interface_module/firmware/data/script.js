@@ -449,6 +449,7 @@ class StatusViewer {
             const data = await response.json();
             
             this.updateNetworkInfo(data);
+            this.updateFirmwareInfo(data);
             this.updateDeviceInfo(data);
             this.updateAntennaStatus(data);
             
@@ -483,6 +484,27 @@ class StatusViewer {
             signalElement.textContent = signalText;
         } else {
             signalElement.textContent = 'N/A';
+        }
+    }
+
+    updateFirmwareInfo(data) {
+        document.getElementById('firmware-version').textContent = data.firmwareVersion || 'Unknown';
+        
+        // Format build time if available
+        const buildTime = data.buildTime || 'Unknown';
+        if (buildTime !== 'Unknown' && buildTime.length === 15) {
+            // Format YYYYMMDD_HHMMSS to readable format
+            const year = buildTime.substr(0, 4);
+            const month = buildTime.substr(4, 2);
+            const day = buildTime.substr(6, 2);
+            const hour = buildTime.substr(9, 2);
+            const minute = buildTime.substr(11, 2);
+            const second = buildTime.substr(13, 2);
+            
+            const formattedTime = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+            document.getElementById('build-time').textContent = formattedTime;
+        } else {
+            document.getElementById('build-time').textContent = buildTime;
         }
     }
 

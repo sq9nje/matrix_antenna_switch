@@ -8,6 +8,7 @@
 #include <ESPmDNS.h>
 #include <SPIFFS.h>
 #include <ArduinoJson.h>
+#include <Update.h>
 
 void initializeMDNS() {
   if (MDNS.begin(mdnsHostname.c_str())) {
@@ -44,6 +45,10 @@ void initializeWebServer() {
 
   server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/status.html", "text/html");
+  });
+
+  server.on("/ota", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/ota.html", "text/html");
   });
 
   // Antenna management API
@@ -216,6 +221,19 @@ void initializeWebServer() {
     doc["macAddress"] = WiFi.macAddress();
     doc["hostname"] = mdnsHostname;
     
+    // Firmware information
+    #ifdef FIRMWARE_VERSION
+    doc["firmwareVersion"] = FIRMWARE_VERSION;
+    #else
+    doc["firmwareVersion"] = "Unknown";
+    #endif
+    
+    #ifdef BUILD_TIME
+    doc["buildTime"] = BUILD_TIME;
+    #else
+    doc["buildTime"] = "Unknown";
+    #endif
+
     // Device information
     doc["chipModel"] = ESP.getChipModel();
     doc["chipRevision"] = ESP.getChipRevision();
@@ -232,6 +250,81 @@ void initializeWebServer() {
     serializeJson(doc, response);
     request->send(200, "application/json", response);
   });
+
+  // OTA Update endpoint
+  server.on("/api/update", HTTP_POST, 
+    [](AsyncWebServerRequest *request) {
+      bool updateHasError = Update.hasError();
+      String message = updateHasError ? "Update Failed" : "Update Success";
+      request->send(200, "text/plain", message);
+      
+      if (!updateHasError) {
+        delay(1000);
+        ESP.restart();
+      }
+    },
+    [](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
+      if (!index) {
+        Serial.printf("Update Start: %s\n", filename.c_str());
+        
+        // Turn off all relays during update
+        for(uint8_t radio = 0; radio < 2; radio++) {
+          for(uint8_t antenna = 0; antenna < 6; antenna++) {
+            digitalWrite(relay[radio][antenna], LOW);
+          }
+        }
+        currentAntenna[0] = 0;
+        currentAntenna[1] = 0;
+        
+        // Determine update type based on filename
+        int cmd;
+        if (filename.indexOf("spiffs") >= 0 || filename.indexOf("SPIFFS") >= 0) {
+          cmd = U_SPIFFS;
+          Serial.println("Detected SPIFFS update");
+        } else if (filename.indexOf("firmware") >= 0 || filename.indexOf("FIRMWARE") >= 0) {
+          cmd = U_FLASH;
+          Serial.println("Detected firmware update");
+        } else if (filename.endsWith(".bin")) {
+          // Default: assume firmware for generic .bin files
+          cmd = U_FLASH;
+          Serial.println("Generic .bin file - assuming firmware update");
+        } else {
+          Serial.println("Unknown file type - assuming SPIFFS");
+          cmd = U_SPIFFS;
+        }
+        
+        if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) {
+          Update.printError(Serial);
+          sendOTAStatus("error", "Failed to begin update", 0);
+          return;
+        }
+        
+        sendOTAStatus("starting", filename, 0);
+      }
+
+      if (len) {
+        if (Update.write(data, len) != len) {
+          Update.printError(Serial);
+          sendOTAStatus("error", "Write failed", 0);
+          return;
+        }
+        
+        // Send progress update
+        size_t progress = (index + len) * 100 / request->contentLength();
+        sendOTAStatus("progress", "", progress);
+      }
+
+      if (final) {
+        if (Update.end(true)) {
+          Serial.printf("Update Success: %uB\n", index + len);
+          sendOTAStatus("complete", "Update successful", 100);
+        } else {
+          Update.printError(Serial);
+          sendOTAStatus("error", "Update failed to complete", 0);
+        }
+      }
+    }
+  );
 
   server.begin();
   Serial.println("HTTP server started");

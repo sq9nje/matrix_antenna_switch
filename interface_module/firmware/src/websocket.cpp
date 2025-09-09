@@ -27,6 +27,18 @@ void sendAntennaNameUpdate() {
   webSocket.broadcastTXT(message);
 }
 
+void sendOTAStatus(const String& status, const String& message, uint8_t progress) {
+  DynamicJsonDocument doc(300);
+  doc["type"] = "ota";
+  doc["status"] = status;
+  doc["message"] = message;
+  doc["progress"] = progress;
+  
+  String jsonMessage;
+  serializeJson(doc, jsonMessage);
+  webSocket.broadcastTXT(jsonMessage);
+}
+
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
   switch(type) {
     case WStype_DISCONNECTED:
