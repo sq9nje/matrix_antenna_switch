@@ -12,7 +12,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./inteface_module/firmware
+        working-directory: inteface_module/firmware
 
     steps:
       - uses: actions/checkout@v4
