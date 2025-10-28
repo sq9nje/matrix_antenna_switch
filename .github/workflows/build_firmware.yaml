@@ -40,13 +40,10 @@ jobs:
       - name: Build SPIFFS image
         run: pio run -e esp32doit-devkit-v1 --target buildfs
 
-      - name: Debug
-        run: ls -la .pio/build/esp32doit-devkit-v1
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v5
         with:
           name: firmware
           path: |
-            .pio/build/esp32doit-devkit-v1/firmware.bin
-            .pio/build/esp32doit-devkit-v1/spiffs.bin
+            interface_module/firmware/.pio/build/esp32doit-devkit-v1/firmware.bin
+            interface_module/firmware/.pio/build/esp32doit-devkit-v1/spiffs.bin
