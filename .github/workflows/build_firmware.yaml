@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./inteface_module/firmware
 
     steps:
       - uses: actions/checkout@v4
@@ -26,3 +30,8 @@ jobs:
 
       - name: Verify PlatformIO
         run: pio --version
+
+      - name: Install libraries
+        run: pio lib install
+      - name: Run PlatformIO
+        run: pio run -e esp32doit-devkit-v1
