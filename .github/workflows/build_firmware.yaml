@@ -1,0 +1,37 @@
+name: Build Firmware
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - interface_module/firmware/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./inteface_module/firmware
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+
+      - name: Verify PlatformIO
+        run: pio --version
+
+      - name: Install libraries
+        run: pio lib install
+      - name: Run PlatformIO
+        run: pio run -e esp32doit-devkit-v1
