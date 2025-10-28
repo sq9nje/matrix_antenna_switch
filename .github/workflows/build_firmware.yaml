@@ -25,6 +25,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Upgrade pip
+        run: pip install --upgrade pip
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
 
@@ -32,7 +34,7 @@ jobs:
         run: pio --version
 
       - name: Install libraries
-        run: pio lib install
+        run: pio pkg install
       - name: Build firmware
         run: pio run -e esp32doit-devkit-v1
       - name: Build SPIFFS image
