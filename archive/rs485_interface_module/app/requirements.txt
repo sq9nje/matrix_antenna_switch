@@ -8,7 +8,7 @@ future==0.18.2
 greenlet==0.4.16
 isort==4.3.21
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==3.1.6
 lazy-object-proxy==1.4.3
 MarkupSafe==1.1.1
 mccabe==0.6.1
