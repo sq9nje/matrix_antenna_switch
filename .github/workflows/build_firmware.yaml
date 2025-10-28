@@ -40,6 +40,9 @@ jobs:
       - name: Build SPIFFS image
         run: pio run -e esp32doit-devkit-v1 --target buildfs
 
+      - name: Debug
+        run: ls -la .pio/build/esp32doit-devkit-v1
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v5
         with:
