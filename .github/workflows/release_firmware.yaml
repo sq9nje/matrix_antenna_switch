@@ -1,0 +1,60 @@
+name: Release Firmware
+
+on:
+  push:
+    tags:
+      - firmware-**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: interface_module/firmware
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+
+      - name: Verify PlatformIO
+        run: pio --version
+
+      - name: Get version
+        id: version
+        run: echo "fw_version=`echo ${{ github.ref_name }} | sed -e 's/^firmware-//'`" >> $GH_OUTPUT
+
+      - name: Install libraries
+        env:
+          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=${{ steps.version.outputs.fw_version }}"
+        run: pio pkg install
+      - name: Build firmware
+        env:
+          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=${{ steps.version.outputs.fw_version }}"
+        run: pio run -e esp32doit-devkit-v1
+      - name: Build SPIFFS image
+        env:
+          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=${{ steps.version.outputs.fw_version }}"
+        run: pio run -e esp32doit-devkit-v1 --target buildfs
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${tag#v}" \
+              --generate-notes
