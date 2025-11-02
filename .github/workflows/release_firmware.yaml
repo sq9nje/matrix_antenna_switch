@@ -49,12 +49,10 @@ jobs:
           PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=\\\"${{ steps.version.outputs.fw_version }}\\\""
         run: pio run -e esp32doit-devkit-v1 --target buildfs
 
-      - name: Create Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
-        run: |
-          gh release create "$tag" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="${tag#v}" \
-              --generate-notes
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            interface_module/firmware/.pio/build/esp32doit-devkit-v1/firmware.bin
+            interface_module/firmware/.pio/build/esp32doit-devkit-v1/spiffs.bin
