@@ -1,10 +1,9 @@
-name: Build Firmware
+name: Release Firmware
 
 on:
-  workflow_dispatch:
   push:
-    paths:
-      - interface_module/firmware/**
+    tags:
+      - firmware-**
 
 jobs:
   build:
@@ -33,17 +32,29 @@ jobs:
       - name: Verify PlatformIO
         run: pio --version
 
+      - name: Get version
+        id: version
+        run: echo "fw_version=`echo ${{ github.ref_name }} | sed -e 's/^firmware-//'`" >> $GH_OUTPUT
+
       - name: Install libraries
+        env:
+          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=${{ steps.version.outputs.fw_version }}"
         run: pio pkg install
       - name: Build firmware
+        env:
+          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=${{ steps.version.outputs.fw_version }}"
         run: pio run -e esp32doit-devkit-v1
       - name: Build SPIFFS image
+        env:
+          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=${{ steps.version.outputs.fw_version }}"
         run: pio run -e esp32doit-devkit-v1 --target buildfs
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v5
-        with:
-          name: firmware
-          path: |
-            interface_module/firmware/.pio/build/esp32doit-devkit-v1/firmware.bin
-            interface_module/firmware/.pio/build/esp32doit-devkit-v1/spiffs.bin
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${tag#v}" \
+              --generate-notes
