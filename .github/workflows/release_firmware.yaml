@@ -37,16 +37,14 @@ jobs:
         run: echo "fw_version=`echo ${{ github.ref_name }} | sed -e 's/^firmware-//'`" >> $env:GITHUB_OUTPUT
 
       - name: Install libraries
-        env:
-          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=${{ steps.version.outputs.fw_version }}"
         run: pio pkg install
       - name: Build firmware
         env:
-          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=${{ steps.version.outputs.fw_version }}"
+          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=\"${{ steps.version.outputs.fw_version }}\""
         run: pio run -e esp32doit-devkit-v1
       - name: Build SPIFFS image
         env:
-          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=${{ steps.version.outputs.fw_version }}"
+          PLATFORMIO_BUILD_FLAGS: "-DFIRMWARE_VERSION=\"${{ steps.version.outputs.fw_version }}\""
         run: pio run -e esp32doit-devkit-v1 --target buildfs
 
       - name: Create Release
