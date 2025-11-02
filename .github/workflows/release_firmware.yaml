@@ -34,7 +34,7 @@ jobs:
 
       - name: Get version
         id: version
-        run: echo "fw_version=`echo ${{ github.ref_name }} | sed -e 's/^firmware-//'`" >> $GH_OUTPUT
+        run: echo "fw_version=`echo ${{ github.ref_name }} | sed -e 's/^firmware-//'`" >> $env:GITHUB_OUTPUT
 
       - name: Install libraries
         env:
