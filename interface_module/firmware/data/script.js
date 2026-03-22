@@ -307,6 +307,26 @@ class SettingsManager {
         if (resetNetworkBtn) {
             resetNetworkBtn.addEventListener('click', () => this.resetNetworkSettings());
         }
+
+        const exportBtn = document.getElementById('export-btn');
+        const importBtn = document.getElementById('import-btn');
+        const importFile = document.getElementById('import-file');
+
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => this.exportSettings());
+        }
+
+        if (importFile) {
+            importFile.addEventListener('change', () => {
+                if (importBtn) {
+                    importBtn.disabled = !importFile.files.length;
+                }
+            });
+        }
+
+        if (importBtn) {
+            importBtn.addEventListener('click', () => this.importSettings());
+        }
     }
 
     async saveSettings() {
@@ -428,6 +448,51 @@ class SettingsManager {
                 console.error('Error resetting network settings:', error);
                 this.showMessage('Error resetting network settings', 'error');
             }
+        }
+    }
+
+    async exportSettings() {
+        try {
+            const response = await fetch('/api/settings/export');
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'settings.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Failed to export settings:', error);
+            this.showMessage('Failed to export settings', 'error');
+        }
+    }
+
+    async importSettings() {
+        const fileInput = document.getElementById('import-file');
+        if (!fileInput || !fileInput.files.length) return;
+
+        if (!confirm('This will overwrite all current settings. Continue?')) return;
+
+        try {
+            const text = await fileInput.files[0].text();
+            JSON.parse(text); // validate JSON
+
+            const response = await fetch('/api/settings/import', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: text
+            });
+
+            if (response.ok) {
+                this.showMessage('Settings imported successfully! Reloading...', 'success');
+                setTimeout(() => window.location.reload(), 2000);
+            } else {
+                const errorText = await response.text();
+                this.showMessage(`Import failed: ${errorText}`, 'error');
+            }
+        } catch (error) {
+            console.error('Failed to import settings:', error);
+            this.showMessage('Failed to import settings: invalid JSON file', 'error');
         }
     }
 

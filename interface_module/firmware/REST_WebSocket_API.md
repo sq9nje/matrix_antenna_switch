@@ -22,6 +22,9 @@ This document describes the REST and WebSocket API endpoints for the 6x2 ESP32 a
     - [Update Operation Mode](#update-operation-mode)
   - [Device Status](#device-status)
     - [Get System Status](#get-system-status)
+  - [Settings Backup & Restore](#settings-backup--restore)
+    - [Export Settings](#export-settings)
+    - [Import Settings](#import-settings)
   - [System Administration](#system-administration)
     - [Reboot Device](#reboot-device)
     - [Reset Network Settings](#reset-network-settings)
@@ -211,6 +214,50 @@ GET /api/status
   "currentRadio2": 0
 }
 ```
+
+---
+
+## Settings Backup & Restore
+
+### Export Settings
+```http
+GET /api/settings/export
+```
+Downloads all device settings as a JSON file.
+
+**Response:**
+```json
+{
+  "mdnsHostname": "antenna",
+  "antennaSwapping": false,
+  "singleRadioMode": false,
+  "antennaNames": ["Dipole", "Yagi", "Loop", "Vertical", "Antenna 5", "Antenna 6"]
+}
+```
+**Headers:** `Content-Disposition: attachment; filename="settings.json"`
+
+### Import Settings
+```http
+POST /api/settings/import
+Content-Type: application/json
+
+{
+  "mdnsHostname": "antenna",
+  "antennaSwapping": true,
+  "singleRadioMode": false,
+  "antennaNames": ["Dipole", "Yagi", "Loop", "Vertical", "Antenna 5", "Antenna 6"]
+}
+```
+Restores settings from a previously exported JSON file. All fields are optional; only provided fields are updated.
+
+**Response:** `200 Settings imported successfully`
+
+**Errors:**
+- `400 Invalid JSON` — Request body is not valid JSON
+
+**Side Effects:**
+- Settings are saved to SPIFFS
+- WebSocket state and antenna name updates are broadcast to all connected clients
 
 ---
 

@@ -99,9 +99,8 @@ void setup() {
   // Initialize hardware
   initializeHardware();
 
-  // Load settings and antenna names
+  // Load settings
   loadSettings();
-  loadAntennaNames();
 
   // Initialize network
   initializeWiFi();

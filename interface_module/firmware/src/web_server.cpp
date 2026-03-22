@@ -74,7 +74,7 @@ void initializeWebServer() {
         }
       }
       
-      saveAntennaNames();
+      saveSettings();
       sendAntennaNameUpdate(); // Broadcast updated names via WebSocket
       request->send(200, "text/plain", "OK");
     });
@@ -108,7 +108,7 @@ void initializeWebServer() {
         
         if(doc.containsKey("name")) {
           antennaNames[antennaIndex] = doc["name"].as<String>();
-          saveAntennaNames();
+          saveSettings();
           sendAntennaNameUpdate(); // Broadcast updated names via WebSocket
           request->send(200, "text/plain", "OK");
         } else {
@@ -206,6 +206,67 @@ void initializeWebServer() {
     request->send(200, "text/plain", "Network settings reset. Device will reboot...");
     resetNetworkSettings();
   });
+
+  // Settings export
+  server.on("/api/settings/export", HTTP_GET, [](AsyncWebServerRequest *request){
+    DynamicJsonDocument doc(1024);
+    doc["mdnsHostname"] = mdnsHostname.c_str();
+    doc["antennaSwapping"] = antennaSwappingEnabled;
+    doc["singleRadioMode"] = singleRadioMode;
+    JsonArray names = doc.createNestedArray("antennaNames");
+    for(int i = 0; i < 6; i++) {
+      names.add(antennaNames[i]);
+    }
+
+    String response;
+    serializeJsonPretty(doc, response);
+    AsyncWebServerResponse *resp = request->beginResponse(200, "application/json", response);
+    resp->addHeader("Content-Disposition", "attachment; filename=\"settings.json\"");
+    request->send(resp);
+  });
+
+  // Settings import
+  server.on("/api/settings/import", HTTP_POST, [](AsyncWebServerRequest *request){}, NULL,
+    [](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total){
+      DynamicJsonDocument doc(1024);
+      DeserializationError error = deserializeJson(doc, (char*)data);
+
+      if(error) {
+        request->send(400, "text/plain", "Invalid JSON");
+        return;
+      }
+
+      if(doc.containsKey("mdnsHostname")) {
+        String newHostname = validateHostname(doc["mdnsHostname"].as<String>());
+        if(newHostname.length() > 0) {
+          mdnsHostname = newHostname;
+        }
+      }
+      if(doc.containsKey("antennaSwapping")) {
+        antennaSwappingEnabled = doc["antennaSwapping"].as<bool>();
+      }
+      if(doc.containsKey("singleRadioMode")) {
+        bool newSingleRadioMode = doc["singleRadioMode"].as<bool>();
+        if(newSingleRadioMode && !singleRadioMode) {
+          if(currentAntenna[1] > 0) {
+            digitalWrite(relay[1][currentAntenna[1]-1], 0);
+            currentAntenna[1] = 0;
+          }
+        }
+        singleRadioMode = newSingleRadioMode;
+      }
+      if(doc.containsKey("antennaNames")) {
+        JsonArray names = doc["antennaNames"].as<JsonArray>();
+        for(int i = 0; i < 6 && i < (int)names.size(); i++) {
+          antennaNames[i] = names[i].as<String>();
+        }
+      }
+
+      saveSettings();
+      sendWebSocketUpdate();
+      sendAntennaNameUpdate();
+      request->send(200, "text/plain", "Settings imported successfully");
+    });
 
   // Status API
   server.on("/api/status", HTTP_GET, [](AsyncWebServerRequest *request){
