@@ -83,8 +83,22 @@
 
                 <hr style="margin: 30px 0; border: 0; height: 1px; background: #e2e8f0;">
 
+                <h3 style="text-align: center; margin-bottom: 20px; color: #2d3748;">Backup & Restore</h3>
+
+                <div class="button-group">
+                    <button type="button" class="btn" id="export-btn">Export Settings</button>
+                </div>
+
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="import-file">Import Settings:</label>
+                    <input type="file" id="import-file" accept=".json" style="margin-bottom: 10px;">
+                    <button type="button" class="btn btn-warning" id="import-btn" disabled>Import Settings</button>
+                </div>
+
+                <hr style="margin: 30px 0; border: 0; height: 1px; background: #e2e8f0;">
+
                 <h3 style="text-align: center; margin-bottom: 20px; color: #2d3748;">Admin Functions</h3>
-                
+
                 <div class="button-group">
                     <a href="/ota" class="btn">Firmware Update (OTA)</a>
                     <button type="button" class="btn btn-warning" id="reboot-btn">Reboot Device</button>

@@ -92,7 +92,7 @@ The firmware maintains global state in `globals.cpp`:
 - Processes commands from both UART0 and UART2 simultaneously
 
 **`storage.cpp`**: SPIFFS-based persistence
-- Stores antenna names and configuration settings
+- All settings stored in a single `/settings.json` file (hostname, operation modes, antenna names)
 - Uses JSON format for serialization via ArduinoJson
 - Settings survive power cycles and firmware updates
 
@@ -155,6 +155,13 @@ Commands from both UART0 (USB) and UART2 (RS-485) are processed identically:
 - Auto-converts to lowercase before parsing
 
 ## Configuration Files
+
+**`/settings.json`** (SPIFFS, created at runtime):
+- `mdnsHostname` (string): mDNS hostname (default: `antenna`)
+- `antennaSwapping` (bool): Enable automatic antenna swapping between radios
+- `singleRadioMode` (bool): Lock system to radio 1 only
+- `antennaNames` (string array): Names for the 6 antennas
+- Exportable/importable via `/api/settings/export` and `/api/settings/import`
 
 **`platformio.ini`**:
 - Two environments: `esp32doit-devkit-v1` (USB) and `esp32doit-devkit-v1-ota` (WiFi)

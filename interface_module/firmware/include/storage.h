@@ -10,16 +10,6 @@
 bool initializeStorage();
 
 /**
- * @brief Load antenna names from storage
- */
-void loadAntennaNames();
-
-/**
- * @brief Save antenna names to storage
- */
-void saveAntennaNames();
-
-/**
  * @brief Load settings from storage
  */
 void loadSettings();
