@@ -64,18 +64,46 @@ class AntennaSwitch {
     }
 
     updateAntennaNames(names = null) {
-        // If names are provided (from WebSocket), update our local copy
         if (names) {
             this.antennaNames = names;
         }
-        
-        // Update the UI with current antenna names
+
+        const radio1Col = document.getElementById('radio1-column');
+        const namesCol = document.getElementById('names-column');
+        const radio2Col = document.getElementById('radio2-column');
+
+        // Remove existing dynamic antenna elements (keep h2 and disconnected button/placeholder)
+        radio1Col.querySelectorAll('.antenna-btn:not(.disconnected)').forEach(el => el.remove());
+        namesCol.querySelectorAll('.antenna-name:not(:first-of-type)').forEach(el => el.remove());
+        radio2Col.querySelectorAll('.antenna-btn:not(.disconnected)').forEach(el => el.remove());
+
         for (let i = 1; i <= 6; i++) {
-            const element = document.getElementById(`antenna-${i}`);
-            if (element && this.antennaNames[i-1]) {
-                element.textContent = this.antennaNames[i-1];
-            }
+            const name = this.antennaNames[i - 1];
+            if (!name || name.trim() === '') continue;
+
+            const btn1 = document.createElement('button');
+            btn1.className = 'antenna-btn';
+            btn1.dataset.radio = '0';
+            btn1.dataset.antenna = String(i);
+            btn1.textContent = String(i);
+            radio1Col.appendChild(btn1);
+
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'antenna-name';
+            nameDiv.id = `antenna-${i}`;
+            nameDiv.textContent = name;
+            namesCol.appendChild(nameDiv);
+
+            const btn2 = document.createElement('button');
+            btn2.className = 'antenna-btn';
+            btn2.dataset.radio = '1';
+            btn2.dataset.antenna = String(i);
+            btn2.textContent = String(i);
+            radio2Col.appendChild(btn2);
         }
+
+        this.setupEventListeners();
+        this.updateState(this.currentState.radio1, this.currentState.radio2);
     }
 
     setupEventListeners() {
@@ -211,7 +239,7 @@ class SettingsManager {
             for (let i = 0; i < 6; i++) {
                 const input = document.getElementById(`antenna-${i}`);
                 if (input) {
-                    input.value = antennaNames[i] || `Antenna ${i + 1}`;
+                    input.value = antennaNames[i] || '';
                 }
             }
         } catch (error) {
@@ -287,7 +315,7 @@ class SettingsManager {
         for (let i = 0; i < 6; i++) {
             const input = document.getElementById(`antenna-${i}`);
             if (input) {
-                antennaNames[i] = input.value.trim() || `Antenna ${i + 1}`;
+                antennaNames[i] = input.value.trim();
             }
         }
 
