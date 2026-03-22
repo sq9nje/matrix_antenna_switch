@@ -1,3 +1,25 @@
+// Theme management
+function initTheme() {
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    const btn = document.getElementById('theme-toggle');
+    if (btn) {
+        btn.textContent = theme === 'dark' ? '\u2600' : '\u263E';
+        btn.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+    }
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+}
+
 class AntennaSwitch {
     constructor() {
         this.ws = null;
@@ -43,22 +65,12 @@ class AntennaSwitch {
     }
 
     updateSingleRadioMode() {
-        const radio2Column = document.querySelector('.antenna-grid .column:nth-child(3)');
-        if (radio2Column) {
+        const antennaGrid = document.querySelector('.antenna-grid');
+        if (antennaGrid) {
             if (this.operationMode.singleRadioMode) {
-                radio2Column.style.display = 'none';
-                // Update grid layout to 2 columns
-                const antennaGrid = document.querySelector('.antenna-grid');
-                if (antennaGrid) {
-                    antennaGrid.style.gridTemplateColumns = '1fr 2fr';
-                }
+                antennaGrid.classList.add('single-radio');
             } else {
-                radio2Column.style.display = 'flex';
-                // Restore grid layout to 3 columns
-                const antennaGrid = document.querySelector('.antenna-grid');
-                if (antennaGrid) {
-                    antennaGrid.style.gridTemplateColumns = '1fr 2fr 1fr';
-                }
+                antennaGrid.classList.remove('single-radio');
             }
         }
     }
@@ -666,6 +678,10 @@ class StatusViewer {
 
 // Initialize the appropriate manager based on the current page
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    const themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
     if (window.location.pathname === '/settings') {
         new SettingsManager();
     } else if (window.location.pathname === '/status') {
