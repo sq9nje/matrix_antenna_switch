@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 // Hardware pin definitions
-#define STATUS_LED  32
+#define STATUS_LED  33
 #define RXD2        16
 #define TXD2        17
 #define BUF_SIZE    32
