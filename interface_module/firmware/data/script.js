@@ -119,7 +119,7 @@ class AntennaSwitch {
                 badgesDiv.className = 'band-badges';
                 bands.forEach(band => {
                     const badge = document.createElement('span');
-                    badge.className = 'band-badge';
+                    badge.className = 'band-badge band-' + band.toLowerCase().replace(/\s/g, '');
                     badge.textContent = band;
                     badgesDiv.appendChild(badge);
                 });

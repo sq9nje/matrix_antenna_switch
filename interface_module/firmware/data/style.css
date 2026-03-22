@@ -191,6 +191,8 @@ small, .hint {
 .antenna-grid {
     display: grid;
     grid-template-columns: 2fr 5fr 2fr;
+    grid-template-rows: auto;
+    grid-auto-rows: 1fr;
     gap: 6px;
 }
 
@@ -289,10 +291,22 @@ small, .hint {
     padding: 1px 4px;
     border-radius: 2px;
     background: var(--accent);
-    color: var(--btn-text);
+    color: #ffffff;
     font-weight: 600;
     line-height: 1.3;
 }
+
+.band-badge.band-160m { background: #cc3333; }
+.band-badge.band-80m  { background: #cc6633; }
+.band-badge.band-60m  { background: #cc8833; }
+.band-badge.band-40m  { background: #b8a020; }
+.band-badge.band-30m  { background: #55a530; }
+.band-badge.band-20m  { background: #33a068; }
+.band-badge.band-17m  { background: #2898a0; }
+.band-badge.band-15m  { background: #3070b8; }
+.band-badge.band-12m  { background: #4455cc; }
+.band-badge.band-10m  { background: #7744bb; }
+.band-badge.band-6m   { background: #aa33aa; }
 
 /* Band checkboxes on settings page */
 .band-row {
