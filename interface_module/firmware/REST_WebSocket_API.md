@@ -42,6 +42,9 @@ This document describes the REST and WebSocket API endpoints for the 6x2 ESP32 a
       - [New Client Connection](#new-client-connection)
       - [Client Disconnection](#client-disconnection)
   - [Error Codes](#error-codes)
+  - [OTRSP (SO2R Protocol)](#otrsp-so2r-protocol)
+    - [Get OTRSP Status](#get-otrsp-status)
+    - [Enable/Disable OTRSP](#enabledisable-otrsp)
   - [Examples](#examples)
     - [Switch Radio 1 to Antenna 3 via WebSocket](#switch-radio-1-to-antenna-3-via-websocket)
     - [Monitor Real-time State Changes](#monitor-real-time-state-changes)
@@ -247,6 +250,8 @@ Downloads all device settings as a JSON file.
   "mdnsHostname": "antenna",
   "antennaSwapping": false,
   "singleRadioMode": false,
+  "otrspEnabled": true,
+  "otrspSerialEnabled": false,
   "antennas": [
     {"name": "Dipole", "bands": ["20m", "15m"]},
     {"name": "Yagi", "bands": ["10m"]},
@@ -268,6 +273,8 @@ Content-Type: application/json
   "mdnsHostname": "antenna",
   "antennaSwapping": true,
   "singleRadioMode": false,
+  "otrspEnabled": true,
+  "otrspSerialEnabled": false,
   "antennas": [
     {"name": "Dipole", "bands": ["20m", "15m"]},
     {"name": "Yagi", "bands": ["10m"]},
@@ -413,6 +420,55 @@ When a client connects:
 
 #### Client Disconnection
 Server logs disconnection but takes no other action.
+
+---
+
+## OTRSP (SO2R Protocol)
+
+The device supports the [Open Two Radio Switching Protocol (OTRSP)](https://www.k1xm.org/OTRSP/) for integration with contest logging software such as N1MM+, WriteLog, and Win-Test. OTRSP is available over TCP (port 12060) and optionally on the RS-485 serial port.
+
+### Get OTRSP Status
+```http
+GET /api/otrsp/status
+```
+**Response:**
+```json
+{
+  "enabled": true,
+  "serialEnabled": false,
+  "tcpPort": 12060,
+  "clientConnected": true,
+  "txFocus": 1,
+  "rxFocus": "1",
+  "band1": "14.0",
+  "band2": "0",
+  "mode1": "U",
+  "mode2": "0"
+}
+```
+**Fields:**
+- `enabled`: Whether the OTRSP TCP server is active
+- `serialEnabled`: Whether OTRSP is enabled on the RS-485 serial port
+- `tcpPort`: TCP port number (always 12060)
+- `clientConnected`: Whether a TCP client is currently connected
+- `txFocus`: Which radio has transmit focus (1 or 2)
+- `rxFocus`: Receive focus mode ("1", "2", "1S", "2S", "1R", "2R")
+- `band1`/`band2`: Band frequency reported by logging software per radio
+- `mode1`/`mode2`: Operating mode per radio (C=CW, U=USB, L=LSB, R=RTTY, F=FM, A=AM, X=other, 0=not set)
+
+### Enable/Disable OTRSP
+```http
+POST /api/otrsp/enable
+Content-Type: application/json
+
+{
+  "enabled": true,
+  "serialEnabled": false
+}
+```
+Both fields are optional; only provided fields are updated. A device restart is required for TCP server changes to take effect.
+
+**Response:** `200 OK - Restart required for TCP changes to take effect`
 
 ---
 

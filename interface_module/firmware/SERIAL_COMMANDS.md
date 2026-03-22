@@ -29,8 +29,9 @@ The device supports command input on two serial interfaces:
   - Connect via USB cable to computer
 
 - **UART2 (RS-485/External)**: Secondary interface for remote control
-  - Same serial parameters as UART0
+  - Baud rate: 9600, Data bits: 8, Parity: None, Stop bits: 1
   - Responses are sent to UART0 (USB) for debugging
+  - Can be switched to OTRSP protocol mode (see [OTRSP Mode](#otrsp-mode-on-uart2))
 
 ### Connection Examples
 ```bash
@@ -299,3 +300,62 @@ The simple command structure makes it easy to integrate with:
 - Commands are processed line-by-line
 - Partial commands are held until CR/LF received
 - Buffer overflow protection (excess characters ignored)
+
+---
+
+## OTRSP Mode on UART2
+
+When OTRSP serial mode is enabled in settings, UART2 (RS-485) switches from the native command protocol to the [Open Two Radio Switching Protocol (OTRSP)](https://www.k1xm.org/OTRSP/) v0.9.
+
+### Serial Parameters
+- **Baud rate**: 9600
+- **Data bits**: 8, **Parity**: None, **Stop bits**: 1
+
+### Protocol Format
+OTRSP uses a different command format than the native protocol:
+- Commands are terminated by **carriage return only** (`\r`, 0x0D)
+- No space delimiters — keyword, item, and value are concatenated
+- Commands are **case-sensitive** (no automatic lowercase conversion)
+- Query commands are prefixed with `?`
+- Unknown query commands are echoed back; unknown set commands are silently ignored
+
+### Supported OTRSP Commands
+
+| Command | Example | Description |
+|---------|---------|-------------|
+| `TX{n}` | `TX1\r` | Set transmit focus to radio n (1 or 2) |
+| `RX{n}` | `RX1\r` | Set receive focus (1, 2, 1S, 2S, 1R, 2R) |
+| `AUX{x}{n}` | `AUX13\r` | Set antenna for radio x to antenna n (0=disconnect, 1-6) |
+| `BAND{x}{freq}` | `BAND114.0\r` | Report band frequency for radio x |
+| `MODE{x}{m}` | `MODE1U\r` | Report mode for radio x (C/U/L/R/F/A/X) |
+| `NAME{text}` | `NAME...\r` | Set device name (ignored) |
+| `FW{ver}` | `FW...\r` | Set firmware version (ignored) |
+| `?` | `?\r` | Ping — device responds `?\r` |
+| `?TX` | `?TX\r` | Query transmit focus — responds e.g. `TX1\r` |
+| `?RX` | `?RX\r` | Query receive focus — responds e.g. `RX1\r` |
+| `?AUX{x}` | `?AUX1\r` | Query antenna for radio x — responds e.g. `AUX13\r` |
+| `?NAME` | `?NAME\r` | Query device name — responds `NAME6x2 Antenna Switch SQ9NJE\r` |
+| `?FW` | `?FW\r` | Query firmware version — responds `FW1.0.0\r` |
+
+### Antenna Selection via AUX
+
+The AUX command is the primary mechanism for antenna control from contest logging software:
+- `AUX1` controls **Radio 1** antenna (maps to `selectAntenna(0, n)`)
+- `AUX2` controls **Radio 2** antenna (maps to `selectAntenna(1, n)`)
+- Value `0` disconnects the radio, values `1-6` select the corresponding antenna
+- Values greater than 6 are ignored
+
+### Enabling OTRSP Serial Mode
+
+Enable via the web settings page or the REST API:
+```bash
+curl -X POST http://antenna.local/api/otrsp/enable \
+  -H "Content-Type: application/json" \
+  -d '{"serialEnabled": true}'
+```
+
+When OTRSP serial mode is active on UART2, the native serial commands (`set`, `get`, `?`, `test`, `blink`) are **not available** on that port. Native commands remain available on UART0 (USB).
+
+### OTRSP over TCP
+
+OTRSP is also available over TCP on port **12060** when enabled. This is the recommended connection method for N1MM+ and other logging software. See `REST_WebSocket_API.md` for configuration details.

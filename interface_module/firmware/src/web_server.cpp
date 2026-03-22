@@ -4,6 +4,7 @@
 #include "websocket.h"
 #include "antenna_hardware.h"
 #include "wifi_manager.h"
+#include "otrsp.h"
 #include <WiFi.h>
 #include <ESPmDNS.h>
 #include <SPIFFS.h>
@@ -20,6 +21,7 @@ void initializeMDNS() {
     // Add service to mDNS
     MDNS.addService("http", "tcp", 80);
     MDNS.addService("ws", "tcp", 81);
+    MDNS.addService("otrsp", "tcp", OTRSP_TCP_PORT);
   } else {
     Serial.println("Error setting up mDNS responder!");
   }
@@ -252,6 +254,8 @@ void initializeWebServer() {
     doc["mdnsHostname"] = mdnsHostname.c_str();
     doc["antennaSwapping"] = antennaSwappingEnabled;
     doc["singleRadioMode"] = singleRadioMode;
+    doc["otrspEnabled"] = otrspEnabled;
+    doc["otrspSerialEnabled"] = otrspSerialEnabled;
     JsonArray arr = doc.createNestedArray("antennas");
     for(int i = 0; i < 6; i++) {
       JsonObject obj = arr.createNestedObject();
@@ -298,6 +302,12 @@ void initializeWebServer() {
           }
         }
         singleRadioMode = newSingleRadioMode;
+      }
+      if(doc.containsKey("otrspEnabled")) {
+        otrspEnabled = doc["otrspEnabled"].as<bool>();
+      }
+      if(doc.containsKey("otrspSerialEnabled")) {
+        otrspSerialEnabled = doc["otrspSerialEnabled"].as<bool>();
       }
       if(doc.containsKey("antennas")) {
         // New format: array of objects
@@ -459,6 +469,40 @@ void initializeWebServer() {
       }
     }
   );
+
+  // OTRSP status API
+  server.on("/api/otrsp/status", HTTP_GET, [](AsyncWebServerRequest *request){
+    DynamicJsonDocument doc(512);
+    doc["enabled"] = otrspEnabled;
+    doc["serialEnabled"] = otrspSerialEnabled;
+    doc["tcpPort"] = OTRSP_TCP_PORT;
+    doc["clientConnected"] = otrspState.clientConnected;
+    doc["txFocus"] = otrspState.txFocus;
+    doc["rxFocus"] = otrspState.rxFocus;
+    doc["band1"] = otrspState.band[0];
+    doc["band2"] = otrspState.band[1];
+    doc["mode1"] = String(otrspState.mode[0]);
+    doc["mode2"] = String(otrspState.mode[1]);
+    String response;
+    serializeJson(doc, response);
+    request->send(200, "application/json", response);
+  });
+
+  // OTRSP enable/disable
+  server.on("/api/otrsp/enable", HTTP_POST, [](AsyncWebServerRequest *request){}, NULL,
+    [](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total){
+      DynamicJsonDocument doc(256);
+      deserializeJson(doc, (char*)data);
+
+      if(doc.containsKey("enabled")) {
+        otrspEnabled = doc["enabled"].as<bool>();
+      }
+      if(doc.containsKey("serialEnabled")) {
+        otrspSerialEnabled = doc["serialEnabled"].as<bool>();
+      }
+      saveSettings();
+      request->send(200, "text/plain", "OK - Restart required for TCP changes to take effect");
+    });
 
   server.begin();
   Serial.println("HTTP server started");

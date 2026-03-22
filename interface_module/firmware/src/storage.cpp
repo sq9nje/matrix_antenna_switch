@@ -31,6 +31,12 @@ void loadSettings() {
       if(doc.containsKey("singleRadioMode")) {
         singleRadioMode = doc["singleRadioMode"].as<bool>();
       }
+      if(doc.containsKey("otrspEnabled")) {
+        otrspEnabled = doc["otrspEnabled"].as<bool>();
+      }
+      if(doc.containsKey("otrspSerialEnabled")) {
+        otrspSerialEnabled = doc["otrspSerialEnabled"].as<bool>();
+      }
       if(doc.containsKey("antennas")) {
         // New format: array of objects with name and bands
         JsonArray arr = doc["antennas"].as<JsonArray>();
@@ -75,6 +81,8 @@ void saveSettings() {
   doc["mdnsHostname"] = mdnsHostname.c_str();
   doc["antennaSwapping"] = antennaSwappingEnabled;
   doc["singleRadioMode"] = singleRadioMode;
+  doc["otrspEnabled"] = otrspEnabled;
+  doc["otrspSerialEnabled"] = otrspSerialEnabled;
   JsonArray arr = doc.createNestedArray("antennas");
   for(int i = 0; i < 6; i++) {
     JsonObject obj = arr.createNestedObject();
