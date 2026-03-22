@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ESP32-based firmware for a 6x2 matrix antenna switch that provides web, REST API, WebSocket, and serial control interfaces. The system allows two radios to connect to six antennas with automatic conflict resolution and OTA update capabilities.
+ESP32-based firmware for a 6x2 matrix antenna switch that provides web, REST API, WebSocket, serial, and OTRSP (SO2R) control interfaces. The system allows two radios to connect to six antennas with automatic conflict resolution, contest logging software integration, and OTA update capabilities.
 
 ## Build Commands
 
@@ -64,9 +64,9 @@ The firmware maintains global state in `globals.cpp`:
 ### Module Responsibilities
 
 **`main.cpp`**: Application entry point
-- Initializes all subsystems in sequence (storage → hardware → network → OTA → web server)
-- Main loop handles OTA, WebSocket, and dual serial port command processing
-- UART0 (USB Serial) and UART2 (RS-485) both process commands, with responses echoed to USB for debugging
+- Initializes all subsystems in sequence (storage → hardware → network → OTRSP → OTA → web server)
+- Main loop handles OTA, WebSocket, OTRSP TCP/serial, and dual serial port command processing
+- UART0 (USB Serial) always uses native protocol; UART2 (RS-485) uses native or OTRSP based on settings
 
 **`antenna_hardware.cpp`**: Relay control logic
 - `selectAntenna()` is the critical function that handles all antenna switching logic
@@ -86,13 +86,20 @@ The firmware maintains global state in `globals.cpp`:
 - New clients receive current state and antenna names on connection
 - Used for OTA progress updates during firmware uploads
 
-**`command_parser.cpp`**: Serial command processor
+**`command_parser.cpp`**: Native serial command processor
 - Case-insensitive command parsing (commands auto-converted to lowercase)
 - 32-character buffer for command input
-- Processes commands from both UART0 and UART2 simultaneously
+- Processes commands from UART0; UART2 only when OTRSP serial mode is disabled
+
+**`otrsp.cpp`**: OTRSP (Open Two Radio Switching Protocol) implementation
+- TCP server on port 12060 for contest logging software (N1MM+, WriteLog, Win-Test)
+- Supports TX, RX, AUX, BAND, MODE, NAME, FW commands per OTRSP v0.9 spec
+- AUX1/AUX2 commands map directly to `selectAntenna()` for antenna control
+- Optional serial fallback on UART2 (9600 baud, 8N1)
+- Single TCP client at a time; separate command buffer from native serial
 
 **`storage.cpp`**: SPIFFS-based persistence
-- All settings stored in a single `/settings.json` file (hostname, operation modes, antenna names)
+- All settings stored in a single `/settings.json` file (hostname, operation modes, antenna names, OTRSP config)
 - Uses JSON format for serialization via ArduinoJson
 - Settings survive power cycles and firmware updates
 
@@ -148,11 +155,19 @@ When OTA update starts (in `main.cpp` `initializeOTA()`):
 - Values accessible via `/api/status` and web status page
 
 ### Serial Command Processing
-Commands from both UART0 (USB) and UART2 (RS-485) are processed identically:
-- UART0 responses go to UART0
-- UART2 responses go to UART0 (for debugging)
-- Command buffer size: 32 characters
-- Auto-converts to lowercase before parsing
+- UART0 (USB) always uses native protocol; responses go to UART0
+- UART2 (RS-485) uses native or OTRSP protocol based on `otrspSerialEnabled` setting
+- Native protocol: command buffer 32 chars, auto-lowercase
+- OTRSP protocol: command buffer 40 chars, case-sensitive, CR-terminated
+
+### OTRSP Integration
+The OTRSP module (`otrsp.cpp`) provides contest logging software integration:
+- **TCP server** on port 12060 accepts one client at a time
+- **AUX command mapping**: `AUX1{n}` → `selectAntenna(0, n)`, `AUX2{n}` → `selectAntenna(1, n)`
+- TX/RX focus, BAND, and MODE are tracked as informational state
+- `?NAME` returns device name, `?FW` returns firmware version
+- Unknown queries echo back unchanged; unknown commands silently ignored (per OTRSP spec)
+- Antenna changes via OTRSP trigger WebSocket broadcasts to web UI clients
 
 ## Configuration Files
 
@@ -160,6 +175,8 @@ Commands from both UART0 (USB) and UART2 (RS-485) are processed identically:
 - `mdnsHostname` (string): mDNS hostname (default: `antenna`)
 - `antennaSwapping` (bool): Enable automatic antenna swapping between radios
 - `singleRadioMode` (bool): Lock system to radio 1 only
+- `otrspEnabled` (bool): Enable OTRSP TCP server on port 12060
+- `otrspSerialEnabled` (bool): Enable OTRSP protocol on UART2 (RS-485)
 - `antennas` (array of objects): Each with `name` (string) and `bands` (string array), e.g. `[{"name": "Dipole", "bands": ["20m","40m"]}, ...]`
 - Exportable/importable via `/api/settings/export` and `/api/settings/import`
 
@@ -207,11 +224,13 @@ All relay control goes through `selectAntenna()` in `antenna_hardware.cpp`:
 - OTA password: `antenna123`
 - WebSocket port: 81
 - HTTP port: 80 (default)
+- OTRSP TCP port: 12060
 - Serial baud rates: UART0=115200, UART2=9600
-- Command buffer size: 32 characters
+- Command buffer size: 32 characters (native), 40 characters (OTRSP)
 - Number of radios: 2
 - Number of antennas: 6
 
 ## API Documentation
 See `REST_WebSocket_API.md` for complete REST and WebSocket API reference.
-See `SERIAL_COMMANDS.md` for serial command protocol details.
+See `SERIAL_COMMANDS.md` for serial command protocol details (includes OTRSP serial mode).
+See [OTRSP Protocol Specification](https://www.k1xm.org/OTRSP/OTRSP_Protocol.pdf) for the full OTRSP v0.9 protocol reference.

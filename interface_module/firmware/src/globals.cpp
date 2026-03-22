@@ -12,6 +12,8 @@ AntennaConfig antennas[6] = {
 String mdnsHostname = "antenna";
 bool antennaSwappingEnabled = false;
 bool singleRadioMode = false;
+bool otrspEnabled = false;
+bool otrspSerialEnabled = false;
 
 // Global objects
 AsyncWebServer server(80);

@@ -44,6 +44,28 @@
 
                 <hr>
 
+                <h3>OTRSP (SO2R Protocol)</h3>
+
+                <div class="form-group">
+                    <label class="switch-label">
+                        <input type="checkbox" id="otrsp-enabled" class="switch-checkbox">
+                        <span class="switch-slider"></span>
+                        <span class="switch-text">Enable OTRSP over TCP</span>
+                    </label>
+                    <small>Listens on TCP port 12060. Used by N1MM+, WriteLog, and Win-Test for SO2R control. Restart required.</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="switch-label">
+                        <input type="checkbox" id="otrsp-serial-enabled" class="switch-checkbox">
+                        <span class="switch-slider"></span>
+                        <span class="switch-text">Enable OTRSP on RS-485 (Serial)</span>
+                    </label>
+                    <small>When enabled, the RS-485 port uses OTRSP protocol (9600 baud) instead of the native serial protocol</small>
+                </div>
+
+                <hr>
+
                 <h3>Antenna Configuration</h3>
 
                 <div class="form-group antenna-config-group">

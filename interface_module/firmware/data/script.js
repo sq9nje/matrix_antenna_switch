@@ -263,6 +263,7 @@ class SettingsManager {
         await this.loadAntennaNames();
         await this.loadHostname();
         await this.loadOperationMode();
+        await this.loadOTRSPSettings();
         this.setupEventListeners();
     }
 
@@ -324,6 +325,21 @@ class SettingsManager {
         } catch (error) {
             console.error('Failed to load operation mode:', error);
             this.showMessage('Failed to load operation mode', 'error');
+        }
+    }
+
+    async loadOTRSPSettings() {
+        try {
+            const response = await fetch('/api/otrsp/status');
+            const data = await response.json();
+
+            const otrspEnabled = document.getElementById('otrsp-enabled');
+            const otrspSerialEnabled = document.getElementById('otrsp-serial-enabled');
+
+            if (otrspEnabled) otrspEnabled.checked = data.enabled || false;
+            if (otrspSerialEnabled) otrspSerialEnabled.checked = data.serialEnabled || false;
+        } catch (error) {
+            console.error('Failed to load OTRSP settings:', error);
         }
     }
 
@@ -427,7 +443,19 @@ class SettingsManager {
                 body: JSON.stringify(operationMode)
             });
 
-            if (antennaResponse.ok && hostnameResponse.ok && operationModeResponse.ok) {
+            // Save OTRSP settings
+            const otrspEnabledInput = document.getElementById('otrsp-enabled');
+            const otrspSerialEnabledInput = document.getElementById('otrsp-serial-enabled');
+            const otrspResponse = await fetch('/api/otrsp/enable', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    enabled: otrspEnabledInput ? otrspEnabledInput.checked : false,
+                    serialEnabled: otrspSerialEnabledInput ? otrspSerialEnabledInput.checked : false
+                })
+            });
+
+            if (antennaResponse.ok && hostnameResponse.ok && operationModeResponse.ok && otrspResponse.ok) {
                 const hostnameText = await hostnameResponse.text();
                 if (hostnameText.includes('Restart required')) {
                     this.showMessage('Settings saved! Restart device to apply hostname changes.', 'success');

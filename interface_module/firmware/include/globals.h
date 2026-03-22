@@ -27,6 +27,8 @@ extern AntennaConfig antennas[6];
 extern String mdnsHostname;
 extern bool antennaSwappingEnabled;
 extern bool singleRadioMode;
+extern bool otrspEnabled;
+extern bool otrspSerialEnabled;
 
 // Global objects
 extern AsyncWebServer server;

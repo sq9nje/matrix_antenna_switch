@@ -16,6 +16,7 @@
 #include "storage.h"
 #include "web_server.h"
 #include "wifi_manager.h"
+#include "otrsp.h"
 
 void initializeOTA() {
   ArduinoOTA.setHostname(mdnsHostname.c_str());
@@ -109,6 +110,9 @@ void setup() {
   // Initialize WebSocket server
   initializeWebSocket();
 
+  // Initialize OTRSP
+  initializeOTRSP();
+
   // Initialize OTA
   initializeOTA();
 
@@ -123,9 +127,14 @@ void loop() {
   ArduinoOTA.handle();
   webSocket.loop();
   
+  // Handle OTRSP TCP + serial
+  handleOTRSPLoop();
+
   // Handle UART0 (Serial) commands - debug output
   handleSerialInput(Serial, Serial);
-  
-  // Handle UART2 commands - debug output to Serial
-  handleSerialInput(Serial2, Serial);
+
+  // Handle UART2 commands (only if not used for OTRSP)
+  if (!otrspSerialEnabled) {
+    handleSerialInput(Serial2, Serial);
+  }
 }
