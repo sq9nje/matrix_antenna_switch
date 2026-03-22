@@ -25,6 +25,7 @@ class AntennaSwitch {
         this.ws = null;
         this.reconnectInterval = null;
         this.antennaNames = [];
+        this.antennaBands = [];
         this.currentState = { radio1: 0, radio2: 0 };
         this.operationMode = { antennaSwapping: false, singleRadioMode: false };
         
@@ -41,7 +42,9 @@ class AntennaSwitch {
     async loadAntennaNames() {
         try {
             const response = await fetch('/api/antennas');
-            this.antennaNames = await response.json();
+            const antennas = await response.json();
+            this.antennaNames = antennas.map(a => a.name);
+            this.antennaBands = antennas.map(a => a.bands || []);
             this.updateAntennaNames();
         } catch (error) {
             console.error('Failed to load antenna names:', error);
@@ -75,9 +78,10 @@ class AntennaSwitch {
         }
     }
 
-    updateAntennaNames(names = null) {
-        if (names) {
-            this.antennaNames = names;
+    updateAntennaNames(antennas = null) {
+        if (antennas) {
+            this.antennaNames = antennas.map(a => a.name);
+            this.antennaBands = antennas.map(a => a.bands || []);
         }
 
         const radio1Col = document.getElementById('radio1-column');
@@ -103,7 +107,25 @@ class AntennaSwitch {
             const nameDiv = document.createElement('div');
             nameDiv.className = 'antenna-name';
             nameDiv.id = `antenna-${i}`;
-            nameDiv.textContent = name;
+
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'antenna-name-text';
+            nameSpan.textContent = name;
+            nameDiv.appendChild(nameSpan);
+
+            const bands = this.antennaBands[i - 1] || [];
+            if (bands.length > 0) {
+                const badgesDiv = document.createElement('div');
+                badgesDiv.className = 'band-badges';
+                bands.forEach(band => {
+                    const badge = document.createElement('span');
+                    badge.className = 'band-badge';
+                    badge.textContent = band;
+                    badgesDiv.appendChild(badge);
+                });
+                nameDiv.appendChild(badgesDiv);
+            }
+
             namesCol.appendChild(nameDiv);
 
             const btn2 = document.createElement('button');
@@ -113,6 +135,11 @@ class AntennaSwitch {
             btn2.textContent = String(i);
             radio2Col.appendChild(btn2);
         }
+
+        const rowCount = namesCol.children.length;
+        [radio1Col, namesCol, radio2Col].forEach(col => {
+            col.style.gridRow = 'span ' + rowCount;
+        });
 
         this.setupEventListeners();
         this.updateState(this.currentState.radio1, this.currentState.radio2);
@@ -154,7 +181,7 @@ class AntennaSwitch {
                     }
                     this.updateState(data.radio1, data.radio2);
                 } else if (data.type === 'antennaNames') {
-                    this.updateAntennaNames(data.names);
+                    this.updateAntennaNames(data.antennas);
                 }
             } catch (error) {
                 console.error('Error parsing WebSocket message:', error);
@@ -246,12 +273,20 @@ class SettingsManager {
     async loadAntennaNames() {
         try {
             const response = await fetch('/api/antennas');
-            const antennaNames = await response.json();
-            
+            const antennas = await response.json();
+
             for (let i = 0; i < 6; i++) {
                 const input = document.getElementById(`antenna-${i}`);
                 if (input) {
-                    input.value = antennaNames[i] || '';
+                    input.value = antennas[i].name || '';
+                }
+
+                const bands = antennas[i].bands || [];
+                const container = document.querySelector(`.band-checkboxes[data-antenna="${i}"]`);
+                if (container) {
+                    container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                        cb.checked = bands.includes(cb.value);
+                    });
                 }
             }
         } catch (error) {
@@ -342,13 +377,19 @@ class SettingsManager {
     }
 
     async saveSettings() {
-        const antennaNames = {};
-        
+        const antennaData = {};
+
         for (let i = 0; i < 6; i++) {
             const input = document.getElementById(`antenna-${i}`);
-            if (input) {
-                antennaNames[i] = input.value.trim();
+            const name = input ? input.value.trim() : '';
+            const bands = [];
+            const container = document.querySelector(`.band-checkboxes[data-antenna="${i}"]`);
+            if (container) {
+                container.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+                    bands.push(cb.value);
+                });
             }
+            antennaData[i] = { name, bands };
         }
 
         const hostnameInput = document.getElementById('mdns-hostname');
@@ -363,13 +404,13 @@ class SettingsManager {
         };
 
         try {
-            // Save antenna names
+            // Save antenna names and bands
             const antennaResponse = await fetch('/api/antennas', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(antennaNames)
+                body: JSON.stringify(antennaData)
             });
 
             // Save hostname

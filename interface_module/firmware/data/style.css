@@ -192,21 +192,19 @@ small, .hint {
     display: grid;
     grid-template-columns: 2fr 5fr 2fr;
     gap: 6px;
-    align-items: start;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    display: grid;
+    grid-template-rows: subgrid;
     min-width: 0;
+    gap: 4px;
 }
 
 .column h2 {
     text-align: center;
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 6px;
     padding-bottom: 6px;
     border-bottom: 1px solid var(--separator);
 }
@@ -223,7 +221,7 @@ small, .hint {
     font-family: inherit;
     color: var(--fg);
     transition: all 0.15s ease;
-    height: 40px;
+    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -269,11 +267,57 @@ small, .hint {
     text-align: center;
     font-weight: 500;
     color: var(--muted);
-    height: 40px;
+    min-height: 40px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 0.875rem;
+    gap: 3px;
+}
+
+/* Band badges on main page */
+.band-badges {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.band-badge {
+    font-size: 0.65rem;
+    padding: 1px 4px;
+    border-radius: 2px;
+    background: var(--accent);
+    color: var(--btn-text);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Band checkboxes on settings page */
+.band-row {
+    margin-bottom: 10px;
+}
+
+.band-row > label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: var(--fg);
+    font-size: 0.875rem;
+}
+
+.band-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+}
+
+.band-checkboxes label {
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--fg);
 }
 
 /* Forms */
@@ -716,12 +760,12 @@ small, .hint {
         font-size: 0.85rem;
     }
     .antenna-btn {
-        height: 34px;
+        min-height: 34px;
         padding: 4px 6px;
         font-size: 0.8rem;
     }
     .antenna-name {
-        height: 34px;
+        min-height: 34px;
     }
     .button-group {
         flex-direction: column;

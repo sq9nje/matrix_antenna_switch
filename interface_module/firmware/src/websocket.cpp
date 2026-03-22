@@ -15,13 +15,25 @@ void sendWebSocketUpdate() {
 }
 
 void sendAntennaNameUpdate() {
-  DynamicJsonDocument doc(1024);
+  DynamicJsonDocument doc(2048);
   doc["type"] = "antennaNames";
-  JsonArray array = doc.createNestedArray("names");
+  JsonArray antennas = doc.createNestedArray("antennas");
   for(int i = 0; i < 6; i++) {
-    array.add(antennaNames[i]);
+    JsonObject ant = antennas.createNestedObject();
+    ant["name"] = antennaNames[i];
+    JsonArray bands = ant.createNestedArray("bands");
+    String src = antennaBands[i];
+    while(src.length() > 0) {
+      int idx = src.indexOf(',');
+      if(idx == -1) {
+        if(src.length() > 0) bands.add(src);
+        break;
+      }
+      bands.add(src.substring(0, idx));
+      src = src.substring(idx + 1);
+    }
   }
-  
+
   String message;
   serializeJson(doc, message);
   webSocket.broadcastTXT(message);

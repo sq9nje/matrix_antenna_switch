@@ -17,6 +17,7 @@ class WebSocketsServer;
 extern uint8_t currentAntenna[2];
 extern const uint8_t relay[2][6];
 extern String antennaNames[6];
+extern String antennaBands[6];
 extern String mdnsHostname;
 extern bool antennaSwappingEnabled;
 extern bool singleRadioMode;

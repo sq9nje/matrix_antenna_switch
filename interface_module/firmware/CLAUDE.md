@@ -58,6 +58,7 @@ pio pkg update
 The firmware maintains global state in `globals.cpp`:
 - `currentAntenna[2]`: Current antenna selection for each radio (0=disconnected, 1-6=antenna number)
 - `antennaNames[6]`: User-configurable antenna names
+- `antennaBands[6]`: Comma-separated band labels per antenna (e.g. "20m,40m"), exposed as JSON arrays via API
 - `antennaSwappingEnabled`: Allows automatic swapping when both radios select same antenna
 - `singleRadioMode`: Locks system to radio 1 only
 
@@ -161,6 +162,7 @@ Commands from both UART0 (USB) and UART2 (RS-485) are processed identically:
 - `antennaSwapping` (bool): Enable automatic antenna swapping between radios
 - `singleRadioMode` (bool): Lock system to radio 1 only
 - `antennaNames` (string array): Names for the 6 antennas
+- `antennaBands` (array of string arrays): Band labels per antenna, e.g. `[["20m","40m"], ["80m"], ...]`
 - Exportable/importable via `/api/settings/export` and `/api/settings/import`
 
 **`platformio.ini`**:

@@ -53,29 +53,60 @@ void initializeWebServer() {
 
   // Antenna management API
   server.on("/api/antennas", HTTP_GET, [](AsyncWebServerRequest *request){
-    DynamicJsonDocument doc(1024);
+    DynamicJsonDocument doc(2048);
     JsonArray array = doc.to<JsonArray>();
     for(int i = 0; i < 6; i++) {
-      array.add(antennaNames[i]);
+      JsonObject ant = array.createNestedObject();
+      ant["name"] = antennaNames[i];
+      JsonArray bands = ant.createNestedArray("bands");
+      String src = antennaBands[i];
+      while(src.length() > 0) {
+        int idx = src.indexOf(',');
+        if(idx == -1) {
+          if(src.length() > 0) bands.add(src);
+          break;
+        }
+        bands.add(src.substring(0, idx));
+        src = src.substring(idx + 1);
+      }
     }
     String response;
     serializeJson(doc, response);
     request->send(200, "application/json", response);
   });
 
-  server.on("/api/antennas", HTTP_POST, [](AsyncWebServerRequest *request){}, NULL, 
+  server.on("/api/antennas", HTTP_POST, [](AsyncWebServerRequest *request){}, NULL,
     [](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total){
-      DynamicJsonDocument doc(1024);
+      DynamicJsonDocument doc(2048);
       deserializeJson(doc, (char*)data);
-      
+
       for(int i = 0; i < 6; i++) {
-        if(doc.containsKey(String(i))) {
-          antennaNames[i] = doc[String(i)].as<String>();
+        String key = String(i);
+        if(doc.containsKey(key)) {
+          JsonVariant val = doc[key];
+          if(val.is<JsonObject>()) {
+            JsonObject obj = val.as<JsonObject>();
+            if(obj.containsKey("name")) {
+              antennaNames[i] = obj["name"].as<String>();
+            }
+            if(obj.containsKey("bands")) {
+              JsonArray bands = obj["bands"].as<JsonArray>();
+              String joined = "";
+              for(int j = 0; j < (int)bands.size(); j++) {
+                if(j > 0) joined += ",";
+                joined += bands[j].as<String>();
+              }
+              antennaBands[i] = joined;
+            }
+          } else {
+            // Backward compatibility: plain string value = name only
+            antennaNames[i] = val.as<String>();
+          }
         }
       }
-      
+
       saveSettings();
-      sendAntennaNameUpdate(); // Broadcast updated names via WebSocket
+      sendAntennaNameUpdate();
       request->send(200, "text/plain", "OK");
     });
 
@@ -83,12 +114,23 @@ void initializeWebServer() {
   server.on("^\\/api\\/antenna\\/(\\d+)$", HTTP_GET, [](AsyncWebServerRequest *request){
     String antennaStr = request->pathArg(0);
     int antennaIndex = antennaStr.toInt();
-    
+
     if(antennaIndex >= 0 && antennaIndex < 6) {
-      DynamicJsonDocument doc(256);
+      DynamicJsonDocument doc(512);
       doc["index"] = antennaIndex;
       doc["name"] = antennaNames[antennaIndex];
-      
+      JsonArray bands = doc.createNestedArray("bands");
+      String src = antennaBands[antennaIndex];
+      while(src.length() > 0) {
+        int idx = src.indexOf(',');
+        if(idx == -1) {
+          if(src.length() > 0) bands.add(src);
+          break;
+        }
+        bands.add(src.substring(0, idx));
+        src = src.substring(idx + 1);
+      }
+
       String response;
       serializeJson(doc, response);
       request->send(200, "application/json", response);
@@ -101,18 +143,33 @@ void initializeWebServer() {
     [](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total){
       String antennaStr = request->pathArg(0);
       int antennaIndex = antennaStr.toInt();
-      
+
       if(antennaIndex >= 0 && antennaIndex < 6) {
-        DynamicJsonDocument doc(256);
+        DynamicJsonDocument doc(512);
         deserializeJson(doc, (char*)data);
-        
+
+        bool updated = false;
         if(doc.containsKey("name")) {
           antennaNames[antennaIndex] = doc["name"].as<String>();
+          updated = true;
+        }
+        if(doc.containsKey("bands")) {
+          JsonArray bands = doc["bands"].as<JsonArray>();
+          String joined = "";
+          for(int j = 0; j < (int)bands.size(); j++) {
+            if(j > 0) joined += ",";
+            joined += bands[j].as<String>();
+          }
+          antennaBands[antennaIndex] = joined;
+          updated = true;
+        }
+
+        if(updated) {
           saveSettings();
-          sendAntennaNameUpdate(); // Broadcast updated names via WebSocket
+          sendAntennaNameUpdate();
           request->send(200, "text/plain", "OK");
         } else {
-          request->send(400, "text/plain", "Missing 'name' field");
+          request->send(400, "text/plain", "Missing 'name' or 'bands' field");
         }
       } else {
         request->send(400, "text/plain", "Invalid antenna index");
@@ -209,13 +266,27 @@ void initializeWebServer() {
 
   // Settings export
   server.on("/api/settings/export", HTTP_GET, [](AsyncWebServerRequest *request){
-    DynamicJsonDocument doc(1024);
+    DynamicJsonDocument doc(2048);
     doc["mdnsHostname"] = mdnsHostname.c_str();
     doc["antennaSwapping"] = antennaSwappingEnabled;
     doc["singleRadioMode"] = singleRadioMode;
     JsonArray names = doc.createNestedArray("antennaNames");
     for(int i = 0; i < 6; i++) {
       names.add(antennaNames[i]);
+    }
+    JsonArray bandsArr = doc.createNestedArray("antennaBands");
+    for(int i = 0; i < 6; i++) {
+      JsonArray bands = bandsArr.createNestedArray();
+      String src = antennaBands[i];
+      while(src.length() > 0) {
+        int idx = src.indexOf(',');
+        if(idx == -1) {
+          if(src.length() > 0) bands.add(src);
+          break;
+        }
+        bands.add(src.substring(0, idx));
+        src = src.substring(idx + 1);
+      }
     }
 
     String response;
@@ -228,7 +299,7 @@ void initializeWebServer() {
   // Settings import
   server.on("/api/settings/import", HTTP_POST, [](AsyncWebServerRequest *request){}, NULL,
     [](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total){
-      DynamicJsonDocument doc(1024);
+      DynamicJsonDocument doc(2048);
       DeserializationError error = deserializeJson(doc, (char*)data);
 
       if(error) {
@@ -259,6 +330,18 @@ void initializeWebServer() {
         JsonArray names = doc["antennaNames"].as<JsonArray>();
         for(int i = 0; i < 6 && i < (int)names.size(); i++) {
           antennaNames[i] = names[i].as<String>();
+        }
+      }
+      if(doc.containsKey("antennaBands")) {
+        JsonArray bandsArr = doc["antennaBands"].as<JsonArray>();
+        for(int i = 0; i < 6 && i < (int)bandsArr.size(); i++) {
+          JsonArray bands = bandsArr[i].as<JsonArray>();
+          String joined = "";
+          for(int j = 0; j < (int)bands.size(); j++) {
+            if(j > 0) joined += ",";
+            joined += bands[j].as<String>();
+          }
+          antennaBands[i] = joined;
         }
       }
 

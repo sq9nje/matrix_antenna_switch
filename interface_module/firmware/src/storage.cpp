@@ -15,10 +15,10 @@ void loadSettings() {
   if(SPIFFS.exists("/settings.json")) {
     File file = SPIFFS.open("/settings.json", "r");
     if(file) {
-      DynamicJsonDocument doc(1024);
+      DynamicJsonDocument doc(2048);
       deserializeJson(doc, file);
       file.close();
-      
+
       if(doc.containsKey("mdnsHostname")) {
         const char* hostname = doc["mdnsHostname"];
         if(hostname) {
@@ -37,12 +37,24 @@ void loadSettings() {
           antennaNames[i] = names[i].as<String>();
         }
       }
+      if(doc.containsKey("antennaBands")) {
+        JsonArray bandsArr = doc["antennaBands"].as<JsonArray>();
+        for(int i = 0; i < 6 && i < (int)bandsArr.size(); i++) {
+          JsonArray bands = bandsArr[i].as<JsonArray>();
+          String joined = "";
+          for(int j = 0; j < (int)bands.size(); j++) {
+            if(j > 0) joined += ",";
+            joined += bands[j].as<String>();
+          }
+          antennaBands[i] = joined;
+        }
+      }
     }
   }
 }
 
 void saveSettings() {
-  DynamicJsonDocument doc(1024);
+  DynamicJsonDocument doc(2048);
   doc["mdnsHostname"] = mdnsHostname.c_str();
   doc["antennaSwapping"] = antennaSwappingEnabled;
   doc["singleRadioMode"] = singleRadioMode;
@@ -50,7 +62,21 @@ void saveSettings() {
   for(int i = 0; i < 6; i++) {
     names.add(antennaNames[i]);
   }
-  
+  JsonArray bandsArr = doc.createNestedArray("antennaBands");
+  for(int i = 0; i < 6; i++) {
+    JsonArray bands = bandsArr.createNestedArray();
+    String src = antennaBands[i];
+    while(src.length() > 0) {
+      int idx = src.indexOf(',');
+      if(idx == -1) {
+        if(src.length() > 0) bands.add(src);
+        break;
+      }
+      bands.add(src.substring(0, idx));
+      src = src.substring(idx + 1);
+    }
+  }
+
   File file = SPIFFS.open("/settings.json", "w");
   if(file) {
     serializeJson(doc, file);
