@@ -190,7 +190,7 @@ small, .hint {
 /* Antenna grid */
 .antenna-grid {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 2fr 5fr 2fr;
     gap: 6px;
     align-items: start;
 }
@@ -199,6 +199,7 @@ small, .hint {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    min-width: 0;
 }
 
 .column h2 {
@@ -212,7 +213,7 @@ small, .hint {
 
 /* Antenna buttons */
 .antenna-btn {
-    padding: 8px 12px;
+    padding: 8px 8px;
     border: 1px solid var(--card-border);
     background: var(--input-bg);
     border-radius: 4px;
@@ -642,6 +643,22 @@ small, .hint {
     text-decoration: underline;
 }
 
+/* Responsive button labels */
+.antenna-btn .label-short {
+    display: none;
+}
+
+/* Dark mode danger button */
+[data-theme="dark"] .btn-danger {
+    background: #a04040;
+    border-color: #a04040;
+}
+
+[data-theme="dark"] .btn-danger:hover {
+    background: #8b3535;
+    border-color: #8b3535;
+}
+
 /* Single radio mode */
 .antenna-grid.single-radio {
     grid-template-columns: 1fr 2fr;
@@ -678,23 +695,33 @@ small, .hint {
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 700px) {
+    .antenna-btn .label-full {
+        display: none;
+    }
+    .antenna-btn .label-short {
+        display: inline;
+    }
+}
+
+@media (max-width: 400px) {
     .antenna-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 6px;
+        gap: 4px;
     }
     .column:nth-child(2) {
         display: none;
     }
     .column h2 {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
     .antenna-btn {
-        height: 36px;
-        padding: 6px 10px;
+        height: 34px;
+        padding: 4px 6px;
+        font-size: 0.8rem;
     }
     .antenna-name {
-        height: 36px;
+        height: 34px;
     }
     .button-group {
         flex-direction: column;
@@ -704,11 +731,14 @@ small, .hint {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 360px) {
     .container {
-        padding: 8px;
+        padding: 4px;
     }
     main {
-        padding: 12px;
+        padding: 8px;
+    }
+    .bottom-bar {
+        padding: 6px 8px;
     }
 }
