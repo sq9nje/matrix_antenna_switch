@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTA Update - 6x2 Antenna Switch</title>
+    <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light')</script>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -11,15 +12,15 @@
         <h1 class="ota-title">Over-The-Air (OTA) Update</h1>
 
         <div class="warning-box">
-            <strong>⚠️ Warning:</strong> During the update process, all antenna connections will be disconnected for safety.
+            <strong>Warning:</strong> During the update process, all antenna connections will be disconnected for safety.
             Do not power off the device during the update process.
         </div>
 
-        <div style="background: #e8f4fd; border: 1px solid #b6d7ff; color: #1e40af; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-            <strong>📋 File Types:</strong><br>
-            • <strong>Firmware files:</strong> Contains "firmware" in filename (e.g., antenna_switch_firmware_20240909.bin)<br>
-            • <strong>Web interface files:</strong> Contains "spiffs" in filename (e.g., antenna_switch_spiffs_20240909.bin)<br>
-            • <strong>Generic .bin:</strong> Treated as firmware update
+        <div class="info-box">
+            <strong>File Types:</strong><br>
+            &bull; <strong>Firmware files:</strong> Contains "firmware" in filename (e.g., antenna_switch_firmware_20240909.bin)<br>
+            &bull; <strong>Web interface files:</strong> Contains "spiffs" in filename (e.g., antenna_switch_spiffs_20240909.bin)<br>
+            &bull; <strong>Generic .bin:</strong> Treated as firmware update
         </div>
 
         <div class="upload-section">
@@ -35,13 +36,12 @@
             </div>
         </div>
 
-        <a href="/" class="back-link">← Back to Main Page</a>
+        <a href="/" class="back-link">&larr; Back to Main Page</a>
     </div>
 
     <script>
         let ws;
 
-        // Initialize WebSocket connection
         function initWebSocket() {
             ws = new WebSocket(`ws://${window.location.hostname}:81/`);
 
@@ -61,7 +61,6 @@
             };
         }
 
-        // Handle OTA status updates
         function handleOTAUpdate(data) {
             const progressContainer = document.getElementById('progressContainer');
             const progressFill = document.getElementById('progressFill');
@@ -104,7 +103,6 @@
             }
         }
 
-        // Start firmware upload
         function startUpload() {
             const fileInput = document.getElementById('firmwareFile');
             const file = fileInput.files[0];
@@ -146,7 +144,6 @@
             });
         }
 
-        // Initialize on page load
         window.onload = function() {
             initWebSocket();
         };
