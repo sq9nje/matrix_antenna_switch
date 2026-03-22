@@ -57,7 +57,7 @@ pio pkg update
 ### Core State Management
 The firmware maintains global state in `globals.cpp`:
 - `currentAntenna[2]`: Current antenna selection for each radio (0=disconnected, 1-6=antenna number)
-- `antennaNames[6]`: User-configurable antenna names
+- `antennas[6]`: Array of `AntennaConfig` structs, each with `name` (String) and `bands` (std::vector\<String\>), empty vector means no bands selected
 - `antennaSwappingEnabled`: Allows automatic swapping when both radios select same antenna
 - `singleRadioMode`: Locks system to radio 1 only
 
@@ -160,7 +160,7 @@ Commands from both UART0 (USB) and UART2 (RS-485) are processed identically:
 - `mdnsHostname` (string): mDNS hostname (default: `antenna`)
 - `antennaSwapping` (bool): Enable automatic antenna swapping between radios
 - `singleRadioMode` (bool): Lock system to radio 1 only
-- `antennaNames` (string array): Names for the 6 antennas
+- `antennas` (array of objects): Each with `name` (string) and `bands` (string array), e.g. `[{"name": "Dipole", "bands": ["20m","40m"]}, ...]`
 - Exportable/importable via `/api/settings/export` and `/api/settings/import`
 
 **`platformio.ini`**:

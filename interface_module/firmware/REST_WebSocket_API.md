@@ -9,10 +9,10 @@ This document describes the REST and WebSocket API endpoints for the 6x2 ESP32 a
   - [Base URL \& Authentication](#base-url--authentication)
   - [Content Types](#content-types)
   - [Antenna Management](#antenna-management)
-    - [Get All Antenna Names](#get-all-antenna-names)
-    - [Update All Antenna Names](#update-all-antenna-names)
+    - [Get All Antennas](#get-all-antennas)
+    - [Update All Antennas](#update-all-antennas)
     - [Get Single Antenna Info](#get-single-antenna-info)
-    - [Update Single Antenna Name](#update-single-antenna-name)
+    - [Update Single Antenna](#update-single-antenna)
   - [Switch State](#switch-state)
     - [Get Current State](#get-current-state)
   - [Configuration](#configuration)
@@ -46,7 +46,7 @@ This document describes the REST and WebSocket API endpoints for the 6x2 ESP32 a
     - [Switch Radio 1 to Antenna 3 via WebSocket](#switch-radio-1-to-antenna-3-via-websocket)
     - [Monitor Real-time State Changes](#monitor-real-time-state-changes)
     - [Get Device IP and Connection Info](#get-device-ip-and-connection-info)
-    - [Update Antenna Names](#update-antenna-names)
+    - [Update Antennas](#update-antennas)
 
 ---
 
@@ -68,27 +68,39 @@ No authentication required for current implementation.
 
 ## Antenna Management
 
-### Get All Antenna Names
+### Get All Antennas
 ```http
 GET /api/antennas
 ```
 **Response:**
 ```json
-["Dipole", "Yagi", "Loop", "Vertical", "Antenna 5", "Antenna 6"]
+[
+  {"name": "Dipole", "bands": ["20m", "15m"]},
+  {"name": "Yagi", "bands": ["10m"]},
+  {"name": "Loop", "bands": ["80m", "40m"]},
+  {"name": "Vertical", "bands": ["160m", "80m", "40m", "20m"]},
+  {"name": "Antenna 5", "bands": []},
+  {"name": "Antenna 6", "bands": []}
+]
 ```
 
-### Update All Antenna Names
+### Update All Antennas
 ```http
 POST /api/antennas
 Content-Type: application/json
 
 {
-  "0": "New Name 1",
-  "1": "New Name 2",
-  "2": "New Name 3"
+  "0": {"name": "New Name 1", "bands": ["20m", "15m"]},
+  "1": {"name": "New Name 2", "bands": ["80m"]},
+  "2": {"name": "New Name 3", "bands": []}
 }
 ```
 **Response:** `200 OK`
+
+**Backward Compatibility:** Plain string values are also accepted for name-only updates:
+```json
+{"0": "New Name 1", "1": "New Name 2"}
+```
 
 ### Get Single Antenna Info
 ```http
@@ -101,19 +113,23 @@ GET /api/antenna/{index}
 ```json
 {
   "index": 0,
-  "name": "Dipole"
+  "name": "Dipole",
+  "bands": ["20m", "15m"]
 }
 ```
 
-### Update Single Antenna Name
+### Update Single Antenna
 ```http
 PUT /api/antenna/{index}
 Content-Type: application/json
 
 {
-  "name": "New Antenna Name"
+  "name": "New Antenna Name",
+  "bands": ["20m", "40m"]
 }
 ```
+Both `name` and `bands` fields are optional; only provided fields are updated.
+
 **Response:** `200 OK`
 
 ---
@@ -231,7 +247,14 @@ Downloads all device settings as a JSON file.
   "mdnsHostname": "antenna",
   "antennaSwapping": false,
   "singleRadioMode": false,
-  "antennaNames": ["Dipole", "Yagi", "Loop", "Vertical", "Antenna 5", "Antenna 6"]
+  "antennas": [
+    {"name": "Dipole", "bands": ["20m", "15m"]},
+    {"name": "Yagi", "bands": ["10m"]},
+    {"name": "Loop", "bands": ["80m", "40m"]},
+    {"name": "Vertical", "bands": ["160m", "80m", "40m", "20m"]},
+    {"name": "Antenna 5", "bands": []},
+    {"name": "Antenna 6", "bands": []}
+  ]
 }
 ```
 **Headers:** `Content-Disposition: attachment; filename="settings.json"`
@@ -245,10 +268,19 @@ Content-Type: application/json
   "mdnsHostname": "antenna",
   "antennaSwapping": true,
   "singleRadioMode": false,
-  "antennaNames": ["Dipole", "Yagi", "Loop", "Vertical", "Antenna 5", "Antenna 6"]
+  "antennas": [
+    {"name": "Dipole", "bands": ["20m", "15m"]},
+    {"name": "Yagi", "bands": ["10m"]},
+    {"name": "Loop", "bands": ["80m", "40m"]},
+    {"name": "Vertical", "bands": ["160m", "80m", "40m", "20m"]},
+    {"name": "Antenna 5", "bands": []},
+    {"name": "Antenna 6", "bands": []}
+  ]
 }
 ```
 Restores settings from a previously exported JSON file. All fields are optional; only provided fields are updated.
+
+**Backward Compatibility:** The old format with separate `antennaNames` and `antennaBands` arrays is also accepted for import.
 
 **Response:** `200 Settings imported successfully`
 
@@ -341,11 +373,18 @@ Sent automatically when antenna state changes or client connects:
 - `singleRadioMode`: Whether single radio mode is enabled
 
 #### Antenna Names Update
-Sent when antenna names are changed or client connects:
+Sent when antenna names or bands are changed, or client connects:
 ```json
 {
   "type": "antennaNames",
-  "names": ["20m Dipole", "40m Yagi", "80m Loop", "Vertical", "Antenna 5", "Antenna 6"]
+  "antennas": [
+    {"name": "Dipole", "bands": ["20m", "15m"]},
+    {"name": "Yagi", "bands": ["10m"]},
+    {"name": "Loop", "bands": ["80m", "40m"]},
+    {"name": "Vertical", "bands": []},
+    {"name": "Antenna 5", "bands": []},
+    {"name": "Antenna 6", "bands": []}
+  ]
 }
 ```
 
@@ -406,7 +445,7 @@ ws.onmessage = function(event) {
   if (data.type === 'state') {
     console.log(`Radio 1: ${data.radio1}, Radio 2: ${data.radio2}`);
   } else if (data.type === 'antennaNames') {
-    console.log('Antenna names updated:', data.names);
+    console.log('Antennas updated:', data.antennas);
   }
 };
 ```
@@ -416,9 +455,9 @@ ws.onmessage = function(event) {
 curl http://antenna.local/api/status | jq '.ip, .ssid, .rssi'
 ```
 
-### Update Antenna Names
+### Update Antennas
 ```bash
 curl -X POST http://antenna.local/api/antennas \
   -H "Content-Type: application/json" \
-  -d '{"0":"20m Dipole","1":"40m Yagi","2":"80m Loop"}'
+  -d '{"0":{"name":"Dipole","bands":["20m","15m"]},"1":{"name":"Yagi","bands":["10m"]}}'
 ```
