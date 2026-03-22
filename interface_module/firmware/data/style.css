@@ -309,16 +309,8 @@ small, .hint {
 .band-badge.band-6m   { background: #aa33aa; }
 
 /* Band checkboxes on settings page */
-.band-row {
-    margin-bottom: 10px;
-}
-
-.band-row > label {
-    display: block;
-    margin-bottom: 4px;
-    font-weight: 600;
-    color: var(--fg);
-    font-size: 0.875rem;
+.antenna-config-group .band-checkboxes {
+    margin-top: 6px;
 }
 
 .band-checkboxes {
