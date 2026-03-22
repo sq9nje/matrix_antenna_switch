@@ -24,8 +24,7 @@ class AntennaSwitch {
     constructor() {
         this.ws = null;
         this.reconnectInterval = null;
-        this.antennaNames = [];
-        this.antennaBands = [];
+        this.antennas = [];
         this.currentState = { radio1: 0, radio2: 0 };
         this.operationMode = { antennaSwapping: false, singleRadioMode: false };
         
@@ -42,9 +41,7 @@ class AntennaSwitch {
     async loadAntennaNames() {
         try {
             const response = await fetch('/api/antennas');
-            const antennas = await response.json();
-            this.antennaNames = antennas.map(a => a.name);
-            this.antennaBands = antennas.map(a => a.bands || []);
+            this.antennas = await response.json();
             this.updateAntennaNames();
         } catch (error) {
             console.error('Failed to load antenna names:', error);
@@ -78,10 +75,9 @@ class AntennaSwitch {
         }
     }
 
-    updateAntennaNames(antennas = null) {
-        if (antennas) {
-            this.antennaNames = antennas.map(a => a.name);
-            this.antennaBands = antennas.map(a => a.bands || []);
+    updateAntennaNames(antennasData = null) {
+        if (antennasData) {
+            this.antennas = antennasData;
         }
 
         const radio1Col = document.getElementById('radio1-column');
@@ -94,8 +90,8 @@ class AntennaSwitch {
         radio2Col.querySelectorAll('.antenna-btn:not(.disconnected)').forEach(el => el.remove());
 
         for (let i = 1; i <= 6; i++) {
-            const name = this.antennaNames[i - 1];
-            if (!name || name.trim() === '') continue;
+            const antenna = this.antennas[i - 1];
+            if (!antenna || !antenna.name || antenna.name.trim() === '') continue;
 
             const btn1 = document.createElement('button');
             btn1.className = 'antenna-btn';
@@ -110,10 +106,10 @@ class AntennaSwitch {
 
             const nameSpan = document.createElement('span');
             nameSpan.className = 'antenna-name-text';
-            nameSpan.textContent = name;
+            nameSpan.textContent = antenna.name;
             nameDiv.appendChild(nameSpan);
 
-            const bands = this.antennaBands[i - 1] || [];
+            const bands = antenna.bands || [];
             if (bands.length > 0) {
                 const badgesDiv = document.createElement('div');
                 badgesDiv.className = 'band-badges';

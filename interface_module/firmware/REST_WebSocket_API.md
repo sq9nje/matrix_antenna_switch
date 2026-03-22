@@ -247,8 +247,14 @@ Downloads all device settings as a JSON file.
   "mdnsHostname": "antenna",
   "antennaSwapping": false,
   "singleRadioMode": false,
-  "antennaNames": ["Dipole", "Yagi", "Loop", "Vertical", "Antenna 5", "Antenna 6"],
-  "antennaBands": [["20m", "15m"], ["10m"], ["80m", "40m"], ["160m", "80m", "40m", "20m"], [], []]
+  "antennas": [
+    {"name": "Dipole", "bands": ["20m", "15m"]},
+    {"name": "Yagi", "bands": ["10m"]},
+    {"name": "Loop", "bands": ["80m", "40m"]},
+    {"name": "Vertical", "bands": ["160m", "80m", "40m", "20m"]},
+    {"name": "Antenna 5", "bands": []},
+    {"name": "Antenna 6", "bands": []}
+  ]
 }
 ```
 **Headers:** `Content-Disposition: attachment; filename="settings.json"`
@@ -262,11 +268,19 @@ Content-Type: application/json
   "mdnsHostname": "antenna",
   "antennaSwapping": true,
   "singleRadioMode": false,
-  "antennaNames": ["Dipole", "Yagi", "Loop", "Vertical", "Antenna 5", "Antenna 6"],
-  "antennaBands": [["20m", "15m"], ["10m"], ["80m", "40m"], ["160m", "80m", "40m", "20m"], [], []]
+  "antennas": [
+    {"name": "Dipole", "bands": ["20m", "15m"]},
+    {"name": "Yagi", "bands": ["10m"]},
+    {"name": "Loop", "bands": ["80m", "40m"]},
+    {"name": "Vertical", "bands": ["160m", "80m", "40m", "20m"]},
+    {"name": "Antenna 5", "bands": []},
+    {"name": "Antenna 6", "bands": []}
+  ]
 }
 ```
 Restores settings from a previously exported JSON file. All fields are optional; only provided fields are updated.
+
+**Backward Compatibility:** The old format with separate `antennaNames` and `antennaBands` arrays is also accepted for import.
 
 **Response:** `200 Settings imported successfully`
 

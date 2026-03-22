@@ -2,6 +2,7 @@
 #define GLOBALS_H
 
 #include <Arduino.h>
+#include <vector>
 
 // Hardware pin definitions
 #define STATUS_LED  33
@@ -13,11 +14,16 @@
 class AsyncWebServer;
 class WebSocketsServer;
 
+// Antenna configuration
+struct AntennaConfig {
+    String name;
+    std::vector<String> bands;  // empty = no bands selected
+};
+
 // Global variables
 extern uint8_t currentAntenna[2];
 extern const uint8_t relay[2][6];
-extern String antennaNames[6];
-extern String antennaBands[6];
+extern AntennaConfig antennas[6];
 extern String mdnsHostname;
 extern bool antennaSwappingEnabled;
 extern bool singleRadioMode;

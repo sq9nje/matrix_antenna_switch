@@ -57,17 +57,10 @@ void initializeWebServer() {
     JsonArray array = doc.to<JsonArray>();
     for(int i = 0; i < 6; i++) {
       JsonObject ant = array.createNestedObject();
-      ant["name"] = antennaNames[i];
+      ant["name"] = antennas[i].name;
       JsonArray bands = ant.createNestedArray("bands");
-      String src = antennaBands[i];
-      while(src.length() > 0) {
-        int idx = src.indexOf(',');
-        if(idx == -1) {
-          if(src.length() > 0) bands.add(src);
-          break;
-        }
-        bands.add(src.substring(0, idx));
-        src = src.substring(idx + 1);
+      for(const auto& band : antennas[i].bands) {
+        bands.add(band);
       }
     }
     String response;
@@ -87,20 +80,18 @@ void initializeWebServer() {
           if(val.is<JsonObject>()) {
             JsonObject obj = val.as<JsonObject>();
             if(obj.containsKey("name")) {
-              antennaNames[i] = obj["name"].as<String>();
+              antennas[i].name = obj["name"].as<String>();
             }
             if(obj.containsKey("bands")) {
+              antennas[i].bands.clear();
               JsonArray bands = obj["bands"].as<JsonArray>();
-              String joined = "";
               for(int j = 0; j < (int)bands.size(); j++) {
-                if(j > 0) joined += ",";
-                joined += bands[j].as<String>();
+                antennas[i].bands.push_back(bands[j].as<String>());
               }
-              antennaBands[i] = joined;
             }
           } else {
             // Backward compatibility: plain string value = name only
-            antennaNames[i] = val.as<String>();
+            antennas[i].name = val.as<String>();
           }
         }
       }
@@ -118,17 +109,10 @@ void initializeWebServer() {
     if(antennaIndex >= 0 && antennaIndex < 6) {
       DynamicJsonDocument doc(512);
       doc["index"] = antennaIndex;
-      doc["name"] = antennaNames[antennaIndex];
+      doc["name"] = antennas[antennaIndex].name;
       JsonArray bands = doc.createNestedArray("bands");
-      String src = antennaBands[antennaIndex];
-      while(src.length() > 0) {
-        int idx = src.indexOf(',');
-        if(idx == -1) {
-          if(src.length() > 0) bands.add(src);
-          break;
-        }
-        bands.add(src.substring(0, idx));
-        src = src.substring(idx + 1);
+      for(const auto& band : antennas[antennaIndex].bands) {
+        bands.add(band);
       }
 
       String response;
@@ -150,17 +134,15 @@ void initializeWebServer() {
 
         bool updated = false;
         if(doc.containsKey("name")) {
-          antennaNames[antennaIndex] = doc["name"].as<String>();
+          antennas[antennaIndex].name = doc["name"].as<String>();
           updated = true;
         }
         if(doc.containsKey("bands")) {
+          antennas[antennaIndex].bands.clear();
           JsonArray bands = doc["bands"].as<JsonArray>();
-          String joined = "";
           for(int j = 0; j < (int)bands.size(); j++) {
-            if(j > 0) joined += ",";
-            joined += bands[j].as<String>();
+            antennas[antennaIndex].bands.push_back(bands[j].as<String>());
           }
-          antennaBands[antennaIndex] = joined;
           updated = true;
         }
 
@@ -270,22 +252,13 @@ void initializeWebServer() {
     doc["mdnsHostname"] = mdnsHostname.c_str();
     doc["antennaSwapping"] = antennaSwappingEnabled;
     doc["singleRadioMode"] = singleRadioMode;
-    JsonArray names = doc.createNestedArray("antennaNames");
+    JsonArray arr = doc.createNestedArray("antennas");
     for(int i = 0; i < 6; i++) {
-      names.add(antennaNames[i]);
-    }
-    JsonArray bandsArr = doc.createNestedArray("antennaBands");
-    for(int i = 0; i < 6; i++) {
-      JsonArray bands = bandsArr.createNestedArray();
-      String src = antennaBands[i];
-      while(src.length() > 0) {
-        int idx = src.indexOf(',');
-        if(idx == -1) {
-          if(src.length() > 0) bands.add(src);
-          break;
-        }
-        bands.add(src.substring(0, idx));
-        src = src.substring(idx + 1);
+      JsonObject obj = arr.createNestedObject();
+      obj["name"] = antennas[i].name;
+      JsonArray bands = obj.createNestedArray("bands");
+      for(const auto& band : antennas[i].bands) {
+        bands.add(band);
       }
     }
 
@@ -326,22 +299,39 @@ void initializeWebServer() {
         }
         singleRadioMode = newSingleRadioMode;
       }
-      if(doc.containsKey("antennaNames")) {
-        JsonArray names = doc["antennaNames"].as<JsonArray>();
-        for(int i = 0; i < 6 && i < (int)names.size(); i++) {
-          antennaNames[i] = names[i].as<String>();
-        }
-      }
-      if(doc.containsKey("antennaBands")) {
-        JsonArray bandsArr = doc["antennaBands"].as<JsonArray>();
-        for(int i = 0; i < 6 && i < (int)bandsArr.size(); i++) {
-          JsonArray bands = bandsArr[i].as<JsonArray>();
-          String joined = "";
-          for(int j = 0; j < (int)bands.size(); j++) {
-            if(j > 0) joined += ",";
-            joined += bands[j].as<String>();
+      if(doc.containsKey("antennas")) {
+        // New format: array of objects
+        JsonArray arr = doc["antennas"].as<JsonArray>();
+        for(int i = 0; i < 6 && i < (int)arr.size(); i++) {
+          JsonObject obj = arr[i].as<JsonObject>();
+          if(obj.containsKey("name")) {
+            antennas[i].name = obj["name"].as<String>();
           }
-          antennaBands[i] = joined;
+          antennas[i].bands.clear();
+          if(obj.containsKey("bands")) {
+            JsonArray bands = obj["bands"].as<JsonArray>();
+            for(int j = 0; j < (int)bands.size(); j++) {
+              antennas[i].bands.push_back(bands[j].as<String>());
+            }
+          }
+        }
+      } else {
+        // Old format: separate arrays
+        if(doc.containsKey("antennaNames")) {
+          JsonArray names = doc["antennaNames"].as<JsonArray>();
+          for(int i = 0; i < 6 && i < (int)names.size(); i++) {
+            antennas[i].name = names[i].as<String>();
+          }
+        }
+        if(doc.containsKey("antennaBands")) {
+          JsonArray bandsArr = doc["antennaBands"].as<JsonArray>();
+          for(int i = 0; i < 6 && i < (int)bandsArr.size(); i++) {
+            antennas[i].bands.clear();
+            JsonArray bands = bandsArr[i].as<JsonArray>();
+            for(int j = 0; j < (int)bands.size(); j++) {
+              antennas[i].bands.push_back(bands[j].as<String>());
+            }
+          }
         }
       }
 
