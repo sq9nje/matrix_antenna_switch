@@ -199,7 +199,7 @@ class AntennaSwitch {
             }
             
             // Disable buttons that are selected by the other radio (except disconnected)
-            if (antenna > 0) {
+            if (antenna > 0 && !this.operationMode.antennaSwapping) {
                 if ((radio === 0 && antenna === radio2) || (radio === 1 && antenna === radio1)) {
                     btn.classList.add('disabled');
                 }
