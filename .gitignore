@@ -23,6 +23,7 @@ _autosave-*
 # Exported BOM files
 *.xml
 *.csv
+!interface_module/firmware/partitions.csv
 
 # Python venv
 .venv
